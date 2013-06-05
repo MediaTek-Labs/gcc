@@ -444,6 +444,10 @@ mframe-header-opt
 Target Var(flag_frame_header_optimization) Optimization
 Optimize frame header.
 
+mshrink-offsets
+Target Mask(SHRINK_OFFSETS)
+Shrink offsets in MIPS16 code to avoid extended loads and stores.
+
 noasmopt
 Driver
 

@@ -1058,6 +1058,11 @@ Objective-C and Objective-C++ Dialects}.
 -msdata-opt-list=@var{file} @gol
 -muninit-const-in-rodata  -mno-uninit-const-in-rodata @gol
 -mcode-readable=@var{setting} @gol
+<<<<<<< HEAD
+=======
+-mdead-loads -mno-dead-loads @gol
+-mshrink-offsets -mno-shrink-offsets @gol
+>>>>>>> 23246628c5b... Add offset shrinking pass
 -msplit-addresses  -mno-split-addresses @gol
 -mexplicit-relocs  -mno-explicit-relocs @gol
 -mcheck-zero-division  -mno-check-zero-division @gol
@@ -25006,6 +25011,16 @@ useful on targets that are configured to have a dual instruction/data
 SRAM interface but that (unlike the M4K) do not automatically redirect
 PC-relative loads to the instruction RAM.
 @end table
+
+@item -mshrink-offsets
+@itemx -mno-shrink-offsets
+@opindex mshrink-offsets
+@opindex mno-shrink-offsets
+Enable (disable) an optimisation to reduce offsets used directly in
+memory references for MIPS16 code to make more use of 16-bit instructions
+for loads and stores.  This is at the expense of one additional setup
+instruction to adjust the base pointer for several memory references.
+This optimisation is enabled by default with @option{-Os}.
 
 @item -msplit-addresses
 @itemx -mno-split-addresses
