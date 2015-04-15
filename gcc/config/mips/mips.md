@@ -5592,7 +5592,10 @@
     {
       mips_expand_synci_loop (operands[0], operands[1]);
       emit_insn (gen_sync ());
-      emit_insn (PMODE_INSN (gen_clear_hazard, ()));
+      if (ISA_HAS_R6MUL)
+	emit_insn (PMODE_INSN (gen_clear_hazard_r6, ()));
+      else
+	emit_insn (PMODE_INSN (gen_clear_hazard, ()));
     }
   else if (mips_cache_flush_func && mips_cache_flush_func[0])
     {
@@ -5629,10 +5632,23 @@
   return "%(%<bal\t1f\n"
          "\tnop\n"
          "1:\t<d>addiu\t$31,$31,12\n"
-         "\tjr.hb\t$31\n"
-         "\tnop%>%)";
+	 "\tjr.hb\t$31\n"
+	 "\tnop%>%)";
 }
   [(set_attr "insn_count" "5")])
+
+(define_insn "clear_hazard_r6_<mode>"
+  [(unspec_volatile [(const_int 0)] UNSPEC_CLEAR_HAZARD)
+   (clobber (match_scratch:P 0 "=d"))]
+  "ISA_HAS_SYNCI && ISA_HAS_R6MUL"
+{
+  return "%(%<auipc\t%0,%%pcrel_hi(1f)\n"
+	 "\t<d>addiu\t%0,%0,%%pcrel_lo(1f+4)\n"
+	 "\tjr.hb\t%0\n"
+	 "\tnop\n"
+	 "1:%>%)";
+}
+  [(set_attr "insn_count" "4")])
 
 ;; Cache operations for R4000-style caches.
 (define_insn "mips_cache"
