@@ -475,3 +475,11 @@ Use Loongson EXTension (EXT) instructions.
 mloongson-ext2
 Target Var(TARGET_LOONGSON_EXT2)
 Use Loongson EXTension R2 (EXT2) instructions.
+
+msdata-num=
+Target RejectNegative Joined UInteger Var(mips_sdata_section_num) Init(-1)
+Place all gp relative data in sdata section number NUM.
+
+msdata-opt-list=
+Target RejectNegative Joined Var(mips_sdata_opt_list_file)
+msdata-opt-list=FILE    Use to specify variables to go in the .sdata section.
