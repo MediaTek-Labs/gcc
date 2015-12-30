@@ -8702,7 +8702,8 @@ mips_store_by_pieces_p (unsigned HOST_WIDE_INT size, unsigned int align)
    Assume that the areas do not overlap.  */
 
 static void
-mips_block_move_straight (rtx dest, rtx src, HOST_WIDE_INT length)
+mips_block_move_straight (rtx dest, rtx src, HOST_WIDE_INT length,
+			  HOST_WIDE_INT alignment ATTRIBUTE_UNUSED)
 {
   HOST_WIDE_INT offset, delta;
   unsigned HOST_WIDE_INT bits;
@@ -8801,6 +8802,7 @@ mips_adjust_block_mem (rtx mem, HOST_WIDE_INT length,
 
 static void
 mips_block_move_loop (rtx dest, rtx src, HOST_WIDE_INT length,
+		      HOST_WIDE_INT alignment,
 		      HOST_WIDE_INT bytes_per_iter)
 {
   rtx_code_label *label;
@@ -8824,7 +8826,7 @@ mips_block_move_loop (rtx dest, rtx src, HOST_WIDE_INT length,
   emit_label (label);
 
   /* Emit the loop body.  */
-  mips_block_move_straight (dest, src, bytes_per_iter);
+  mips_block_move_straight (dest, src, bytes_per_iter, alignment);
 
   /* Move on to the next block.  */
   mips_emit_move (src_reg, plus_constant (Pmode, src_reg, bytes_per_iter));
@@ -8839,7 +8841,7 @@ mips_block_move_loop (rtx dest, rtx src, HOST_WIDE_INT length,
 
   /* Mop up any left-over bytes.  */
   if (leftover)
-    mips_block_move_straight (dest, src, leftover);
+    mips_block_move_straight (dest, src, leftover, alignment);
   else
     /* Temporary fix for PR79150.  */
     emit_insn (gen_nop ());
@@ -8849,25 +8851,24 @@ mips_block_move_loop (rtx dest, rtx src, HOST_WIDE_INT length,
    memory reference SRC to memory reference DEST.  */
 
 bool
-mips_expand_block_move (rtx dest, rtx src, rtx length)
+mips_expand_block_move (rtx dest, rtx src, rtx length, rtx alignment)
 {
-  if (!ISA_HAS_LWL_LWR
-      && (MEM_ALIGN (src) < MIPS_MIN_MOVE_MEM_ALIGN
-	  || MEM_ALIGN (dest) < MIPS_MIN_MOVE_MEM_ALIGN))
-    return false;
-
-  if (CONST_INT_P (length))
+  if (CONST_INT_P (length)
+      && (ISA_HAS_LWL_LWR
+	  || INTVAL (alignment) * BITS_PER_UNIT >= MIPS_MIN_MOVE_MEM_ALIGN))
     {
       if (mips_movmem_limit == -1 || INTVAL (length) < mips_movmem_limit)
 	{
 	  if (INTVAL (length) <= MIPS_MAX_MOVE_BYTES_STRAIGHT)
 	    {
-	      mips_block_move_straight (dest, src, INTVAL (length));
+	      mips_block_move_straight (dest, src, INTVAL (length),
+					INTVAL (alignment));
 	      return true;
 	    }
 	  else if (optimize)
 	    {
 	      mips_block_move_loop (dest, src, INTVAL (length),
+				    INTVAL (alignment),
 				    MIPS_MAX_MOVE_BYTES_PER_LOOP_ITER);
 	      return true;
 	    }

@@ -5667,7 +5667,8 @@
 	      (use (match_operand:SI 3 "const_int_operand"))])]
   "!TARGET_MIPS16 && !TARGET_MEMCPY"
 {
-  if (mips_expand_block_move (operands[0], operands[1], operands[2]))
+  if (mips_expand_block_move (operands[0], operands[1],
+			      operands[2], operands[3]))
     DONE;
   else
     FAIL;
