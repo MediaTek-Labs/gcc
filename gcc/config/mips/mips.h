@@ -3377,6 +3377,10 @@ struct GTY(())  machine_function {
 
   /* True if GCC stored callee saved registers in the frame header.  */
   bool use_frame_header_for_callee_saved_regs;
+
+  /* True if we are safe to use SAVE/RESTORE instruction in the
+     prologue/epilogue.  */
+  bool safe_to_use_save_restore;
 };
 #endif
 
