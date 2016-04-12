@@ -390,4 +390,7 @@ extern void mips_expand_vec_cond_expr (machine_mode, machine_mode, rtx *);
 extern void mips_d_target_versions (void);
 extern void mips_d_register_target_info (void);
 
+extern bool mips_bit_clear_p (enum machine_mode, unsigned HOST_WIDE_INT);
+extern void mips_bit_clear_info (enum machine_mode, unsigned HOST_WIDE_INT,
+				 int *, int *);
 #endif /* ! GCC_MIPS_PROTOS_H */

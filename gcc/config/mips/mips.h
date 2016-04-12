@@ -2052,10 +2052,6 @@ FP_ASM_SPEC "\
    function address than to call an address kept in a register.  */
 #define NO_FUNCTION_CSE 1
 
-/* The ABI-defined global pointer.  Sometimes we use a different
-   register in leaf functions: see PIC_OFFSET_TABLE_REGNUM.  */
-#define GLOBAL_POINTER_REGNUM (GP_REG_FIRST + 28)
-
 /* We normally use $28 as the global pointer.  However, when generating
    n32/64 PIC, it is better for leaf functions to use a call-clobbered
    register instead.  They can then avoid saving and restoring $28
@@ -2674,7 +2670,6 @@ typedef struct mips_args {
    width of the shifted operand.  However, Loongson MMI shifts
    do not truncate the shift amount at all.  */
 #define SHIFT_COUNT_TRUNCATED (!TARGET_LOONGSON_MMI)
-
 
 /* Specify the machine mode that pointers have.
    After generation of rtl, the compiler makes no further distinction
