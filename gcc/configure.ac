@@ -877,6 +877,9 @@ fi
 AC_DEFINE_UNQUOTED(DEFAULT_STK_CLASH_GUARD_SIZE, $DEFAULT_STK_CLASH_GUARD_SIZE,
 	[Define to larger than zero set the default stack clash protector size.])
 
+# needed for restricting the fixedincludes multilibs that we install
+AC_SUBST(with_multi_buildlist)
+
 # Enable __cxa_atexit for C++.
 AC_ARG_ENABLE(__cxa_atexit,
 [AS_HELP_STRING([--enable-__cxa_atexit], [enable __cxa_atexit for C++])],
