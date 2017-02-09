@@ -1,5 +1,6 @@
 /* { dg-require-effective-target trampolines } */
 
+/* { dg-xfail-run-if "nanoMIPS: needs fixing" nanomips-*-* "-O0" } */
 int
 g (int a, int b, int (*gi) (int, int))
 {

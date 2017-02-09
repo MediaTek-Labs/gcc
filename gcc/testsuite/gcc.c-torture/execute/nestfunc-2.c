@@ -1,5 +1,6 @@
 /* { dg-require-effective-target trampolines } */
 
+/* { dg-xfail-run-if "nanoMIPS: needs fixing" nanomips-*-* "-O0" } */
 extern int foo (int, int, int (*) (int, int, int, int, int, int, int));
 
 int z;

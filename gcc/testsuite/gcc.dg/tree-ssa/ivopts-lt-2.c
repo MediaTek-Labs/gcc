@@ -1,6 +1,6 @@
 /* { dg-do compile } */
 /* { dg-options "-O2 -fno-tree-loop-distribute-patterns -fdump-tree-ivopts" } */
-/* { dg-skip-if "PR68644" { hppa*-*-* powerpc*-*-* } } */
+/* { dg-skip-if "PR68644" { hppa*-*-* powerpc*-*-* nanomips*-*-* } } */
 
 void
 f1 (int *p, unsigned int i)

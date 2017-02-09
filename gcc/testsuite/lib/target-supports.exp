@@ -557,13 +557,15 @@ proc check_effective_target_trampolines { } {
     if [target_info exists gcc,no_trampolines] {
       return 0
     }
+    # FIXME: remove this once the support is added to nanoMIPS
     if { [istarget avr-*-*]
 	 || [istarget msp430-*-*]
 	 || [istarget nvptx-*-*]
 	 || [istarget hppa2.0w-hp-hpux11.23]
 	 || [istarget hppa64-hp-hpux11.23]
 	 || [istarget pru-*-*]
-	 || [istarget bpf-*-*] } {
+	 || [istarget bpf-*-*]
+     || [istarget nanomips*-*-*] } {
 	return 0;
     }
     return 1
@@ -727,6 +729,7 @@ proc check_profiling_available { test_what } {
 	     || [istarget m68k-*-elf]
 	     || [istarget m68k-*-uclinux*]
 	     || [istarget mips*-*-elf*]
+	     || [istarget nanomips*-*-elf*]
 	     || [istarget mmix-*-*]
 	     || [istarget mn10300-*-elf*]
 	     || [istarget moxie-*-elf*]
@@ -1295,7 +1298,7 @@ proc check_effective_target_mpaired_single { } {
 # Return true if the target has access to FPU instructions.
 
 proc check_effective_target_hard_float { } {
-    if { [istarget mips*-*-*] } {
+    if { [istarget mips*-*-*] || [istarget nanomips*-*-*] } {
 	return [check_no_compiler_messages hard_float assembly {
 		#if (defined __mips_soft_float || defined __mips16)
 		#error __mips_soft_float || __mips16
@@ -10066,6 +10069,7 @@ proc check_effective_target_branch_cost {} {
 	 || [istarget frv*-*-*]
 	 || [istarget i?86-*-*] || [istarget x86_64-*-*]
 	 || [istarget mips*-*-*]
+	 || [istarget nanomips*-*-*]
 	 || [istarget s390*-*-*]
 	 || [istarget riscv*-*-*]
 	 || [istarget sh*-*-*] } {

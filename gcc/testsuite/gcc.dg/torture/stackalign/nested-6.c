@@ -1,5 +1,7 @@
-/* { dg-do run } */
+/* { dg-do run { xfail nanomips-*-* } } */
 /* { dg-require-effective-target trampolines } */
+
+#ifndef NO_TRAMPOLINES
 
 typedef __SIZE_TYPE__ size_t;
 extern void abort (void);

@@ -1,5 +1,6 @@
 /* { dg-require-effective-target trampolines } */
 
+/* { dg-xfail-run-if "nanoMIPS: needs fixing" nanomips-*-* } */
 /* Test that the GP gets properly restored, either by the nonlocal
    receiver or the nested function.  */
 

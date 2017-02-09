@@ -1,4 +1,4 @@
-/* { dg-do run } */
+/* { dg-do run { xfail nanomips-*-* } } */
 /* { dg-require-effective-target trampolines } */
 
 extern void abort (void);
