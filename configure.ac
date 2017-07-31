@@ -1258,6 +1258,9 @@ case "${target}" in
     ;;
   mips*-*-linux*)
     ;;
+  nanomips*-*-linux*)
+    noconfigdirs="$noconfigdirs ld gprof"
+    ;;
   mips*-*-ultrix* | mips*-*-osf* | mips*-*-ecoff* | mips*-*-pe* \
   | mips*-*-irix* | mips*-*-lnews* | mips*-*-riscos*)
     noconfigdirs="$noconfigdirs ld gas gprof"
@@ -2634,6 +2637,9 @@ case "${target}" in
   mips*-*-*linux* | mips*-*-gnu*)
     target_makefile_frag="config/mt-mips-gnu"
     ;;
+  nanomips*-*-*linux*)
+    target_makefile_frag="config/mt-nanomips"
+    ;;
   nios2-*-elf*)
     target_makefile_frag="config/mt-nios2-elf"
     ;;
@@ -3231,6 +3237,7 @@ if test x${with_multi_buildlist} = x ; then
     mips*-img-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-img-elf ;;
     mips*-mti-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-mti-elf ;;
     nanomips*-*-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-nano-elf ;;
+    nanomips*-*-linux*) multi_buildlist=${srcdir}/gcc/config/mips/ml-nano-linux ;;
   esac
   # Verify the file exists before using it in case the gcc component is not
   # present in the tree.
