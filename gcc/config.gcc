@@ -477,6 +477,7 @@ microblaze*-*-*)
         ;;
 mips*-*-*)
 	cpu_type=mips
+	md_file=mips/mips-classic.md
 	d_target_objs="mips-d.o"
 	extra_headers="loongson.h loongson-mmiintrin.h msa.h"
 	extra_objs="frame-header-opt.o"
