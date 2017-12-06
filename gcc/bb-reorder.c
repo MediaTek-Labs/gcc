@@ -2366,6 +2366,13 @@ edge_order (const void *ve1, const void *ve2)
   edge e2 = *(const edge *) ve2;
   profile_count c1 = e1->count ();
   profile_count c2 = e2->count ();
+
+  int sort_threshold = flag_rb_edge_sort;
+
+  if (!(c1.to_frequency(cfun) > sort_threshold
+      || c2.to_frequency(cfun) > sort_threshold))
+    return 0;
+
   /* Since profile_count::operator< does not establish a strict weak order
      in presence of uninitialized counts, use 'max': this makes them appear
      as if having execution frequency less than any initialized count.  */
@@ -2421,8 +2428,8 @@ reorder_basic_blocks_simple (void)
 
   /* Sort the edges, the most desirable first.  When optimizing for size
      all edges are equally desirable.  */
-
-  if (optimize_function_for_speed_p (cfun))
+  if (optimize_function_for_speed_p (cfun)
+      || flag_rb_edge_sort != RB_EDGE_SORT_DEFAULT)
     gcc_stablesort (edges, n, sizeof *edges, edge_order);
 
   /* Now decide which of those edges to make fallthrough edges.  We set
