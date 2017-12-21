@@ -2547,4 +2547,10 @@ default_memtag_untagged_pointer (rtx tagged_pointer, rtx target)
   return untagged_base;
 }
 
+void
+default_adjust_costs (void*, int)
+{
+  return;
+}
+
 #include "gt-targhooks.h"

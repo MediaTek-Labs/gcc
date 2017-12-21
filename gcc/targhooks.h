@@ -276,6 +276,7 @@ extern rtx default_load_returned_bounds (rtx);
 extern void default_store_returned_bounds (rtx,rtx);
 extern bool default_optab_supported_p (int, machine_mode, machine_mode,
 				       optimization_type);
+
 extern unsigned int default_max_noce_ifcvt_seq_cost (edge);
 extern bool default_noce_conversion_profitable_p (rtx_insn *,
 						  struct noce_if_info *);
@@ -299,5 +300,7 @@ extern rtx default_memtag_add_tag (rtx, poly_int64, uint8_t);
 extern rtx default_memtag_set_tag (rtx, rtx, rtx);
 extern rtx default_memtag_extract_tag (rtx, rtx);
 extern rtx default_memtag_untagged_pointer (rtx, rtx);
+
+extern void default_adjust_costs (void*, int);
 
 #endif /* GCC_TARGHOOKS_H */
