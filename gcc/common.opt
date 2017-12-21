@@ -1948,6 +1948,10 @@ fbit-tests
 Common Var(flag_bit_tests) Init(1) Optimization
 Use bit tests for sufficiently large switch statements.
 
+fjump-table-clusters
+Common Var(flag_jump_table_clusters) Init(0) Optimization
+Use combination of jump tables for sufficiently large switch statements.
+
 fkeep-inline-functions
 Common Var(flag_keep_inline_functions)
 Generate code for functions even if they are fully inlined.
