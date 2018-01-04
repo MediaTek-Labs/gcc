@@ -5291,6 +5291,21 @@ configured with --enable-newlib-nano-formatted-io.])
       [-march=rv32i_zifencei],,,
       [AC_DEFINE(HAVE_AS_MARCH_ZIFENCEI, 1,
 		 [Define if the assembler understands -march=rv*_zifencei.])])
+     ;;
+  nanomips*-*-*)
+    AC_DEFINE(HAVE_AS_DOT_MODULE, 1,
+	      [Define if your assembler supports .module.])
+    AC_DEFINE(HAVE_AS_NO_SHARED, 1,
+	      [Define if the assembler understands -mno-shared.])
+    AC_DEFINE(HAVE_GAS_NANOMIPS, 1,
+	      [Define if your assembler supports nanoMIPS])
+    gcc_GAS_CHECK_FEATURE([explicit relocation support],
+      gcc_cv_as_mips_explicit_relocs, [2,14,0],,
+[	lw $4,%gp_rel(foo)($4)],,
+      [if test x$target_cpu_default = x
+       then target_cpu_default=MASK_EXPLICIT_RELOCS
+       else target_cpu_default="($target_cpu_default)|MASK_EXPLICIT_RELOCS"
+       fi])
     ;;
     s390*-*-*)
     gcc_GAS_CHECK_FEATURE([.gnu_attribute support],

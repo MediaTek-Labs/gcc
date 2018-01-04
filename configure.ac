@@ -346,7 +346,7 @@ case "${ENABLE_GOLD}" in
       # Check for target supported by gold.
       case "${target}" in
         i?86-*-* | x86_64-*-* | sparc*-*-* | powerpc*-*-* | arm*-*-* \
-        | aarch64*-*-* | tilegx*-*-* | mips*-*-* | s390*-*-*)
+        | aarch64*-*-* | tilegx*-*-* | mips*-*-* | nanomips*-*-* | s390*-*-*)
 	  configdirs="$configdirs gold"
 	  if test x${ENABLE_GOLD} = xdefault; then
 	    default_ld=gold
@@ -918,7 +918,7 @@ case "${target}" in
   m68*-*-* | fido-*-*)
     libgloss_dir=m68k
     ;;
-  mips*-*-*)
+  mips*-*-* | nanomips*-*-*)
     libgloss_dir=mips
     ;;
   powerpc*-*-*)
@@ -1242,7 +1242,7 @@ case "${target}" in
   microblaze*)
     noconfigdirs="$noconfigdirs gprof"
     ;;
-  mips*-sde-elf* | mips*-mti-elf* | mips*-img-elf*)
+  mips*-sde-elf* | mips*-mti-elf* | mips*-img-elf* | nanomips*-*-elf)
     if test x$with_newlib = xyes; then
       noconfigdirs="$noconfigdirs gprof"
     fi
@@ -2625,6 +2625,9 @@ case "${target}" in
   mips*-sde-elf* | mips*-mti-elf* | mips*-img-elf*)
     target_makefile_frag="config/mt-sde"
     ;;
+  nanomips*-*-elf*)
+    target_makefile_frag="config/mt-nanomips"
+    ;;
   mipsisa*-*-elfoabi*)
     target_makefile_frag="config/mt-mips-elfoabi"
     ;;
@@ -3227,6 +3230,7 @@ if test x${with_multi_buildlist} = x ; then
     mips*-mti-linux*) multi_buildlist=${srcdir}/gcc/config/mips/ml-mti-linux ;;
     mips*-img-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-img-elf ;;
     mips*-mti-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-mti-elf ;;
+    nanomips*-*-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-nano-elf ;;
   esac
   # Verify the file exists before using it in case the gcc component is not
   # present in the tree.

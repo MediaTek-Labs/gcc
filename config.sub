@@ -1212,6 +1212,7 @@ case $cpu-$vendor in
 			| mipsisa64sr71k | mipsisa64sr71kel \
 			| mipsr5900 | mipsr5900el \
 			| mipstx39 | mipstx39el \
+			| nanomips \
 			| mmix \
 			| mn10200 | mn10300 \
 			| moxie \
@@ -1566,8 +1567,8 @@ case $cpu-$vendor in
 	mips*-cisco)
 		os=elf
 		;;
-	mips*-*)
-		os=elf
+	mips*-* | nanomips*-*)
+		os=-elf
 		;;
 	or32-*)
 		os=coff
