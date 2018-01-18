@@ -429,4 +429,7 @@ extern void mips_d_register_target_info (void);
 
 extern bool mips_bit_clear_p (enum machine_mode, unsigned HOST_WIDE_INT);
 extern void mips_bit_clear_info (unsigned HOST_WIDE_INT, int *, int *);
+enum mips_symbol_type mips_classify_symbol (const_rtx,
+					    enum mips_symbol_context);
+
 #endif /* ! GCC_MIPS_PROTOS_H */
