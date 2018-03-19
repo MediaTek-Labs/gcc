@@ -1,6 +1,5 @@
 /* { dg-require-effective-target trampolines } */
 
-/* { dg-skip-if "nanoMIPS: needs fixing" { nanomips-*-* } { "*" } { "" } } */
 main()
 {
   void p(void ((*f) (void ())))
