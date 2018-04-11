@@ -249,6 +249,7 @@ extern void mips_split_msa_insert_d (rtx, rtx, rtx, rtx);
 extern void mips_split_msa_fill_d (rtx, rtx);
 extern const char *mips_output_move (rtx, rtx);
 extern const char *mips_output_load_store (rtx, rtx, machine_mode, bool, bool);
+extern bool is_nanomips_output_48_bits (rtx, rtx);
 extern bool mips_cfun_has_cprestore_slot_p (void);
 extern bool mips_cprestore_address_p (rtx, bool);
 extern void mips_save_gp_to_cprestore_slot (rtx, rtx, rtx, rtx);
