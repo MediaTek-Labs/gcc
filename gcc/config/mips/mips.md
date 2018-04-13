@@ -808,6 +808,17 @@
 		(const_string "yes")
 		(const_string "no")))
 
+;; Attribute that describes instruction parameters and marks instructions
+;; that do have 16-bit equivalents.
+(define_attr "has_16bit_ver" "no,yes,rr,rrr,ri_li,rri_load,rri_store,rri_and,
+  rri_sll,rri_beqzc, rri_beqc,rri_add"
+  (const_string "no"))
+
+;; Attribute that describes hard register subset which can be used inside
+;; 16-bit version of instruction.
+(define_attr "subset_16bit" "std,store,move,4x4,sub_load, sub_store,no"
+  (const_string "no"))
+
 ;; Describe a user's asm statement.
 (define_asm_attributes
   [(set_attr "type" "multi")
@@ -1278,7 +1289,9 @@
 }
   [(set_attr "alu_type" "add")
    (set_attr "compression" "micromips32,*,micromips32,micromips32,micromips32,micromips32,*")
-   (set_attr "mode" "<MODE>")])
+   (set_attr "mode" "<MODE>")
+   (set_attr "has_16bit_ver" "yes,yes,yes,rri_add,yes,no,rri_add")
+   (set_attr "subset_16bit" "std,std,std,std,std,no,std")])
 
 (define_insn "*add<mode>3_mips16"
   [(set (match_operand:GPR 0 "register_operand" "=ks,ks,d,d,d,d,d,d,d")
@@ -1496,7 +1509,9 @@
   "<d>subu\t%0,%1,%2"
   [(set_attr "alu_type" "sub")
    (set_attr "compress_as" "micro_or_nano32,*")
-   (set_attr "mode" "<MODE>")])
+   (set_attr "mode" "<MODE>")
+   (set_attr "has_16bit_ver" "rrr")
+   (set_attr "subset_16bit" "std")])
 
 (define_insn "*subsi3_extended"
   [(set (match_operand:DI 0 "register_operand" "=d")
@@ -1643,6 +1658,9 @@
     return "<d>mul\t%0,%1,%2";
 }
   [(set_attr "type" "imul3nc")
+   (set_attr "has_16bit_ver" "no,yes")
+   (set_attr "has_16bit_ver" "yes")
+   (set_attr "subset_16bit" "4x4")
    (set_attr "mode" "<MODE>")
    (set (attr "enabled")
 	(cond [(and (eq_attr "alternative" "0")
@@ -3305,7 +3323,9 @@
 }
   [(set_attr "alu_type" "not")
    (set_attr "compress_as" "micro_or_nano,*")
-   (set_attr "mode" "<MODE>")])
+   (set_attr "mode" "<MODE>")
+   (set_attr "has_16bit_ver" "rr")
+   (set_attr "subset_16bit" "std")])
 
 ;;
 ;;  ....................
@@ -3390,6 +3410,8 @@
   [(set_attr "move_type" "load,load,load,andi,andi,andi,andi,ext_ins,shift_shift,logical,logical,ext_ins")
    (set_attr "compress_as" "*,*,*,micro_or_nano,micro_or_nano,micro_or_nano,*,*,*,micro_or_nano,*,*")
    (set_attr "mode" "<MODE>")
+   (set_attr "has_16bit_ver" "rri_load,rri_load,rri_load,rri_and,rri_and,rri_and,rri_and,rri_and,no,rr,rr,no")
+   (set_attr "subset_16bit" "std,std,std,std,std,std,std,std,no,std,std,no")
    (set (attr "enabled")
 	(cond [(and (eq_attr "alternative" "3,4")
 		    (not (match_test "TARGET_NANOMIPS")))
@@ -3452,7 +3474,9 @@
    ori\t%0,%1,%x2"
   [(set_attr "alu_type" "or")
    (set_attr "compress_as" "micro_or_nano,*,*")
-   (set_attr "mode" "<MODE>")])
+   (set_attr "mode" "<MODE>")
+   (set_attr "has_16bit_ver" "rrr,rrr,no")
+   (set_attr "subset_16bit" "std,std,no")])
 
 
 (define_insn "*ior<mode>3_mips16"
@@ -3482,7 +3506,9 @@
    xori\t%0,%1,%x2"
   [(set_attr "alu_type" "xor")
    (set_attr "compress_as" "micro_or_nano,*,*")
-   (set_attr "mode" "<MODE>")])
+   (set_attr "mode" "<MODE>")
+   (set_attr "has_16bit_ver" "rrr,rrr,no")
+   (set_attr "subset_16bit" "std,std,no")])
 
 
 (define_insn "*xor<mode>3_mips16"
@@ -3719,6 +3745,8 @@
   [(set_attr "move_type" "andi,andi,andi,load")
    (set_attr "compress_as" "micro_or_nano,micro_or_nano,*,*")
    (set_attr "mode" "<GPR:MODE>")
+   (set_attr "has_16bit_ver" "rr,rr,rr,rri_load")
+   (set_attr "subset_16bit" "std,std,std,sub_load")
    (set (attr "enabled")
 	(cond [(and (eq_attr "alternative" "0,1")
 		    (not (match_test "TARGET_NANOMIPS")))
@@ -3774,7 +3802,9 @@
     }
 }
   [(set_attr "move_type" "andi,load")
-   (set_attr "mode" "HI")])
+   (set_attr "mode" "HI")
+   (set_attr "has_16bit_ver" "rr,rri_load")
+   (set_attr "subset_16bit" "std,sub_load")])
 
 (define_insn "*zero_extendqihi2_mips16"
   [(set (match_operand:HI 0 "register_operand" "=d")
@@ -3897,7 +3927,10 @@
 				   false/*zero_extend_p*/, true/*load_p*/);
 }
   [(set_attr "move_type" "signext,load")
-   (set_attr "mode" "<GPR:MODE>")])
+   (set_attr "mode" "<GPR:MODE>")
+   (set_attr "has_16bit_ver" "no, rri_load")
+   (set_attr "subset_16bit" "no, sub_load")
+   ])
 
 (define_expand "extendqihi2"
   [(set (match_operand:HI 0 "register_operand")
@@ -5147,6 +5180,8 @@
   { return mips_output_move (operands[0], operands[1]); }
   [(set_attr "move_type" "move,move,const,const,const,move,const,const,const,load,load,load,store,store,store,mtc,fpload,mfc,fpstore,mfc,mtc,mtlo,mflo,mtc,fpload,mfc,fpstore,load,store")
    (set_attr "compression" "nanomips,nanomips,nanomips,nanomips32,nanomips32,nanomips48_32,nanomips48_32,nanomips32,*,nanomips,nanomips,*,nanomips,nanomips,*,*,*,*,*,*,*,*,*,*,*,*,*,nanomips,nanomips")
+   (set_attr "has_16bit_ver" "yes,yes,ri_li,ri_li,no,no,no,ri_li,ri_li,yes,yes,rri_load,yes,yes,rri_store,no,no,no,no,no,no,no,no,no,no,no,no,yes,yes")
+   (set_attr "subset_16bit" "move,move,std,std,no,no,no,std,std,std,no,sub_load,no,std,sub_store,no,no,no,no,no,no,no,no,no,no,no,no,4x4,4x4")
    (set_attr "mode" "SI")
    (set (attr "enabled")
 	(cond [(and (eq_attr "alternative" "5")
@@ -5289,7 +5324,9 @@
   "ISA_HAS_LWXS"
   "lwxs\t%0,%1(%2)"
   [(set_attr "type"	"load")
-   (set_attr "mode"	"SI")])
+   (set_attr "mode"	"SI")
+   (set_attr "has_16bit_ver" "rrr")
+   (set_attr "subset_16bit" "std")])
 
 (define_insn "*lwuxs"
   [(set (match_operand:DI 0 "register_operand" "=d")
@@ -5373,6 +5410,8 @@
   [(set_attr "move_type" "move,const,const,load,load,store,store,mtlo,mflo,move")
    (set_attr "compress_as" "all,micro_or_nano,*,micro_or_nano,*,micro_or_nano,*,*,*,*")
    (set_attr "mode" "HI")
+   (set_attr "has_16bit_ver" "no,ri_li,ri_li,rri_load,rri_load,rri_store,rri_store,no,no,no")
+   (set_attr "subset_16bit" "no,std,std,std,sub_load,store,sub_store,no,no,no")
    (set (attr "enabled")
 	(cond [(and (eq_attr "alternative" "9")
 		    (match_test "!(TARGET_NANOMIPS /*&& TARGET_LI48*/)"))
@@ -5453,7 +5492,9 @@
   { return mips_output_move (operands[0], operands[1]); }
   [(set_attr "move_type" "move,const,const,load,load,store,store,mtlo,mflo")
    (set_attr "compress_as" "all,micro_or_nano,*,micro_or_nano,*,micro_or_nano,*,*,*")
-   (set_attr "mode" "QI")])
+   (set_attr "mode" "QI")
+   (set_attr "has_16bit_ver" "no,ri_li,ri_li,rri_load,rri_load,rri_store,rri_store,no,no")
+   (set_attr "subset_16bit" "no,std,std,std,sub_load,store,sub_store,no,no")])
 
 (define_insn "*movqi_mips16"
   [(set (match_operand:QI 0 "nonimmediate_operand" "=d,y,d,d,d,d,m,*d")
@@ -5528,7 +5569,9 @@
        || reg_or_0_operand (operands[1], SFmode))"
   { return mips_output_move (operands[0], operands[1]); }
   [(set_attr "move_type" "move,load,store")
-   (set_attr "mode" "SF")])
+   (set_attr "mode" "SF")
+   (set_attr "has_16bit_ver" "yes,rri_load,rri_store")
+   (set_attr "subset_16bit" "move,sub_load,sub_store")])
 
 (define_insn "*movsf_mips16"
   [(set (match_operand:SF 0 "nonimmediate_operand" "=d,y,d,d,m")
@@ -5569,7 +5612,9 @@
        || reg_or_0_operand (operands[1], DFmode))"
   { return mips_output_move (operands[0], operands[1]); }
   [(set_attr "move_type" "move,load,store")
-   (set_attr "mode" "DF")])
+   (set_attr "mode" "DF")
+   (set_attr "has_16bit_ver" "yes,rri_load,rri_store")
+   (set_attr "subset_16bit" "move,sub_load,sub_store")])
 
 (define_insn "*movdf_mips16"
   [(set (match_operand:DF 0 "nonimmediate_operand" "=d,y,d,d,m")
@@ -6167,7 +6212,9 @@
 }
   [(set_attr "type" "shift")
    (set_attr "compress_as" "<shift_compression>,none")
-   (set_attr "mode" "<MODE>")])
+   (set_attr "mode" "<MODE>")
+   (set_attr "has_16bit_ver" "yes,rri_sll")
+   (set_attr "subset_16bit" "std,std")])
 
 
 (define_insn "*<optab>si3_extend"
@@ -6470,6 +6517,8 @@
   [(set_attr "type" "branch")
    (set_attr "cbranch_cmp_op" "reg,zero,imm")
    (set_attr "compact_form" "maybe")
+   (set_attr "has_16bit_ver" "rri_beqc,rri_beqc,no")
+   (set_attr "subset_16bit" "std")
    (set (attr "hazard") (if_then_else (match_test "TARGET_NANOMIPS")
 				      (const_string "none")
 				      (const_string "forbidden_slot")))
@@ -6493,6 +6542,8 @@
    (set_attr "cbranch_cmp_op" "reg,zero,imm")
    (set_attr "compact_form" "maybe")
    (set_attr "hazard" "forbidden_slot")
+   (set_attr "has_16bit_ver" "rri_beqc,rri_beqc,no")
+   (set_attr "subset_16bit" "std")
    (set (attr "hazard") (if_then_else (match_test "TARGET_NANOMIPS")
 				      (const_string "none")
 				      (const_string "forbidden_slot")))
