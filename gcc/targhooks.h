@@ -276,6 +276,8 @@ extern rtx default_load_returned_bounds (rtx);
 extern void default_store_returned_bounds (rtx,rtx);
 extern bool default_optab_supported_p (int, machine_mode, machine_mode,
 				       optimization_type);
+extern void default_adjust_reg_costs (void*, int);
+
 extern unsigned int default_max_noce_ifcvt_seq_cost (edge);
 extern bool default_noce_conversion_profitable_p (rtx_insn *,
 						  struct noce_if_info *);

@@ -2547,8 +2547,9 @@ default_memtag_untagged_pointer (rtx tagged_pointer, rtx target)
   return untagged_base;
 }
 
+/* Default implementation of TARGET_ADJUST_REG_COSTS.  */
 void
-default_adjust_costs (void*, int)
+default_adjust_reg_costs (void*, int)
 {
   return;
 }
