@@ -3257,6 +3257,7 @@ mips_string_constant_p (rtx x)
 {
   tree decl, exp;
   if (TARGET_NANOMIPS != NANOMIPS_NMF
+      || flag_pic
       || !TARGET_LI48)
     return false;
 
