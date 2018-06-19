@@ -3399,7 +3399,7 @@
     case 10:
       return "and\t%0,%1,%2";
     case 11:
-      mips_bit_clear_info (INTVAL (operands[2]), &pos, &len);
+      mips_bit_clear_info (<MODE>mode, INTVAL (operands[2]), &pos, &len);
       operands[1] = GEN_INT (pos);
       operands[2] = GEN_INT (len);
       return "<d>ins\t%0,%.,%1,%2";
