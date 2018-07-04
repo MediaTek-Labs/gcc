@@ -2538,6 +2538,8 @@ enum reg_class
 #define MIPS_GP_SAVE_AREA_SIZE \
   (TARGET_CALL_CLOBBERED_GP ? MIPS_STACK_ALIGN (UNITS_PER_WORD) : 0)
 
+#define DYNAMIC_CHAIN_ADDRESS mips_dynamic_chain_address
+
 #define RETURN_ADDR_RTX mips_return_addr
 
 #define MIPS_FRAME_BIAS 0
