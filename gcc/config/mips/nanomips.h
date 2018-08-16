@@ -218,7 +218,8 @@ FP_ASM_SPEC "\
 #undef LINK_SPEC
 #define LINK_SPEC "\
 %(endian_spec) \
-%{shared}"
+%{shared} \
+--relax"
 
 #undef DEFAULT_SIGNED_CHAR
 #define DEFAULT_SIGNED_CHAR 0
