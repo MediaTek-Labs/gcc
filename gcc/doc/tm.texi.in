@@ -7049,6 +7049,12 @@ is referenced by a function.
 
 @hook TARGET_ASM_OUTPUT_DWARF_DTPREL
 
+@defmac ASM_OUTPUT_CFI_DIRECTIVE (FILE *@var{file}, dw_cfi_ref @var{cfi})
+If defined, this C statement will be used for emitting .cfi_* directives
+into output assembly file. Otherwise a call to @code{output_cfi_directive}
+will be used.
+@end defmac
+
 @need 2000
 @node VMS Debug
 @subsection Macros for VMS Debug Format
