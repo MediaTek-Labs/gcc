@@ -558,3 +558,6 @@ Target Undocumented Var(TARGET_OPT_MOVEBALC) Init(1)
 
 mjump-table-opt
 Target Undocumented Var(TARGET_JUMPTABLE_OPT) Init(1)
+
+mssdata
+Target Undocumented Var(TARGET_SSDATA) Init(1)
