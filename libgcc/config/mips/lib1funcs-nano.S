@@ -34,6 +34,11 @@
 #define A1 $a1
 #endif
 
+	/* Set PIC mode according to compiler invocation.  */
+#define TOK(X,Y) X##Y
+#define MODULE(X,Y) .module TOK(X,Y)
+	MODULE(pic,__pic__)
+
 #ifdef L_ashrdi3
 STARTFN(__ashrdi3)
 	subu	$a3,$zero,$a2
