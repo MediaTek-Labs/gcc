@@ -1,5 +1,6 @@
 /* { dg-do compile { target { ! { *-*-darwin* hppa*64*-*-* mips*-*-linux-* amdgcn*-*-* } } } } */
 /* { dg-options "-fno-pie" } */
+/* { dg-xfail-if "FAIL if PIC is enabled by default" { ! nonpic } } */
 
 #ifdef __PIC__
 # error __PIC__ is defined!
