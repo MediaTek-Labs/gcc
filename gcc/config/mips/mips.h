@@ -1264,7 +1264,8 @@ struct mips_cpu_info {
 #define ISA_HAS_MOVEP		(TARGET_MICROMIPS			\
 				 || (TARGET_NANOMIPS == NANOMIPS_NMF))
 #define ISA_HAS_MOVEP_REV	(TARGET_NANOMIPS == NANOMIPS_NMF)
-#define ISA_HAS_UALW_UASW	(TARGET_NANOMIPS == NANOMIPS_NMF)
+#define ISA_HAS_UALW_UASW	(TARGET_NANOMIPS == NANOMIPS_NMF        \
+                                 && TARGET_LOAD_STORE_UNALIGNED)
 
 #define ISA_HAS_LWP_SWP		(TARGET_MICROMIPS && mips_isa_rev <= 6)
 
