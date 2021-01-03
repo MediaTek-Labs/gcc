@@ -1,0 +1,9 @@
+noinl_list noinline
+noinl_attr_always always_inline
+noinl_list_always noinline
+noinl_always_list always_inline
+jessica always_inline
+O_func optimize("O0")
+O2_func optimize("O2")
+O3_func optimize("O3")
+Os_func optimize("Os")

@@ -262,6 +262,7 @@ set mips_option_groups {
     stdlib "REQUIRES_STDLIB"
     tls_dialect "-mtls-dialect=(trad|desc)"
     tls_model "-ftls-model=(local-exec|initial-exec|local-dynamic|global-dynamic)"
+    func-opt-list "-mfunc-opt-list=.*"
 }
 
 for { set option 0 } { $option < 32 } { incr option } {
@@ -817,6 +818,23 @@ proc mips-dg-options { args } {
 	} else {
 	    mips_make_test_option options $option $all_but_p
 	}
+    }
+
+    # Pass an absolute file path to -mfunc-opt-list=.
+    set func_opt_list_test_option_p [mips_test_option_p options func-opt-list]
+
+    if { $func_opt_list_test_option_p } {
+	set func_opt_list [mips_option options func-opt-list]
+	if { ![regexp {=.*$} $func_opt_list filename] } {
+		error "Unrecognized specification: $func_opt_list"
+	}
+	set filename [string trimleft $filename "="]
+
+	global srcdir
+	global subdir
+	set new_func_opt_list "-mfunc-opt-list=$srcdir/$subdir/$filename"
+
+	set options(option,[mips_option_group $new_func_opt_list]) $new_func_opt_list
     }
 
     # Handle dependencies between the test options and the optimization ones.
