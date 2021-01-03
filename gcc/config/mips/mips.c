@@ -948,6 +948,7 @@ mips_fol_attr_conflicts (struct mips_func_opt_list * f,
 }
 
 #define MATCH_WHITESPACE(A) ISSPACE (A)
+#define MATCH_COMMENT(A) (A == '#')
 #define MATCH_EMPTYSTRING(A) (A == '\n' || A == 0 || A == EOF)
 
 /* Subroutinue for below.  */
@@ -1121,6 +1122,12 @@ mips_func_opt_list_read_line (const char * line, const char * file, int lineno)
   /* Take all leading whitespace.  */
   while (MATCH_WHITESPACE (line[pos]))
     pos++;
+
+  if (MATCH_COMMENT (line[pos]))
+    {
+      while (!MATCH_EMPTYSTRING (line[pos]))
+	pos++;
+    }
 
   if (MATCH_EMPTYSTRING (line[pos]))
       return NULL;
