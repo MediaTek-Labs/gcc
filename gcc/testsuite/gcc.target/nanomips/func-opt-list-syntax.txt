@@ -1,0 +1,74 @@
+# Check for valid and invalid syntax in -mfunc-opt-list=% file.
+
+#           warning: unknown attribute comment for a
+a noinline comment
+
+#           warning: unknown attribute x for b
+b x
+
+# comment line
+ # another comment line
+	# leading-tab comment line
+
+# Valid optimization level
+a optimize("O2")
+
+# Invalid optimization level
+b optimize("NIL")
+
+#           warning: ignoring unrecognized function hint 'Ov101'
+h Ov101
+
+j O3
+k Os
+#           warning: ignoring conflicting optimization hint for function 'j'
+j Os
+
+#           warning: ignoring conflicting optimization hint for function 'k'
+k O
+
+# empty parameter list without attribute directive
+c ()
+
+# parameter list without attribute directive
+c (noinline)
+
+# Valid single argument
+c aligned(16)
+
+# Multiple arguments where only one is expected, error: unexpected ','
+d aligned(2,4)
+
+# One or 2 arguments expected and provided
+c alloc_size(1)
+d alloc_size(1,2)
+
+# More than 2 arguments where one or two expected, error: unexpected ','
+d aligned(2,4)
+
+# Optional arguments can be skipped
+
+# Optional list of numbers, provided or omitted
+d nonnull(1,2)
+e nonnull
+
+# Optional string, provided or omitted
+b warning("Danger")
+c warning
+
+# Optional number, provided or omitted
+a constructor(1)
+b constructor
+
+# string required and provided
+c alias("a")
+
+# string required, error: Expected '"'
+d alias()
+
+# string argument required, error: Expected '("")'
+e alias
+
+# string argument, missing terminal parenthesis, error: Expected ')'
+a alias("abceed"
+
