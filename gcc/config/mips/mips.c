@@ -989,6 +989,18 @@ mips_func_opt_list_parse_arg (const char * line, struct mips_func_opt_list * f,
   unsigned int length = 0;
   unsigned int arg_count = 0;
 
+  if (arg_type == FOL_ARG_UNKNOWN && line[pos] == '(')
+    {
+      length = pos;
+      while (!MATCH_EMPTYSTRING(line[length]))
+	length++;
+      warning (OPT_Wattributes, "%s:%d:%d: Unexpected '('. Attribute "
+	       "parameters not preceded by an attribute", file, lineno, pos);
+      while (!MATCH_EMPTYSTRING(line[pos]))
+	pos++;
+      return pos;
+    }
+
   if (arg_type == FOL_ARG_NONE)
     return pos;
 
@@ -1195,9 +1207,15 @@ mips_func_opt_list_read_line (const char * line, const char * file, int lineno)
 
     for (opt = 0; *mips_func_opt_list_strings[opt].optstring != 0; opt++)
       {
-	if (mips_func_opt_list_strings[opt].optstring != 0
-	    && strncmp (mips_func_opt_list_strings[opt].optstring, &(line[pos]),
-			identifier_length) == 0)
+	/* Skip ahead to unknown option when the directive is missing.  */
+	if (identifier_length == 0)
+	  {
+	    matched = true;
+	    continue;
+	  }
+	else if (mips_func_opt_list_strings[opt].optstring != 0
+		 && strncmp (mips_func_opt_list_strings[opt].optstring, &(line[pos]),
+			     identifier_length) == 0)
 	  {
 	    int conflict_attr = mips_fol_attr_conflicts (fl, opt);
 	    if (conflict_attr)
@@ -1228,6 +1246,7 @@ mips_func_opt_list_read_line (const char * line, const char * file, int lineno)
       }
 
     matched = false;
+
     pos += identifier_length;
     identifier_length = 0;
 
