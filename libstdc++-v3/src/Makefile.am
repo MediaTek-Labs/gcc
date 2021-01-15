@@ -336,13 +336,13 @@ endif
 
 
 # Control additional build primary rules.
-all-once: libstdc++convenience.la $(STAMP_DEBUG)
-install-data-once: $(STAMP_INSTALL_DEBUG)
+all-once: libstdc++convenience.la $(STAMP_DEBUG) $(STAMP_NORTTI)
+install-data-once: $(STAMP_INSTALL_DEBUG) $(STAMP_INSTALL_NORTTI)
 
 all-local: all-once
 install-data-local: install-data-once
 clean-local:
-	rm -rf libstdc++convenience.la stamp* $(CLEAN_DEBUG)
+	rm -rf libstdc++convenience.la stamp* $(CLEAN_DEBUG) $(CLEAN_NORTTI)
 
 # Make a non-installed convenience library, so that --disable-static
 # may work.
@@ -408,3 +408,62 @@ build-debug: stamp-debug
 install-debug: build-debug
 	(cd ${debugdir} && $(MAKE) CXXFLAGS='$(DEBUG_FLAGS)' \
 	toolexeclibdir=$(glibcxx_toolexeclibdir)/debug install) ;
+
+if GLIBCXX_BUILD_NORTTI
+STAMP_NORTTI = build-nortti
+STAMP_INSTALL_NORTTI = install-nortti
+CLEAN_NORTTI = nortti
+else
+STAMP_NORTTI =
+STAMP_INSTALL_NORTTI =
+CLEAN_NORTTI =
+endif
+
+
+# Build a nortti variant.
+norttidir = ${glibcxx_builddir}/src/nortti
+stamp-nortti:
+	if test ! -d ${norttidir}; then \
+	  mkdir -p ${norttidir}; \
+	  for d in $(SUBDIRS); do mkdir -p  ${norttidir}/$$d; done; \
+	  (cd ${norttidir}; \
+	  sed -e 's/top_builddir = \.\./top_builddir = ..\/../' \
+	      -e 's/top_build_prefix = \.\./top_build_prefix = ..\/../' \
+	      -e 's/srcdir = \.\./srcdir = ..\/../' \
+	      -e 's/VPATH = \.\./VPATH = ..\/../' \
+	      -e 's/glibcxx_basedir = \.\./glibcxx_basedir = ..\/../' \
+	      -e 's/MKDIR_P = \.\./MKDIR_P = ..\/../' \
+	      -e 's/^enable_shared = yes/enable_shared = no/' \
+	      -e 's/^enable_static = no/enable_static = yes/' \
+	  < ../Makefile > Makefile ; \
+	  for d in . $(SUBDIRS); do \
+	  sed -e 's/top_builddir = \.\./top_builddir = ..\/../' \
+	      -e 's/top_build_prefix = \.\./top_build_prefix = ..\/../' \
+	      -e 's/srcdir = \.\./srcdir = ..\/../' \
+	      -e 's/VPATH = \.\./VPATH = ..\/../' \
+	      -e 's/glibcxx_basedir = \.\./glibcxx_basedir = ..\/../' \
+	      -e 's/MKDIR_P = \.\./MKDIR_P = ..\/../' \
+	      -e 's/^enable_shared = yes/enable_shared = no/' \
+	      -e 's/^enable_static = no/enable_static = yes/' \
+	  < ../$$d/Makefile > $$d/Makefile ; \
+	  done) ; \
+	fi; \
+	echo `date` > stamp-nortti;
+
+build-nortti: stamp-nortti
+	  (cd ${norttidir}; \
+	  mv Makefile Makefile.tmp; \
+	  sed -e 's,all-local: all-once,all-local:,' \
+	      -e 's,install-data-local: install-data-once,install-data-local:,' \
+	      -e '/vpath/!s,src/c,src/nortti/c,' \
+	  < Makefile.tmp > Makefile ; \
+	  rm -f Makefile.tmp ; \
+	  $(MAKE) CXXFLAGS='$(CXXFLAGS) -fno-rtti -fno-exceptions' \
+	  LIBTOOLFLAGS='$(LIBTOOLFLAGS) --tag disable-shared' \
+	  toolexeclibdir=$(glibcxx_toolexeclibdir)/nortti all) ;
+
+# Install nortti library.
+install-nortti: build-nortti
+	(cd ${norttidir} && $(MAKE) CXXFLAGS='$(CXXFLAGS) -fno-rtti -fno-exceptions' \
+	LIBTOOLFLAGS='$(LIBTOOLFLAGS) --tag disable-shared' \
+	toolexeclibdir=$(glibcxx_toolexeclibdir)/nortti install) ;

@@ -4904,6 +4904,33 @@ AC_DEFUN([GLIBCXX_CHECK_EXCEPTION_PTR_SYMVER], [
   fi
 ])
 
+dnl Check to see if nortti library is to be built.
+dnl
+dnl --enable-libstdcxx-nortti
+dnl builds a separate static library with -fnortti and -fno-exceptions in addition to the
+dnl normal libstdc++ binaries.
+dnl
+dnl --disable-libstdcxx-nortti
+dnl does not build the version of libstdc++ with -fno-rtti and -fno-exceptions.
+dnl
+AC_DEFUN([GLIBCXX_ENABLE_NORTTI], [
+  GLIBCXX_ENABLE(libstdcxx-nortti,auto,,[build additional nortti library])
+  AC_MSG_CHECKING([whether to build additional nortti library])
+  if test $enable_libstdcxx_nortti = auto; then
+    case "$target" in
+      nanomips*-elf)
+        enable_libstdcxx_nortti=yes
+      ;;
+      *)
+        enable_libstdcxx_nortti=$1
+      ;;
+    esac
+  fi
+  AC_MSG_RESULT($enable_libstdcxx_nortti)
+  GLIBCXX_CONDITIONAL(GLIBCXX_BUILD_NORTTI, test $enable_libstdcxx_nortti = yes)
+])
+
+
 # Macros from the top-level gcc directory.
 m4_include([../config/gc++filt.m4])
 m4_include([../config/tls.m4])

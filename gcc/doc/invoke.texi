@@ -628,6 +628,7 @@ Objective-C and Objective-C++ Dialects}.
 @xref{Link Options,,Options for Linking}.
 @gccoptlist{@var{object-file-name}  -fuse-ld=@var{linker}  -l@var{library} @gol
 -nostartfiles  -nodefaultlibs  -nolibc  -nostdlib @gol
+-nortti-libstdc++ @gol
 -e @var{entry}  --entry=@var{entry} @gol
 -pie  -pthread  -r  -rdynamic @gol
 -s  -static  -static-pie  -static-libgcc  -static-libstdc++ @gol
@@ -1060,11 +1061,6 @@ Objective-C and Objective-C++ Dialects}.
 -munique-sections=@var{file} @gol
 -muninit-const-in-rodata  -mno-uninit-const-in-rodata @gol
 -mcode-readable=@var{setting} @gol
-<<<<<<< HEAD
-=======
--mdead-loads -mno-dead-loads @gol
--mshrink-offsets -mno-shrink-offsets @gol
->>>>>>> 23246628c5b... Add offset shrinking pass
 -msplit-addresses  -mno-split-addresses @gol
 -mexplicit-relocs  -mno-explicit-relocs @gol
 -mcheck-zero-division  -mno-check-zero-division @gol
@@ -15922,6 +15918,14 @@ the program without going all the way to a fully static link.  The
 @option{-static-libstdc++} option directs the @command{g++} driver to
 link @file{libstdc++} statically, without necessarily linking other
 libraries statically.
+
+@item -nortti-libstdc++
+@opindex nortti-libstdc++
+When the @command{g++} program is used to link a C++ program, it
+normally automatically links against @option{libstdc++}.  If
+@file{libstdc++} is to be linked as static library, then this
+links against the version of @file{libstdc++} that is built with
+@option{-fno-rtti} and @option{-fno-exceptions}.
 
 @item -symbolic
 @opindex symbolic

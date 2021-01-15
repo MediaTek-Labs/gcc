@@ -2807,11 +2807,11 @@ msp430-*-*)
 	extra_gcc_objs="driver-msp430.o"
 	;;
 nanomips*-*-elf*)
-	tm_file="elfos.h newlib-stdint.h ${tm_file} mips/elf.h mips/nanomips.h"
+	tm_file="elfos.h newlib-stdint.h ${tm_file} nortti-libstdc++.h mips/elf.h mips/nanomips.h"
 	tmake_file="mips/t-nanomips-multi"
 	md_file=mips/nanomips.md
 	tm_defines="${tm_defines} NANOMIPS_SUPPORT=1 MIPS_ISA_DEFAULT=38 MIPS_ABI_DEFAULT=ABI_P32"
-	extra_options="${extra_options} mips/nanomips.opt"
+	extra_options="${extra_options} nortti-libstdc++.opt mips/nanomips.opt"
 	with_arch_32="32r6"
 	with_arch_64="64r6"
 	with_float="soft"
