@@ -671,6 +671,8 @@ LIBICONV
 OPT_LDFLAGS
 SECTION_LDFLAGS
 GLIBCXX_LIBS
+GLIBCXX_BUILD_NORTTI_FALSE
+GLIBCXX_BUILD_NORTTI_TRUE
 ENABLE_VTABLE_VERIFY_FALSE
 ENABLE_VTABLE_VERIFY_TRUE
 VTV_CYGMIN_FALSE
@@ -882,6 +884,7 @@ enable_extern_template
 with_python_dir
 enable_werror
 enable_vtable_verify
+enable_libstdcxx_nortti
 enable_libstdcxx_time
 enable_tls
 enable_rpath
@@ -1575,6 +1578,8 @@ Optional Features:
                           enable extern template [default=yes]
   --enable-werror         turns on -Werror [default=yes]
   --enable-vtable-verify  enable vtable verify [default=no]
+  --enable-libstdcxx-nortti
+                          build additional nortti library [default=auto]
   --enable-libstdcxx-time[=KIND]
                           use KIND for check type [default=auto]
   --enable-tls            Use thread-local storage [default=yes]
@@ -11614,7 +11619,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11617 "configure"
+#line 11622 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -11720,7 +11725,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<_LT_EOF
-#line 11723 "configure"
+#line 11728 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -15406,7 +15411,7 @@ $as_echo "$glibcxx_cv_atomic_long_long" >&6; }
   # Fake what AC_TRY_COMPILE does.
 
     cat > conftest.$ac_ext << EOF
-#line 15409 "configure"
+#line 15414 "configure"
 int main()
 {
   typedef bool atomic_type;
@@ -15441,7 +15446,7 @@ $as_echo "$glibcxx_cv_atomic_bool" >&6; }
     rm -f conftest*
 
     cat > conftest.$ac_ext << EOF
-#line 15444 "configure"
+#line 15449 "configure"
 int main()
 {
   typedef short atomic_type;
@@ -15476,7 +15481,7 @@ $as_echo "$glibcxx_cv_atomic_short" >&6; }
     rm -f conftest*
 
     cat > conftest.$ac_ext << EOF
-#line 15479 "configure"
+#line 15484 "configure"
 int main()
 {
   // NB: _Atomic_word not necessarily int.
@@ -15512,7 +15517,7 @@ $as_echo "$glibcxx_cv_atomic_int" >&6; }
     rm -f conftest*
 
     cat > conftest.$ac_ext << EOF
-#line 15515 "configure"
+#line 15520 "configure"
 int main()
 {
   typedef long long atomic_type;
@@ -15593,7 +15598,7 @@ $as_echo "$as_me: WARNING: Performance of certain classes will degrade as a resu
   # unnecessary for this test.
 
     cat > conftest.$ac_ext << EOF
-#line 15596 "configure"
+#line 15601 "configure"
 int main()
 {
   _Decimal32 d1;
@@ -15635,7 +15640,7 @@ ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
   # unnecessary for this test.
 
     cat > conftest.$ac_ext << EOF
-#line 15638 "configure"
+#line 15643 "configure"
 template<typename T1, typename T2>
   struct same
   { typedef T2 type; };
@@ -15669,7 +15674,7 @@ $as_echo "$enable_int128" >&6; }
     rm -f conftest*
 
     cat > conftest.$ac_ext << EOF
-#line 15672 "configure"
+#line 15677 "configure"
 template<typename T1, typename T2>
   struct same
   { typedef T2 type; };
@@ -18180,6 +18185,36 @@ else
   VTV_CYGMIN_FALSE=
 fi
 
+
+
+
+   # Check whether --enable-libstdcxx-nortti was given.
+if test "${enable_libstdcxx_nortti+set}" = set; then :
+  enableval=$enable_libstdcxx_nortti;
+      case "$enableval" in
+       yes|no) ;;
+       *) as_fn_error "Argument to enable/disable libstdcxx-nortti must be yes or no" "$LINENO" 5 ;;
+      esac
+
+else
+  enable_libstdcxx_nortti=auto
+fi
+
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to build additional nortti library" >&5
+$as_echo_n "checking whether to build additional nortti library... " >&6; }
+  if test $enable_libstdcxx_nortti = auto; then
+    case "$target" in
+      nanomips*-elf)
+        enable_libstdcxx_nortti=yes
+      ;;
+      *)
+        enable_libstdcxx_nortti=no
+      ;;
+    esac
+  fi
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $enable_libstdcxx_nortti" >&5
+$as_echo "$enable_libstdcxx_nortti" >&6; }
 
 
 
@@ -81149,6 +81184,15 @@ else
 fi
 
 
+    if test $enable_libstdcxx_nortti = yes; then
+  GLIBCXX_BUILD_NORTTI_TRUE=
+  GLIBCXX_BUILD_NORTTI_FALSE='#'
+else
+  GLIBCXX_BUILD_NORTTI_TRUE='#'
+  GLIBCXX_BUILD_NORTTI_FALSE=
+fi
+
+
     if test $enable_symvers != no; then
   ENABLE_SYMVERS_TRUE=
   ENABLE_SYMVERS_FALSE='#'
@@ -81629,6 +81673,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLE_VTABLE_VERIFY_TRUE}" && test -z "${ENABLE_VTABLE_VERIFY_FALSE}"; then
   as_fn_error "conditional \"ENABLE_VTABLE_VERIFY\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${GLIBCXX_BUILD_NORTTI_TRUE}" && test -z "${GLIBCXX_BUILD_NORTTI_FALSE}"; then
+  as_fn_error "conditional \"GLIBCXX_BUILD_NORTTI\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${ENABLE_SYMVERS_TRUE}" && test -z "${ENABLE_SYMVERS_FALSE}"; then

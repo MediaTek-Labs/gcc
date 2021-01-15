@@ -470,6 +470,7 @@ Objective-C and Objective-C++ Dialects}.
 -s  -static -static-libgcc -static-libstdc++ @gol
 -static-libasan -static-libtsan -static-liblsan -static-libubsan @gol
 -static-libmpx -static-libmpxwrappers @gol
+-nortti-libstdc++ @gol
 -shared -shared-libgcc  -symbolic @gol
 -T @var{script}  -Wl,@var{option}  -Xlinker @var{option} @gol
 -u @var{symbol} -z @var{keyword}}
@@ -10827,6 +10828,14 @@ the program without going all the way to a fully static link.  The
 @option{-static-libstdc++} option directs the @command{g++} driver to
 link @file{libstdc++} statically, without necessarily linking other
 libraries statically.
+
+@item -nortti-libstdc++
+@opindex nortti-libstdc++
+When the @command{g++} program is used to link a C++ program, it
+normally automatically links against @option{libstdc++}.  If
+@file{libstdc++} is to be linked as static library, then this
+links against the version of @file{libstdc++} that is built with
+@option{-fno-rtti} and @option{-fno-exceptions}.
 
 @item -symbolic
 @opindex symbolic
