@@ -1045,8 +1045,11 @@ mips_func_opt_list_parse_arg (const char * line, struct mips_func_opt_list * f,
     case FOL_ARG_STRING:
       if (MATCH_EMPTYSTRING (line[pos])
 	  || line[pos] != '\"')
-	/* Unexpected line end.  */
-	error ("%s:%d:%d: Expected '\"'", file, lineno, pos);
+	{
+	  /* Unexpected line end.  */
+	  error ("%s:%d:%d: Expected '\"'", file, lineno, pos);
+	  break;
+	}
 
       pos += 1;
 
@@ -1108,9 +1111,13 @@ mips_func_opt_list_parse_arg (const char * line, struct mips_func_opt_list * f,
   /* Unmatched ')'.  */
   if (MATCH_EMPTYSTRING (line[pos])
      || line[pos] != ')')
-  error ("%s:%d:%d: Expected ')'", file, lineno, pos);
-
-  pos += 1;
+    {
+      error ("%s:%d:%d: Expected ')'", file, lineno, pos);
+      while (!MATCH_EMPTYSTRING (line[pos]))
+	pos++;
+    }
+  else
+    pos += 1;
 
   return pos;
 }
