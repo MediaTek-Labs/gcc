@@ -24324,14 +24324,8 @@ get_movep_insn_location (rtx_insn *move1, rtx_insn *move2,
       rcopies1.truncate (0);
       rcopies2.truncate (0);
 
-      int cp_pos = (move_curr_pos == move2_pos ? move_curr_pos - 1
-					       : move_curr_pos);
-
-      if (!rcopies_mtx[cp_pos])
-	break;
-
-      get_reg_copies (rcopies_mtx[cp_pos], src1, rcopies1);
-      get_reg_copies (rcopies_mtx[cp_pos], src2, rcopies2);
+      get_reg_copies (rcopies_mtx[move_curr_pos], src1, rcopies1);
+      get_reg_copies (rcopies_mtx[move_curr_pos], src2, rcopies2);
 
       for (ix = 0; rcopies1.iterate (ix, &tmp_src1); ix++)
 	{
@@ -24374,22 +24368,17 @@ get_movep_insn_location (rtx_insn *move1, rtx_insn *move2,
 
   if (tmp_src1 && tmp_src2)
     {
-      rtx_insn *move_insn = move2;
+      gcc_assert (move_curr_pos < rcopies_mtx.length ());
+      rtx_insn *move_insn = move_insns[move_curr_pos];
 
-      if (move_curr_pos < rcopies_mtx.length ())
-	move_insn = move_insns[move_curr_pos];
-
-      rtx_insn *check_insn
-	= (move_curr_pos == move2_pos) ? move2
-				       : NEXT_INSN (move_insn);
+      rtx_insn *check_insn = NEXT_INSN (move_insn);
 
       if (! reg_used_between_p (dest1, move1, check_insn)
 	  && ! reg_set_between_p (src1, move1, check_insn)
 	  && ! reg_set_between_p (dest1, move1, check_insn)
 	  && ! reg_used_between_p (dest2, move2, check_insn)
 	  && ! reg_set_between_p (src2, move2, check_insn)
-	  && ! reg_set_between_p (dest2, move2, check_insn)
-          && ! reg_set_between_p (src2, move1, move2))
+	  && ! reg_set_between_p (dest2, move2, check_insn))
 	  /* (3): Emit movep at MOVE2 or at next suitable program point.  */
 	{
           if (move_curr_pos != move2_pos)
