@@ -2,6 +2,7 @@
 /* { dg-options "-mfunc-opt-list=func-opt-list.txt" } */
 /* { dg-additional-options "-Wno-attributes" } */
 /* { dg-skip-if "code quality test" { *-*-* } { "-O0" "-O1" "-Os" } } */
+/* { dg-skip-if "C model specific pattern" { *-*-* } { "-mcmodel=large" } } */
 
 /* { dg-final { scan-assembler "foo:.*balc\t\[^\n\]*noinl_attr" } } */
 static int noinl_attr (int x, int y) __attribute__((noinline));
