@@ -1,7 +1,8 @@
 /* { dg-do compile }
 /* { dg-options "-mfunc-opt-list=func-opt-list.txt" } */
-/* { dg-additional-options "-O0 -DOPTOFF" } */
-/* { dg-skip-if "" { *-*-* } { "-O3 -g" } } */
+/* { dg-additional-options "-DOPTOFF" } */
+/* { dg-skip-if "optimization controlled by -mfunc-opt-list" { *-*-* } { "-O1" "-O2" "-O3" "-Os" } } */
+/* { dg-skip-if "C model specific pattern" { *-*-* } { "-mcmodel=large" } } */
 
 #ifdef OPTOFF
 #pragma gcc optimize 0
