@@ -7340,6 +7340,19 @@ proc check_effective_target_tiny {} {
     return $et_target_tiny_saved
 }
 
+# Used to check if the testing configuration supports exceptions.
+# Returns 0 if exceptions are unsupported or disabled (e.g. by passing
+# -fno-exceptions). Returns 1 if exceptions are enabled.
+proc check_effective_target_exceptions_enabled {} {
+    return [check_no_compiler_messages exceptions_enabled assembly {
+	// C++
+	void foo (void)
+	{
+	    throw 1;
+	}
+    }]
+}
+
 # Return 1 if LOGICAL_OP_NON_SHORT_CIRCUIT is set to 0 for the current target.
 
 proc check_effective_target_logical_op_short_circuit {} {
