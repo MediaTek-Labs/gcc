@@ -443,6 +443,18 @@ proc gcc-dg-prune { system text } {
 	}
     }
 
+    # If rtti is disabled, mark tests expecting rtti to be enabled
+    # as unsupported.
+    if { ![check_effective_target_rtti_enabled] } {
+	if [regexp "(^|\n)\[^\n\]*: error: cannot use typeid" $text] {
+	    return "::unsupported::rtti disabled"
+	}
+
+	if [regexp "(^|\n)\[^\n\]*: error: 'dynamic_cast' not permitted" $text] {
+	    return "::unsupported::rtti disabled"
+	}
+    }
+
     return $text
 }
 

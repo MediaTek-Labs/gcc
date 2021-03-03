@@ -10950,6 +10950,16 @@ proc check_effective_target_non_strict_prototype { } {
     return 1
 }
 
+proc check_effective_target_rtti_enabled {} {
+    return [check_no_compiler_messages rtti_enabled assembly {
+	// C++
+	bool foo (void)
+	{
+	    return typeid(int) == typeid(int);
+	}
+    }]
+ }
+
 # Returns 1 if the target toolchain supports extended
 # syntax of .symver directive, 0 otherwise.
 
