@@ -7353,6 +7353,16 @@ proc check_effective_target_exceptions_enabled {} {
     }]
 }
 
+proc check_effective_target_rtti_enabled {} {
+    return [check_no_compiler_messages rtti_enabled assembly {
+	// C++
+	bool foo (void)
+	{
+	    return typeid(int) == typeid(int);
+	}
+    }]
+ }
+
 # Return 1 if LOGICAL_OP_NON_SHORT_CIRCUIT is set to 0 for the current target.
 
 proc check_effective_target_logical_op_short_circuit {} {
