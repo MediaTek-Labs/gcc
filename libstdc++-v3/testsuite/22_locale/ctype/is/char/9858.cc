@@ -18,6 +18,8 @@
 
 // 22.2.1.3 - ctype specializations [lib.facet.ctype.special]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <testsuite_hooks.h>
 

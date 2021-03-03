@@ -19,6 +19,8 @@
 // <http://www.gnu.org/licenses/>.
 
 // 20.7.15 polymorphic function object wrapper
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <functional>
 #include <testsuite_hooks.h>
 

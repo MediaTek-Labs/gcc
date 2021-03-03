@@ -19,6 +19,8 @@
 
 // 23.2.4.1 vector constructors, copy, and assignment
 
+// { dg-skip-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <vector>
 #include <string>
 #include <testsuite_allocator.h>

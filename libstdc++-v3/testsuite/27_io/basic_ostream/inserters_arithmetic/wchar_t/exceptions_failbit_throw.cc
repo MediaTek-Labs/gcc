@@ -16,6 +16,8 @@
 // <http://www.gnu.org/licenses/>.
 
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <testsuite_hooks.h>
 #include <testsuite_io.h>

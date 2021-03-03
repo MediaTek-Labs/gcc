@@ -21,6 +21,8 @@
 
 // rethrow_exception() and preservation of data
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <exception>
 #include <typeinfo>
 #include <cstring>

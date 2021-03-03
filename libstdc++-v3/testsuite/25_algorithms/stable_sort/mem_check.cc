@@ -17,6 +17,8 @@
 
 // 25.3.1.2 [lib.stable.sort]
 
+// { dg-skip-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <algorithm>
 #include <testsuite_hooks.h>
 #include <testsuite_iterators.h>

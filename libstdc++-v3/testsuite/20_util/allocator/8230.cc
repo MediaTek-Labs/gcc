@@ -19,6 +19,8 @@
 
 // 20.4.1.1 allocator members
 
+// { dg-skip-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <memory>
 #include <stdexcept>
 #include <testsuite_hooks.h>

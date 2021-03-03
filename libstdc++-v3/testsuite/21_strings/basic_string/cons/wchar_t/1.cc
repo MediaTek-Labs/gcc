@@ -19,6 +19,8 @@
 
 // 21.3.1 basic_string constructors.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <new>
 #include <string>
 #include <stdexcept>

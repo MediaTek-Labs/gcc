@@ -19,6 +19,8 @@
 
 // 20.4.1.1 allocator members
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cstdlib>
 #include <ext/debug_allocator.h>
 #include <ext/malloc_allocator.h>

@@ -20,6 +20,8 @@
 
 // 27.4.4.2 basic_ios member functions
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <locale>
 #include <typeinfo>

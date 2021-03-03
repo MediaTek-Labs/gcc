@@ -19,6 +19,8 @@
 
 // 27.6.1.5 - Template class basic_iostream 
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <iostream>
 #include <testsuite_hooks.h>
 #include <testsuite_character.h>

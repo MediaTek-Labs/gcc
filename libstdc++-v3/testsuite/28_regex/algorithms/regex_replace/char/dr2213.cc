@@ -22,6 +22,8 @@
 // 28.11.4 regex_replace
 // Tests ECMAScript regex_replace's _Out_iter return value.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

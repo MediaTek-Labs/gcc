@@ -18,6 +18,8 @@
 // { dg-options "-O0" }
 // { dg-do link { target c++11 } }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <fstream>
 #include <string>
 

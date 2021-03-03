@@ -24,6 +24,8 @@
 // 28.11.2 regex_match
 // Tests ERE against a std::string target.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 #include <testsuite_regex.h>

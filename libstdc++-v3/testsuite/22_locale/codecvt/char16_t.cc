@@ -19,6 +19,8 @@
 
 // [locale.codecvt], C++11 22.4.1.4.  specialization.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <cstring>
 #include <testsuite_hooks.h>

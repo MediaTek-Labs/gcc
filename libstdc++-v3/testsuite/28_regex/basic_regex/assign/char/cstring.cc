@@ -22,6 +22,8 @@
 
 // C++0X [28.8.3] class template basic_regex assign()
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 
 // Tests assign operation from a C-style null-terminated-string.  

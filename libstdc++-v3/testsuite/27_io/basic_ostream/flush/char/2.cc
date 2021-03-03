@@ -23,6 +23,8 @@
 // DR 60. What is a formatted input function?
 // basic_ostream::flush() does not behave as an unformatted output function.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ostream>
 #include <testsuite_hooks.h>
 #include <testsuite_io.h>

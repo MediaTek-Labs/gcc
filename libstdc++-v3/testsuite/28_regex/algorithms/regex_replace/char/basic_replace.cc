@@ -24,6 +24,8 @@
 // 28.11.4 regex_replace
 // Tests ECMAScript regex_replace.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

@@ -19,6 +19,8 @@
 
 // class basic_istream::sentry
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <experimental/string_view>
 #include <ostream>
 #include <sstream>

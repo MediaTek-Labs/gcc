@@ -19,6 +19,8 @@
 
 // 22.3.3.2.3  Buffer conversions
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <sstream>
 #include <testsuite_hooks.h>

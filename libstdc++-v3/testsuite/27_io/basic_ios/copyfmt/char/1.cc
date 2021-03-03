@@ -20,6 +20,8 @@
 // 27.4.4.2 basic_ios member functions
 
 // NB: Don't include any other headers in this file.
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ios>
 #include <testsuite_hooks.h>
 

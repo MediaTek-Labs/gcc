@@ -24,6 +24,8 @@
 // 28.12.1 regex_iterator
 // Tests operator++() of regex_iterator class
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

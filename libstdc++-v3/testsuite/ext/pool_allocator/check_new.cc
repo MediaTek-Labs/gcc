@@ -21,6 +21,8 @@
 
 // 20.4.1.1 allocator members
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cstdlib>
 #include <ext/pool_allocator.h>
 #include <replacement_memory_operators.h>

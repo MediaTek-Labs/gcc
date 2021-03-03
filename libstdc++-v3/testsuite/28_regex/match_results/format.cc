@@ -24,6 +24,8 @@
 // 28.10.5 formatting
 // Tests ECMAScript format()
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 #include <testsuite_regex.h>

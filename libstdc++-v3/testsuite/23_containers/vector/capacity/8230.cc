@@ -20,6 +20,8 @@
 
 // 23.2.4.2 vector capacity
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <vector>
 #include <stdexcept>
 #include <testsuite_allocator.h>

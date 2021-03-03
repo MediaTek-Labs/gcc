@@ -21,6 +21,8 @@
 // 28.8 basic_regex
 // Tests multiple consecutive quantifiers
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 #include <testsuite_regex.h>

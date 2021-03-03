@@ -17,6 +17,14 @@
 
 // 27.6.1.1.2 class basic_istream::sentry
 
+<<<<<<< HEAD
+=======
+// The library still throws the original definition of std::ios::failure
+// { dg-options "-D_GLIBCXX_USE_CXX11_ABI=0" }
+
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
+>>>>>>> a9bcb8962c4... Mark all libstdc++ tests failing with -nortti-libstdc++ with xfail
 #include <sstream>
 #include <testsuite_hooks.h>
 

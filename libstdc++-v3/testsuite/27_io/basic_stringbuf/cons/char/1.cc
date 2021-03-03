@@ -19,6 +19,8 @@
 
 // C++03 27.7.1.1  basic_stringbuf constructors  [lib.stringbuf.cons]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <testsuite_hooks.h>
 #include <testsuite_io.h>

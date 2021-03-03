@@ -22,6 +22,8 @@
 
 // [28.8.2] class template basic_regex constructor
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

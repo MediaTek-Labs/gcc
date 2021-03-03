@@ -20,6 +20,8 @@
 
 // [28.8.5] class template basic_regex locale
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <string>
 #include <regex>
 #include <testsuite_hooks.h>

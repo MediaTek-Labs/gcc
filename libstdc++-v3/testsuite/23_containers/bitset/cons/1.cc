@@ -19,6 +19,8 @@
 
 // 23.3.5.1 bitset constructors
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <string>
 #include <bitset>
 #include <algorithm> // std::reverse

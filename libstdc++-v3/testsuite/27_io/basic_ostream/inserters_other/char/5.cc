@@ -23,6 +23,8 @@
 // DR 60. What is a formatted input function?
 // Inserters for manipulators do not behave as formatted output functions.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ostream>
 #include <stdexcept>
 #include <testsuite_hooks.h>

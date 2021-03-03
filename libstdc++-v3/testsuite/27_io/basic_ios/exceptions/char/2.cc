@@ -18,6 +18,8 @@
 
 // 27.4.4.2 basic_ios member functions
 
+// { dg-skip-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <testsuite_hooks.h>
 

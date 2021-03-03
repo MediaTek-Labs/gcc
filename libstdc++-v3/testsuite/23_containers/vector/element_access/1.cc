@@ -20,6 +20,8 @@
 
 // 23.2.4 vector 
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <vector>
 #include <stdexcept>
 #include <testsuite_hooks.h>

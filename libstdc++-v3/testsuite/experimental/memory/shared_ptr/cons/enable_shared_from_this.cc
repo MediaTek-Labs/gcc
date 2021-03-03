@@ -17,6 +17,8 @@
 
 // { dg-do run { target c++14 } }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <experimental/memory>
 #include <testsuite_hooks.h>
 

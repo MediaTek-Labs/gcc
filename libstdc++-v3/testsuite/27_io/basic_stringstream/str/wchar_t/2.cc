@@ -17,6 +17,8 @@
 
 // 27.7.6 member functions (stringstream_members)
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <testsuite_hooks.h>
 

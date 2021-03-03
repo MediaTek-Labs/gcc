@@ -20,6 +20,8 @@
 // { dg-do run { xfail *-*-darwin8.[0-4].* } }
 // { dg-skip-if "" { powerpc64-*-freebsd* } }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <vector>
 #include <stdexcept>
 #include <testsuite_hooks.h>

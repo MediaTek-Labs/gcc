@@ -21,6 +21,8 @@
 
 // 28.12.2 Class template regex_token_iterator
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

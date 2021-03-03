@@ -17,6 +17,8 @@
 
 // 27.6.1.2.2 arithmetic extractors
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <istream>
 #include <sstream>
 #include <locale>

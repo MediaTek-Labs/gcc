@@ -40,6 +40,8 @@
  * (or more than one) which holds some balance.
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <iostream>
 #include <string>
 #include <cassert>

@@ -20,6 +20,8 @@
 // 27.8.1.1 - Template class basic_filebuf 
 // NB: This file is for testing basic_filebuf with NO OTHER INCLUDES.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <fstream>
 #include <testsuite_hooks.h>
 #include <testsuite_character.h>

@@ -17,6 +17,8 @@
 
 // 22.2.6.2.1 money_put members
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <locale>
 #include <climits>

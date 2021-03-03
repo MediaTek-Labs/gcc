@@ -19,6 +19,9 @@
 
 // NB: Don't include any other headers in this file.
 // LWG 2192 requires <cstdlib> to declare overloads for floating point types.
+
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cstdlib>
 
 template<typename, typename> struct is_same { enum { value = 0 }; };

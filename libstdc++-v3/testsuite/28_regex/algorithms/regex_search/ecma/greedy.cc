@@ -24,6 +24,8 @@
 // 28.11.3 regex_search
 // Tests ECMAScript greedy and ungreedy quantifiers.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 #include <testsuite_regex.h>

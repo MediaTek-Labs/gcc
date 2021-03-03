@@ -19,6 +19,8 @@
 
 // 22.2.6.3  Template class moneypunct
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <testsuite_hooks.h>
 

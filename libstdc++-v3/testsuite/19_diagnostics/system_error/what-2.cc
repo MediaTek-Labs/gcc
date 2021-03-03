@@ -19,6 +19,8 @@
 
 // 19.1 Exception classes
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <string>
 #include <system_error>
 #include <testsuite_hooks.h>

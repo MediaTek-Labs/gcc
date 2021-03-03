@@ -24,6 +24,8 @@
 // 28.12.2 regex_token_iterator
 // Tests "split" of regex_token_iterator class
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

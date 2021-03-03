@@ -17,6 +17,8 @@
 
 // 27.6.2.5.4 basic_ostream character inserters
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ostream>
 #include <sstream>
 #include <testsuite_hooks.h>

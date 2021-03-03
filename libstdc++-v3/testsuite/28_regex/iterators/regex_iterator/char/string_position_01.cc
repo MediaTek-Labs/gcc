@@ -24,6 +24,8 @@
 // 28.12.1 regex_iterator
 // Tests iter->position() behavior
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <tuple>
 #include <testsuite_hooks.h>

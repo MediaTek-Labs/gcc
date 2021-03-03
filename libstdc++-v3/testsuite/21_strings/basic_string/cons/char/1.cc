@@ -20,6 +20,7 @@
 // 21.3.1 basic_string constructors.
 
 // { dg-options "-Wno-stringop-overflow" }
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
 
 #include <new>
 #include <stdexcept>

@@ -24,6 +24,8 @@
 // 28.8.2 basic_regex ctor
 // Tests for invalid range expression
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

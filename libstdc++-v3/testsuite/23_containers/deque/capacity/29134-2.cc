@@ -17,6 +17,8 @@
 
 // 23.2.1.2 deque capacity [lib.deque.capacity]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <deque>
 #include <stdexcept>
 #include <testsuite_hooks.h>

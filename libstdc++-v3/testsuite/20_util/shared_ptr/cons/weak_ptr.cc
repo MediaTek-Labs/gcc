@@ -19,6 +19,8 @@
 
 // 20.6.6.2 Template class shared_ptr [util.smartptr.shared]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <memory>
 #include <testsuite_hooks.h>
 

@@ -24,6 +24,8 @@
 // 28.11.2 regex_match
 // Tests ECMAScript back-refernce against a std::string.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 #include <testsuite_regex.h>

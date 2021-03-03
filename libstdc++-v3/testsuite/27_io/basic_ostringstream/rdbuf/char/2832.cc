@@ -19,6 +19,8 @@
 
 // 27.7.3.2 member functions (ostringstream_members)
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <testsuite_hooks.h>
 

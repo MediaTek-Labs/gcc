@@ -19,6 +19,8 @@
 
 // 27.4.2.5 ios_base storage functions
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <iostream>
 #include <testsuite_hooks.h>

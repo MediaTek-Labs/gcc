@@ -17,6 +17,8 @@
 
 // { dg-do run { target c++11 } }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <memory>
 #include <testsuite_hooks.h>
 
