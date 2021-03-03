@@ -42,6 +42,8 @@
  * runtime resizes cause an exception.
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/hash_policy.hpp>
 #include <ext/pb_ds/exception.hpp>

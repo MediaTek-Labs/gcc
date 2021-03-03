@@ -39,6 +39,8 @@
  * container object through its resize-policy object.
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cassert>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/hash_policy.hpp>

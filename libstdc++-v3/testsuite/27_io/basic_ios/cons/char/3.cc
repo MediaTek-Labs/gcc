@@ -20,6 +20,8 @@
 
 // 27.4.2.1.6 class ios_base::init
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <typeinfo>
 #include <cstring>

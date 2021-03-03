@@ -19,6 +19,8 @@
 
 // 22.1.2 locale globals [lib.locale.global.templates]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cwchar> // for mbstate_t
 #include <locale>
 #include <typeinfo>

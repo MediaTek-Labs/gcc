@@ -19,6 +19,8 @@
 
 // libstdc++/66441
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <codecvt>
 #include <testsuite_hooks.h>

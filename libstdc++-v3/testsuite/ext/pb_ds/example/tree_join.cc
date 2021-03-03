@@ -42,6 +42,8 @@
  */
 
 // For tree
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ext/pb_ds/assoc_container.hpp>
 // For join_error exception.
 #include <ext/pb_ds/exception.hpp>

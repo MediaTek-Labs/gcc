@@ -35,6 +35,8 @@
  */
 
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ext/pb_ds/assoc_container.hpp>
 #include <iostream>
 #include <cassert>

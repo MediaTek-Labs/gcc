@@ -40,6 +40,8 @@
  * a hash-based container object through its resize-policy object.
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <functional>
 #include <cassert>
 #include <ext/pb_ds/assoc_container.hpp>

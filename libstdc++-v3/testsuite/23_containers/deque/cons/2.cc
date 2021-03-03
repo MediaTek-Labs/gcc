@@ -19,6 +19,8 @@
 
 // 23.2.1.1 deque constructors, copy, and assignment
 
+// { dg-skip-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <deque>
 #include <iterator>
 #include <sstream>

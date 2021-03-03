@@ -19,6 +19,8 @@
 
 // PR libstdc++/47724
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 
 void test01()

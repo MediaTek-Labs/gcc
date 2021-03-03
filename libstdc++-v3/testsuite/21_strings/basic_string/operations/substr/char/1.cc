@@ -19,6 +19,8 @@
 
 // 21.3.6.7 basic_string::substr
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <string>
 #include <stdexcept>
 #include <testsuite_hooks.h>

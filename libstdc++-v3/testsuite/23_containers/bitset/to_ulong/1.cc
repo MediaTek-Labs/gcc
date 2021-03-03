@@ -19,6 +19,8 @@
 
 // 23.3.5.2 bitset members
 
+// { dg-skip-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <bitset>
 #include <stdexcept>
 #include <sstream>

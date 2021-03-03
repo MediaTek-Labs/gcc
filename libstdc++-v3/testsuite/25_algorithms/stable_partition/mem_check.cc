@@ -17,6 +17,8 @@
 
 // 25.2.12 [lib.alg.partitions] Partitions.
 
+// { dg-skip-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <algorithm>
 #include <testsuite_hooks.h>
 #include <testsuite_iterators.h>

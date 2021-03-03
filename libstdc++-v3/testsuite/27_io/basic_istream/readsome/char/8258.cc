@@ -19,6 +19,8 @@
 
 // 27.6.1.3 unformatted input functions
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <istream>
 #include <streambuf>
 #include <testsuite_hooks.h>

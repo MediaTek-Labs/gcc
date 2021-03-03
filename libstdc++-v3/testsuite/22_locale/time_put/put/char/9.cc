@@ -19,6 +19,8 @@
 
 // 22.2.5.3.1 time_put members
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <sstream>
 #include <testsuite_hooks.h>

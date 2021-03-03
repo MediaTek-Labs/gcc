@@ -31,6 +31,8 @@
 // The library still throws the original definition of std::ios::failure
 // { dg-options "-D_GLIBCXX_USE_CXX11_ABI=0" }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <iostream>
 #include <limits>

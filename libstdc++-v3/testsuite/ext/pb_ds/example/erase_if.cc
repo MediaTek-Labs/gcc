@@ -39,6 +39,8 @@
  * method of associative containers to erase some of their entries.
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <iostream>
 #include <cassert>
 #include <ext/pb_ds/assoc_container.hpp>

@@ -25,6 +25,8 @@
 // 28.2 (4) Table 127 - Regular expression traits class requirements
 // 28.7 Class template regex_traits [re.traits]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <string>
 #include <testsuite_hooks.h>

@@ -18,6 +18,8 @@
 // { dg-options "-std=gnu++11 -O0 -D_GLIBCXX_USE_CXX11_ABI=1" }
 // { dg-do link }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <fstream>
 #include <string>
 

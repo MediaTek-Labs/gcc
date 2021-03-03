@@ -21,6 +21,8 @@
 
 // { dg-do run { xfail dummy_wcsftime } }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <sstream>
 #include <testsuite_hooks.h>

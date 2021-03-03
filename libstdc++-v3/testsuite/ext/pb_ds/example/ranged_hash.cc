@@ -44,6 +44,8 @@
  * is large.
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <functional>
 #include <cassert>
 #include <string>

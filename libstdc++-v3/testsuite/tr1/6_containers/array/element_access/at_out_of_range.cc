@@ -19,6 +19,8 @@
 
 // 6.2.2 Class template array
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <tr1/array>
 #include <stdexcept>
 #include <testsuite_hooks.h>

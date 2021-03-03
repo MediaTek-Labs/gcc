@@ -23,6 +23,8 @@
 // cout.setstate(badbit), which may throw an exception. Check that
 // the exception doesn't escape from the destructor.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <iostream>
 #include <streambuf>
 #include <testsuite_hooks.h>

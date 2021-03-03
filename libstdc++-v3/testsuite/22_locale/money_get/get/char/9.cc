@@ -21,6 +21,8 @@
 // The number of digits required after the decimal point (if any) is exactly
 // the value returned by frac_digits().
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <sstream>
 

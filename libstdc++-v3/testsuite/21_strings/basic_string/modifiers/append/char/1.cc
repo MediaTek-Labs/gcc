@@ -19,6 +19,8 @@
 
 // 21.3.5.2 basic_string::append
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <string>
 #include <stdexcept>
 #include <testsuite_hooks.h>

@@ -19,6 +19,8 @@
 
 // 27.7.1.3 Overridden virtual functions
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <testsuite_hooks.h>
 

@@ -50,6 +50,8 @@
  * version of Dijkstra's
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <iostream>
 #include <cassert>
 #include <ext/pb_ds/priority_queue.hpp>

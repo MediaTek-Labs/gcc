@@ -18,6 +18,8 @@
 
 // 27.6.2.3 class basic_ostream::sentry
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ostream>
 #include <sstream>
 #include <testsuite_hooks.h>

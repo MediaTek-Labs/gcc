@@ -40,6 +40,8 @@
  * a generic container. It then calls this function with some containers.
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <iostream>
 #include <cassert>
 #include <ext/pb_ds/assoc_container.hpp>

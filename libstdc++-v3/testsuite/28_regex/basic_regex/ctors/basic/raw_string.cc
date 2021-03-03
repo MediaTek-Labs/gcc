@@ -21,6 +21,8 @@
 
 // basic_regex constructors + raw string literals
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_regex.h>
 

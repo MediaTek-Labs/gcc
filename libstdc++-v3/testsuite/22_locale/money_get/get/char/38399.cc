@@ -17,6 +17,8 @@
 
 // 22.2.6.1.1 money_get members
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <sstream>
 #include <testsuite_hooks.h>

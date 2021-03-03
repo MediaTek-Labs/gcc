@@ -17,6 +17,8 @@
 
 // { dg-options "-std=gnu++11" }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <functional>
 #include <stdexcept>
 #include <testsuite_hooks.h>

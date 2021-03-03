@@ -19,6 +19,8 @@
 
 // 8.2.1 Class template shared_ptr [memory.smartptr.shared]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <experimental/memory>
 #include <testsuite_hooks.h>
 

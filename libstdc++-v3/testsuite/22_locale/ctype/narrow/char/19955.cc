@@ -18,6 +18,8 @@
 
 // 22.2.1.3.2 ctype<char> members
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <cstring>
 #include <testsuite_hooks.h>

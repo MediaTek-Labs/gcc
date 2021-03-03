@@ -18,6 +18,8 @@
 // <http://www.gnu.org/licenses/>.
 
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <vector>
 #include <stdexcept>
 #include <testsuite_hooks.h>

@@ -20,6 +20,8 @@
 
 // 20.4.1.1 allocator members
 
+// { dg-skip-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ext/array_allocator.h>
 #include <testsuite_allocator.h>
 

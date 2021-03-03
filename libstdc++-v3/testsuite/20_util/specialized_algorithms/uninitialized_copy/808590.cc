@@ -17,6 +17,8 @@
 
 // { dg-options "-std=gnu++03" }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <vector>
 #include <stdexcept>
 

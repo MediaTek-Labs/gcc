@@ -19,6 +19,8 @@
 
 // basic_string_view::substr
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <experimental/string_view>
 #include <stdexcept>
 #include <testsuite_hooks.h>

@@ -20,6 +20,8 @@
 // This is identical to ./808590.cc but using -std=gnu++11
 // See https://gcc.gnu.org/ml/libstdc++/2014-05/msg00027.html
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <vector>
 #include <stdexcept>
 

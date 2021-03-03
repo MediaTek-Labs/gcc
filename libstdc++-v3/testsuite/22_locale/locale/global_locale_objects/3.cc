@@ -19,6 +19,8 @@
 
 // 22.1.1.5 locale static members [lib.locale.statics]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cwchar> // for mbstate_t
 #include <locale>
 #include <testsuite_hooks.h>

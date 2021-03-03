@@ -21,6 +21,8 @@
 
 // 28.6 [re.badexp]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

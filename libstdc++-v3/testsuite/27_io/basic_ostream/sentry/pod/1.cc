@@ -20,6 +20,8 @@
 
 // 27.6.1.1.2 class basic_istream::sentry
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ostream>
 #include <sstream>
 #include <typeinfo>

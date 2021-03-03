@@ -19,6 +19,8 @@
 
 // 22.1.1.1.2 - class locale::facet [lib.locale.facet]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cwchar> // for mbstate_t
 #include <locale>
 #include <stdexcept>

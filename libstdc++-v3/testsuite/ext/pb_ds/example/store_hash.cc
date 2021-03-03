@@ -44,6 +44,8 @@
  * of comparing hash values, this technique adds unnecessary overhead.
  */
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <functional>
 #include <string>
 #include <ext/pb_ds/assoc_container.hpp>

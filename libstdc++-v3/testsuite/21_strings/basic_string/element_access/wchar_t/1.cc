@@ -19,6 +19,8 @@
 
 // 21.3.4 basic_string element access
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <string>
 #include <stdexcept>
 #include <testsuite_hooks.h>

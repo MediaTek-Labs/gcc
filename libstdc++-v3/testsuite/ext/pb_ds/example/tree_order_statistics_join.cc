@@ -40,6 +40,8 @@
 // order statistics.
 // While the example does not show this, the same holds for split operations.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cassert>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>

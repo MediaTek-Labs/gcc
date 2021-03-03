@@ -19,6 +19,8 @@
 
 // 27.6.2.5.2  Arithmetic inserters
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <testsuite_hooks.h>
 #include <testsuite_character.h>

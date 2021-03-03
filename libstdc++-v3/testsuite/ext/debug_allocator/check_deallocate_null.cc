@@ -18,6 +18,8 @@
 
 // 20.4.1.1 allocator members
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <memory>
 #include <ext/debug_allocator.h>
 #include <testsuite_allocator.h>

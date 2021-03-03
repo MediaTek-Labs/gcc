@@ -19,6 +19,8 @@
 
 // 22.2.1.5 - Template class codecvt [lib.locale.codecvt]
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <cstring>
 #include <testsuite_hooks.h>

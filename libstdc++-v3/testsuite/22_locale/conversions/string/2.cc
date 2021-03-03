@@ -19,6 +19,8 @@
 
 // 22.3.3.2.2  String conversions
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <string>
 #include <testsuite_hooks.h>

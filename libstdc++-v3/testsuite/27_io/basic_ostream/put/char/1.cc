@@ -26,6 +26,8 @@
 // Unformatted output functions should catch exceptions thrown
 // from streambuf members.
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <ostream>
 #include <streambuf>
 #include <testsuite_hooks.h>

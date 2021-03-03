@@ -19,6 +19,8 @@
 
 // 22.2.2.2.1  num_put members
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <sstream>
 #include <testsuite_hooks.h>

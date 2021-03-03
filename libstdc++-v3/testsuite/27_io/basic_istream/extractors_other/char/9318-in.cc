@@ -20,6 +20,8 @@
 
 // 27.5.2 template class basic_streambuf
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <sstream>
 #include <istream>
 #include <testsuite_hooks.h>

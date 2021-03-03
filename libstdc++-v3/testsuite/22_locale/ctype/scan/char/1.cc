@@ -20,6 +20,8 @@
 
 // { dg-do run }
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <locale>
 #include <testsuite_hooks.h>
 

@@ -20,6 +20,8 @@
 
 // libstdc++/64140
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

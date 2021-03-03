@@ -21,6 +21,8 @@
 
 // 7.8.2 basic_regex constructors
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <regex>
 #include <testsuite_hooks.h>
 

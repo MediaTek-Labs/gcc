@@ -18,6 +18,8 @@
 
 // 27.5.2 template class basic_streambuf
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cstring>
 #include <cwchar>
 #include <streambuf>

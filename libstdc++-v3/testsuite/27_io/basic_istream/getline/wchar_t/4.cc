@@ -18,6 +18,8 @@
 
 // 27.6.1.3 unformatted input functions
 
+// { dg-xfail-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <cwchar> // for wcslen
 #include <istream>
 #include <testsuite_hooks.h>
