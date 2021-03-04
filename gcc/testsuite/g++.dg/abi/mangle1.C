@@ -2,6 +2,7 @@
 
 // { dg-do compile }
 // { dg-options "-fno-inline" }
+// { dg-require-effective-target rtti_enabled }
 
 struct A {
   virtual void f () { }

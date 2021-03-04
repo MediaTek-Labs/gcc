@@ -3,6 +3,7 @@
 // modes and an error in C++14 mode.
 
 // { dg-options "-Wc++14-compat" }
+// { dg-require-effective-target exceptions_enabled }
 
 #include <new>
 void *operator new (std::size_t s, std::size_t)

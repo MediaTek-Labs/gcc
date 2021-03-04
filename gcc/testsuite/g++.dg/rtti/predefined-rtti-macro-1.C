@@ -1,4 +1,5 @@
 // { dg-do compile }
+// { dg-require-effective-target rtti_enabled }
 
 struct A { virtual ~A() { }; };
 struct B : A { };

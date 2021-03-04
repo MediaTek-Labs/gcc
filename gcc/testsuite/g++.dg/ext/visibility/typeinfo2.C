@@ -1,5 +1,6 @@
 // PR c++/35368
 // { dg-require-visibility "" }
+// { dg-require-effective-target rtti_enabled }
 
 #pragma GCC visibility push (hidden)
 

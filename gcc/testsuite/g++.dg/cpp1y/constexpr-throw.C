@@ -1,4 +1,5 @@
 // { dg-do compile { target c++14 } }
+// { dg-require-effective-target exceptions_enabled }
 
 constexpr void f1() {
   if (false)

@@ -1,4 +1,5 @@
 // { dg-do assemble  }
+// { dg-require-effective-target exceptions_enabled }
 
 // Copyright (C) 1999, 2000 Free Software Foundation, Inc.
 // Contributed by Nathan Sidwell 11 Apr 1999 <nathan@acm.org>

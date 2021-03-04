@@ -2,6 +2,7 @@
 // -Wterminate warning.
 
 // { dg-options "-Wall" }
+// { dg-require-effective-target exceptions_enabled }
 
 struct A
 {

@@ -2,6 +2,7 @@
 // for a definition, or at a call site.
 
 // { dg-options "-fpermissive -w" }
+// { dg-require-effective-target exceptions_enabled }
 
 struct A;			// { dg-message "" }
 

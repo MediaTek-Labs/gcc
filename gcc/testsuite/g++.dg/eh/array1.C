@@ -1,6 +1,7 @@
 // Test that we have one EH cleanup region for the whole array
 // rather than one for each element.
 // { dg-options "-fdump-tree-gimple" }
+// { dg-require-effective-target exceptions_enabled }
 
 struct A
 {

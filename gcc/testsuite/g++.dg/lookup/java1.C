@@ -1,5 +1,6 @@
 // { dg-do compile }
 // { dg-options "-fdollars-in-identifiers" }
+// { dg-require-effective-target exceptions_enabled }
 // Origin: Giovanni Bajo <giovannibajo at libero dot it>
 // Make sure that Java special functions can be called correctly.
 

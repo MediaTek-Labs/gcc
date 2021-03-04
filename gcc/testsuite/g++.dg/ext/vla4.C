@@ -1,5 +1,6 @@
 // PR c++/29318
 // { dg-options "" }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 

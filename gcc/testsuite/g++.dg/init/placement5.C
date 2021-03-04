@@ -7,6 +7,8 @@
 // placement delete if it would also be selected for normal delete, not if
 // there's also an op delete (void *).
 
+// { dg-require-effective-target exceptions_enabled }
+
 typedef __SIZE_TYPE__ size_t;
 
 struct A
