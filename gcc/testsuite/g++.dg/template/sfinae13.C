@@ -1,6 +1,7 @@
 // DR 339
 //
 // Test of the use of casts with SFINAE
+// { dg-require-effective-target rtti_enabled }
 
 // Boilerplate helpers
 typedef char yes_type;

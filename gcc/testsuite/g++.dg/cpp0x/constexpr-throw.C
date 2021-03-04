@@ -1,4 +1,5 @@
 // { dg-do compile { target c++11 } }
+// { dg-require-effective-target exceptions_enabled }
 
 constexpr int may_throw(bool decide) {
 	return decide ? 42 : throw -1; // { dg-error "throw" }

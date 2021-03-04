@@ -1,4 +1,5 @@
 // PR c++/33463
+// { dg-require-effective-target rtti_enabled }
 
 namespace std
 {

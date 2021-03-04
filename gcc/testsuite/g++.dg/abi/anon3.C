@@ -1,4 +1,5 @@
 // { dg-require-weak "" }
+// { dg-require-effective-target rtti_enabled }
 
 typedef struct {
   // { dg-final { scan-assembler ".weak\(_definition\)?\[ \t\]_?_ZN4Heya4blahEv" } }

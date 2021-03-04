@@ -2,6 +2,7 @@
    type_info name and node. */
 /* { dg-do compile } */
 /* { dg-require-visibility "" } */
+/* { dg-require-effective-target rtti_enabled } */
 /* { dg-final { scan-hidden "ZTV3Foo" } } */
 /* { dg-final { scan-hidden "ZTT3Foo" } } */
 /* { dg-final { scan-hidden "ZTS3Foo" } } */

@@ -1,4 +1,5 @@
 // { dg-do assemble  }
+// { dg-require-effective-target exceptions_enabled }
 // Test that we notice unfortunate handler ordering.
 
 struct A { };

@@ -1,6 +1,6 @@
 // HP-UX libunwind.so doesn't provide _UA_END_OF_STACK.
 // { dg-do run { xfail "ia64-hp-hpux11.*" } }
-// { dg-require-effective-target c++14_down }
+// { dg-require-effective-target c++14_down exceptions_enabled }
 
 // Test that forced unwinding calls std::unexpected going 
 // through a nothrow function.

@@ -1,4 +1,5 @@
 // PR c++/34158
+// { dg-require-effective-target exceptions_enabled }
 
 typedef __SIZE_TYPE__ size_t;
 extern "C" void* malloc (size_t);

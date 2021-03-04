@@ -3,6 +3,7 @@
 
 // { dg-do compile { target c++14_down } }
 // { dg-options "-fpermissive -w" }
+// { dg-require-effective-target exceptions_enabled }
 
 struct A;			// { dg-message "" }
 

@@ -1,5 +1,6 @@
 /* { dg-require-visibility "" } */
 /* { dg-options "-fvisibility-ms-compat" } */
+// { dg-require-effective-target rtti_enabled }
 
 /* { dg-final { scan-not-hidden "_ZTI1S" } } */
 /* { dg-final { scan-hidden "_ZTI1T" } } */

@@ -1,4 +1,5 @@
 // PR c++/32251
+// { dg-require-effective-target exceptions_enabled }
 
 struct A {
   A();

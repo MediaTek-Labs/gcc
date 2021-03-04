@@ -1,4 +1,5 @@
 // PR c++/31952
+// { dg-require-effective-target exceptions_enabled }
 
 void
 f0()

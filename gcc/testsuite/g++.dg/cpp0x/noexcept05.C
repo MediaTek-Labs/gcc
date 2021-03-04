@@ -9,6 +9,7 @@
 // { dg-final { scan-assembler "LSDA" } }
 
 // { dg-do compile { target c++11 } }
+// { dg-require-effective-target exceptions_enabled }
 
 struct A { ~A(); };
 void g();

@@ -1,5 +1,6 @@
 // PR66516 - missing diagnostic on taking the address of a builtin function
 // { dg-do compile }
+// { dg-require-effective-target exceptions_enabled }
 
 namespace std {
   // Define type_info type to be able to use typeid in tests without
