@@ -67,6 +67,7 @@ static char *flto_out;
 static unsigned int nr;
 static char **input_names;
 static char **output_names;
+static char **output_extra_names;
 static char **offload_names;
 static char *offload_objects_file_name;
 static char *makefile;
@@ -488,6 +489,7 @@ append_compiler_options (obstack *argv_obstack, struct cl_decoded_option *opts,
 	case OPT_flto_:
 	case OPT_flto:
 	case OPT_flto_partition_:
+	case OPT_flto_preserve_object_names:
 	  continue;
 
 	default:
@@ -988,7 +990,7 @@ run_gcc (unsigned argc, char *argv[])
   /* Look at saved options in the IL files.  */
   for (i = 1; i < argc; ++i)
     {
-      char *p;
+      const char *p, *e;
       int fd;
       off_t file_offset = 0;
       long loffset;
@@ -1013,6 +1015,15 @@ run_gcc (unsigned argc, char *argv[])
 	  memcpy (filename, argv[i], p - argv[i]);
 	  filename[p - argv[i]] = '\0';
 	  file_offset = (off_t) loffset;
+
+	  if ((p = strchr (filename, '('))
+	      && p != filename
+	      && (e = strchr (p, ')'))
+	      && e[1] == '\0')
+            {
+	      filename[p - filename] = '\0';
+	      gcc_assert (file_offset);
+            }
 	}
       fd = open (filename, O_RDONLY | O_BINARY);
       if (fd == -1)
@@ -1307,7 +1318,7 @@ cont1:
 	{
 	  const unsigned piece = 32;
 	  char *output_name = NULL;
-	  char *buf, *input_name = (char *)xmalloc (piece);
+	  char *buf, *extra_name, *input_name = (char *)xmalloc (piece);
 	  size_t len;
 
 	  buf = input_name;
@@ -1323,14 +1334,21 @@ cont:
 	    }
 	  input_name[len - 1] = '\0';
 
+	  extra_name = strchr (input_name, '@');
+
+	  if (extra_name)
+	    *(extra_name++) = '\0';
+
 	  if (input_name[0] == '*')
 	    output_name = &input_name[1];
 
 	  nr++;
 	  input_names = (char **)xrealloc (input_names, nr * sizeof (char *));
 	  output_names = (char **)xrealloc (output_names, nr * sizeof (char *));
+	  output_extra_names = (char **)xrealloc (output_extra_names, nr * sizeof (char *));
 	  input_names[nr-1] = input_name;
 	  output_names[nr-1] = output_name;
+	  output_extra_names[nr-1] = extra_name;
 	}
       fclose (stream);
       maybe_unlink (ltrans_output_file);
@@ -1439,10 +1457,16 @@ cont:
       for (i = 0; i < nr; ++i)
 	{
 	  fputs (output_names[i], stdout);
+	  if (output_extra_names[i])
+	    {
+	      putc ('@', stdout);
+	      fputs (output_extra_names[i], stdout);
+	    }
 	  putc ('\n', stdout);
 	  free (input_names[i]);
 	}
       nr = 0;
+      free (output_extra_names);
       free (output_names);
       free (input_names);
       free (list_option_full);

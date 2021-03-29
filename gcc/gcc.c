@@ -942,11 +942,14 @@ proper position among the other output files.  */
 #if HAVE_LTO_PLUGIN == 2
 #define PLUGIN_COND "!fno-use-linker-plugin:%{!fno-lto"
 #define PLUGIN_COND_CLOSE "}"
+#define PLUGIN_COND2 "fno-use-linker-plugin"
 #else
 /* The linker used has limited plugin support, use LTO plugin with explicit
    -fuse-linker-plugin.  */
 #define PLUGIN_COND "fuse-linker-plugin"
 #define PLUGIN_COND_CLOSE ""
+/* TODO(lto) This should be gated with configure time check  */
+#define PLUGIN_COND2 "!fuse-linker-plugin"
 #endif
 #define LINK_PLUGIN_SPEC \
     "%{" PLUGIN_COND": \
@@ -954,11 +957,15 @@ proper position among the other output files.  */
     -plugin-opt=%(lto_wrapper) \
     -plugin-opt=-fresolution=%u.res \
     %{!nostdlib:%{!nodefaultlibs:%:pass-through-libs(%(link_gcc_c_sequence))}} \
-    }" PLUGIN_COND_CLOSE
+    }" PLUGIN_COND_CLOSE \
+   "%{flto-preserve-object-names: -z plugin-preserve-object-names}" \
+   "%{" PLUGIN_COND2": \
+    %{flto-preserve-object-names: %e-flto-preserve-object-names is supported only with linker plugin}}"
 #else
 /* The linker used doesn't support -plugin, reject -fuse-linker-plugin.  */
 #define LINK_PLUGIN_SPEC "%{fuse-linker-plugin:\
-    %e-fuse-linker-plugin is not supported in this configuration}"
+    %e-fuse-linker-plugin is not supported in this configuration}" \
+    "%{flto-preserve-object-names: %e-flto-preserve-object-names is supported only with linker plugin}"
 #endif
 
 /* Linker command line options for -fsanitize= early on the command line.  */
@@ -4354,7 +4361,7 @@ process_command (unsigned int decoded_options_count,
       if (decoded_options[j].opt_index == OPT_SPECIAL_input_file)
 	{
 	  const char *arg = decoded_options[j].arg;
-          const char *p = strrchr (arg, '@');
+          const char *e, *p = strrchr (arg, '@');
           char *fname;
 	  long offset;
 	  int consumed;
@@ -4372,6 +4379,16 @@ process_command (unsigned int decoded_options_count,
               fname = (char *)xmalloc (p - arg + 1);
               memcpy (fname, arg, p - arg);
               fname[p - arg] = '\0';
+
+              if ((p = strchr (fname, '('))
+                  && p != fname
+                  && (e = strchr (p, ')'))
+                  && e[1] == '\0')
+                {
+                  fname[p - fname] = '\0';
+                  gcc_assert(offset);
+                }
+
 	      /* Only accept non-stdin and existing FNAME parts, otherwise
 		 try with the full name.  */
 	      if (strcmp (fname, "-") == 0 || access (fname, F_OK) < 0)

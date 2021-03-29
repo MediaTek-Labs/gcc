@@ -365,6 +365,13 @@ enum ld_plugin_status
 (*ld_plugin_get_input_section_size) (const struct ld_plugin_section section,
                                      uint64_t *secsize);
 
+
+/* The linker's interface for adding a compiled input file with custom name.  */
+
+typedef
+enum ld_plugin_status
+(*ld_plugin_add_input_file_with_name) (const char *pathname, const char *name);
+
 enum ld_plugin_level
 {
   LDPL_INFO,
@@ -407,7 +414,9 @@ enum ld_plugin_tag
   LDPT_UNIQUE_SEGMENT_FOR_SECTIONS = 27,
   LDPT_GET_SYMBOLS_V3 = 28,
   LDPT_GET_INPUT_SECTION_ALIGNMENT = 29,
-  LDPT_GET_INPUT_SECTION_SIZE = 30
+  LDPT_GET_INPUT_SECTION_SIZE = 30,
+  /* FIXME(lto) Renumber if upstreaming  */
+  LDPT_ADD_INPUT_FILE_WITH_NAME = 255
 };
 
 /* The plugin transfer vector.  */
@@ -441,6 +450,7 @@ struct ld_plugin_tv
     ld_plugin_unique_segment_for_sections tv_unique_segment_for_sections;
     ld_plugin_get_input_section_alignment tv_get_input_section_alignment;
     ld_plugin_get_input_section_size tv_get_input_section_size;
+    ld_plugin_add_input_file_with_name tv_add_input_file_with_name;
   } tv_u;
 };
 

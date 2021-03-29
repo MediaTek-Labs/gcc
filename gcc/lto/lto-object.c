@@ -68,7 +68,7 @@ lto_file_init (lto_file *file, const char *filename, off_t offset)
 lto_file *
 lto_obj_file_open (const char *filename, bool writable)
 {
-  const char *offset_p;
+  const char *offset_p, *p, *e;
   long loffset;
   int consumed;
   char *fname;
@@ -97,11 +97,24 @@ lto_obj_file_open (const char *filename, bool writable)
   lo = XCNEW (struct lto_simple_object);
   lto_file_init ((lto_file *) lo, fname, offset);
 
+  if (offset
+      && (p = strchr (fname, '('))
+      && p != fname
+      && (e = strchr (p, ')'))
+      && e[1] == '\0')
+    fname[p - fname] = '\0';
+  else
+    p = NULL;
+
   lo->fd = open (fname,
 		 (writable
 		  ? O_WRONLY | O_CREAT | O_BINARY
 		  : O_RDONLY | O_BINARY),
 		 0666);
+
+  if (p)
+    fname[p - fname] = '(';
+
   if (lo->fd == -1)
     {
       error ("open %s failed: %s", fname, xstrerror (errno));

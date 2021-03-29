@@ -852,6 +852,17 @@ lto_post_options (const char **pfilename ATTRIBUTE_UNUSED)
      support.  */
   flag_excess_precision_cmdline = EXCESS_PRECISION_FAST;
 
+  if (flag_lto_preserve_object_names
+      && !flag_ltrans
+      && flag_lto_partition != LTO_PARTITION_1TO1)
+    {
+      if ((global_options_set.x_flag_lto_partition != LTO_PARTITION_NONE)
+          || (global_options.x_flag_lto_partition != LTO_PARTITION_BALANCED))
+        error ("-flto-preserve-object-names requires -flto-partition=1to1");
+
+      flag_lto_partition = LTO_PARTITION_1TO1;
+    }
+
   /* Initialize the compiler back end.  */
   return false;
 }
