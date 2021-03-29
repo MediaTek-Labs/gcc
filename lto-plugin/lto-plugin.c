@@ -168,6 +168,7 @@ static ld_plugin_add_input_file add_input_file;
 static ld_plugin_add_input_library add_input_library;
 static ld_plugin_message message;
 static ld_plugin_add_symbols add_symbols, add_symbols_v2;
+static ld_plugin_add_input_file_with_name add_input_file_with_name;
 
 static struct plugin_file_info *claimed_files = NULL;
 static unsigned int num_claimed_files = 0;
@@ -592,7 +593,7 @@ add_output_files (FILE *f)
   for (;;)
     {
       const unsigned piece = 32;
-      char *buf, *s = xmalloc (piece);
+      char *buf, *name, *s = xmalloc (piece);
       size_t len;
 
       buf = s;
@@ -610,12 +611,24 @@ cont:
 	  goto cont;
 	}
       s[len - 1] = '\0';
+      name = strchr(s, '@');
+
+      if (name)
+	*(name++) = '\0';
 
       num_output_files++;
       output_files
 	= xrealloc (output_files, num_output_files * sizeof (char *));
       output_files[num_output_files - 1] = s;
-      add_input_file (output_files[num_output_files - 1]);
+      if (name)
+	{
+	  check (add_input_file_with_name, LDPL_FATAL, "linker must support add_input_file_with_name");
+	  add_input_file_with_name (output_files[num_output_files - 1], name);
+	}
+      else
+	{
+	  add_input_file (output_files[num_output_files - 1]);
+	}
     }
 }
 
@@ -1419,6 +1432,9 @@ onload (struct ld_plugin_tv *tv)
 	case LDPT_OUTPUT_NAME:
 	  /* We only use this to make user-friendly temp file names.  */
 	  link_output_name = p->tv_u.tv_string;
+	  break;
+	case LDPT_ADD_INPUT_FILE_WITH_NAME:
+	  add_input_file_with_name = p->tv_u.tv_add_input_file_with_name;
 	  break;
 	default:
 	  break;

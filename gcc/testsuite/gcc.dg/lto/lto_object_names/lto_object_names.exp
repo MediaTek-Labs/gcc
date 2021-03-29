@@ -1,0 +1,95 @@
+# Copyright (C) 2021 Free Software Foundation, Inc.
+#
+# This file is part of GCC.
+#
+# GCC is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3, or (at your option)
+# any later version.
+#
+# GCC is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with GCC; see the file COPYING3.  If not see
+# <http://www.gnu.org/licenses/>.
+
+# Test -flto-preserve-object-names.
+
+load_lib file-format.exp
+load_lib gcc.exp
+load_lib standard.exp
+load_lib target-libpath.exp
+
+if { ![check_lto_preserve_object_names_available]
+    || [gcc_target_object_format] != "elf" } {
+    return
+}
+
+gcc_init
+
+set tstobjdir "$tmpdir"
+set options ""
+lappend options "additional_flags=-Os"
+lappend options "additional_flags=-flto"
+lappend options "additional_flags=-fuse-linker-plugin"
+lappend options "additional_flags=-flto-preserve-object-names"
+lappend options "additional_flags=-fno-fat-lto-objects"
+lappend options "additional_flags=-nostdlib"
+lappend options "additional_flags=-T$srcdir/$subdir/script.t"
+
+foreach suffix [list "a" "b" "c"] {
+    set source "$srcdir/$subdir/object_name_$suffix.c"
+    set dest "$tstobjdir/object_name_$suffix.o"
+    set output [gcc_target_compile "$source" "$dest" object $options]
+    gcc_check_compile "lto_object_names $dest assemble" "" $dest $output
+}
+
+set ar [transform gcc-ar]
+
+verbose -log "ar is $ar"
+
+set status [remote_exec build "$ar cr $tstobjdir/archive_name.a $tstobjdir/object_name_b.o $tstobjdir/object_name_c.o"]
+set status [lindex $status 0]
+
+if { $status == 0 } {
+    pass "lto_object_names archive_name.a archive"
+} else {
+    fail "lto_object_names archive_name.a archive"
+}
+
+set dest "$tstobjdir/object_name.exe"
+set output [gcc_target_compile "$tstobjdir/object_name_a.o $tstobjdir/archive_name.a" "$dest" link $options]
+gcc_check_compile "lto_object_names $dest link" "" $dest $output
+
+set nm [transform nm]
+
+verbose -log "nm is $nm"
+
+set fd [open "| $nm $dest" r]
+set text [read $fd]
+close $fd
+
+set pattern "bar.*foo.*main"
+
+if [regexp -- $pattern $text] {
+    pass "lto_object_names $dest scan-nm $pattern"
+} else {
+    fail "lto_object_names $dest scan-nm $pattern"
+}
+
+foreach unsupported_option [list "-fno-use-linker-plugin" "-flto-partition=balanced" "-flto-partition=none" "-flto-partition=max"] {
+    set new_options $options
+    lappend new_options "additional_flags=$unsupported_option"
+    set output [gcc_target_compile "$tstobjdir/object_name_a.o $tstobjdir/archive_name.a" "$dest" link $new_options]
+
+    if [regexp -- "error: -flto-preserve-object-names" $output] {
+        pass "lto_object_names $dest link $unsupported_option"
+    } else {
+        fail "lto_object_names $dest link $unsupported_option"
+    }
+}
+
+gcc_finish

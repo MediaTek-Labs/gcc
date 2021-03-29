@@ -2378,13 +2378,29 @@ lto_read_section_data (struct lto_file_decl_data *file_data,
     }
   if (fd == -1)
     {
-      fd = open (file_data->file_name, O_RDONLY|O_BINARY);
+      const char *p, *e;
+      fd_name = xstrdup (file_data->file_name);
+
+      if (offset
+	  && (p = strchr (fd_name, '('))
+	  && (p != fd_name)
+	  && (e = strchr (p, ')'))
+	  && e[1] == '\0')
+       fd_name[p - fd_name] = '\0';
+      else
+       p = NULL;
+
+      fd = open (fd_name, O_RDONLY|O_BINARY);
+
+      if (p)
+       fd_name[p - fd_name] = '(';
+
       if (fd == -1)
 	{
 	  fatal_error (input_location, "Cannot open %s", file_data->file_name);
+	  free (fd_name);
 	  return NULL;
 	}
-      fd_name = xstrdup (file_data->file_name);
     }
 
 #if LTO_MMAP_IO

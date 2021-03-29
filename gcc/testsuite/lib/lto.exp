@@ -198,6 +198,10 @@ proc lto_init { args } {
 	      {-O0 -flto -fuse-linker-plugin -fno-fat-lto-objects }	\
 	      {-O2 -flto -fuse-linker-plugin}	\
 	  ]
+	  if [check_lto_preserve_object_names_available] {
+	    lappend LTO_OPTIONS "-O0 -flto -fuse-linker-plugin -flto-preserve-object-names"
+	    lappend LTO_OPTIONS "-O2 -flto -fuse-linker-plugin -flto-preserve-object-names"
+	  }
  	} else {
 	  set LTO_OPTIONS [list	\
 	      {-O0 -flto -flto-partition=none } \

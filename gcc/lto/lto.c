@@ -400,12 +400,20 @@ lto_wpa_write_files (void)
   if (ltrans_output_list_stream == NULL)
     fatal_error (input_location,
 		 "opening LTRANS output list %s: %m", ltrans_output_list);
+
+#define write_output(s) \
+  ( \
+     blen = strlen (s), \
+     fwrite (s, 1, blen, ltrans_output_list_stream) < blen \
+  )
+
   for (i = 0; i < n_sets; i++)
     {
-      unsigned int len = strlen (temp_filenames[i]);
       if (fprintf (ltrans_output_list_stream, "%i\n", temp_priority[i]) < 0
-	  || fwrite (temp_filenames[i], 1, len, ltrans_output_list_stream) < len
-	  || fwrite ("\n", 1, 1, ltrans_output_list_stream) < 1)
+    || write_output (temp_filenames[i])
+	  || (flag_lto_preserve_object_names
+	      && (write_output ("@") || write_output (ltrans_partitions[i]->name)))
+	  || write_output ("\n"))
 	fatal_error (input_location, "writing to LTRANS output list %s: %m",
 		     ltrans_output_list);
      free (temp_filenames[i]);

@@ -938,6 +938,17 @@ lto_post_options (const char **pfilename ATTRIBUTE_UNUSED)
   if (!flag_merge_constants)
     flag_merge_constants = 1;
 
+  if (flag_lto_preserve_object_names
+      && !flag_ltrans
+      && flag_lto_partition != LTO_PARTITION_1TO1)
+    {
+      if ((global_options_set.x_flag_lto_partition != LTO_PARTITION_NONE)
+          || (global_options.x_flag_lto_partition != LTO_PARTITION_BALANCED))
+        error ("-flto-preserve-object-names requires -flto-partition=1to1");
+
+      flag_lto_partition = LTO_PARTITION_1TO1;
+    }
+
   /* Initialize the compiler back end.  */
   return false;
 }

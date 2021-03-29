@@ -1064,11 +1064,14 @@ proper position among the other output files.  */
 #if HAVE_LTO_PLUGIN == 2
 #define PLUGIN_COND "!fno-use-linker-plugin:%{!fno-lto"
 #define PLUGIN_COND_CLOSE "}"
+#define PLUGIN_COND2 "fno-use-linker-plugin"
 #else
 /* The linker used has limited plugin support, use LTO plugin with explicit
    -fuse-linker-plugin.  */
 #define PLUGIN_COND "fuse-linker-plugin"
 #define PLUGIN_COND_CLOSE ""
+/* TODO(lto) This should be gated with configure time check  */
+#define PLUGIN_COND2 "!fuse-linker-plugin"
 #endif
 #define LINK_PLUGIN_SPEC \
     "%{" PLUGIN_COND": \
@@ -1078,11 +1081,15 @@ proper position among the other output files.  */
     " LTO_PLUGIN_SPEC "\
     %{flinker-output=*:-plugin-opt=-linker-output-known} \
     %{!nostdlib:%{!nodefaultlibs:%:pass-through-libs(%(link_gcc_c_sequence))}} \
-    }" PLUGIN_COND_CLOSE
+    }" PLUGIN_COND_CLOSE \
+   "%{flto-preserve-object-names: -z plugin-preserve-object-names}" \
+   "%{" PLUGIN_COND2": \
+    %{flto-preserve-object-names: %e-flto-preserve-object-names is supported only with linker plugin}}"
 #else
 /* The linker used doesn't support -plugin, reject -fuse-linker-plugin.  */
 #define LINK_PLUGIN_SPEC "%{fuse-linker-plugin:\
-    %e-fuse-linker-plugin is not supported in this configuration}"
+    %e-fuse-linker-plugin is not supported in this configuration}" \
+    "%{flto-preserve-object-names: %e-flto-preserve-object-names is supported only with linker plugin}"
 #endif
 
 /* Linker command line options for -fsanitize= early on the command line.  */

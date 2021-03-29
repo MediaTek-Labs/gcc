@@ -12465,6 +12465,15 @@ effect as usage of the command wrappers (@command{gcc-ar}, @command{gcc-nm} and
 The default is @option{-fno-fat-lto-objects} on targets with linker plugin
 support.
 
+@item -flto-preserve-object-names
+@opindex flto-preserve-object-names
+Instruct the linker plugin to map temporary LTO object names back to their
+original input object names.  When this option is used, object names can be
+matched directly in linker scripts.  The linker map file output also shows
+original object names as if generated without LTO.
+
+The default is @option{-fno-lto-preserve-object-names}.
+
 @item -fcompare-elim
 @opindex fcompare-elim
 After register allocation and post-register allocation instruction splitting,

@@ -316,6 +316,12 @@ lto_1_to_1_map (void)
 
       file_data = node->lto_file_data;
 
+      gcc_assert(file_data || !flag_lto_preserve_object_names);
+      /* TODO(lto) Remove when upstreaming */
+      gcc_assert(node->resolution == LDPR_PREVAILING_DEF
+		 || node->resolution == LDPR_PREVAILING_DEF_IRONLY
+		 || node->resolution  == LDPR_PREVAILING_DEF_IRONLY_EXP
+		 || node->resolution == LDPR_UNKNOWN);
       if (file_data)
 	{
           ltrans_partition *slot = &pmap.get_or_insert (file_data);

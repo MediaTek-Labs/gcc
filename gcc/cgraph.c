@@ -1855,7 +1855,7 @@ cgraph_node::release_body (bool keep_arguments)
   if (!used_as_abstract_origin && DECL_INITIAL (decl))
     DECL_INITIAL (decl) = error_mark_node;
   release_function_body (decl);
-  if (lto_file_data)
+  if (lto_file_data && !flag_lto_preserve_object_names)
     {
       lto_free_function_in_decl_state_for_node (this);
       lto_file_data = NULL;
@@ -3959,7 +3959,10 @@ cgraph_node::get_untransformed_body ()
   lto_stats.num_function_bodies++;
   lto_free_section_data (file_data, LTO_section_function_body, name,
 			 data, len, decl_state->compressed);
-  lto_free_function_in_decl_state_for_node (this);
+  /* Keep lto_file_data for partitioning if flag_lto_preserve_object_names
+     TODO(lto) Comment below may be wrong  */
+  if (!flag_lto_preserve_object_names)
+    lto_free_function_in_decl_state_for_node (this);
   /* Keep lto file data so ipa-inline-analysis knows about cross module
      inlining.  */
 

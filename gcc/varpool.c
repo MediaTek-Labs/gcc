@@ -312,7 +312,10 @@ varpool_node::get_constructor (void)
   lto_stats.num_function_bodies++;
   lto_free_section_data (file_data, LTO_section_function_body, name,
 			 data, len, decl_state->compressed);
-  lto_free_function_in_decl_state_for_node (this);
+  /* Keep lto_file_data for partitioning if flag_lto_preserve_object_names
+     TODO(lto) Maybe limit this only to lto stage  */
+  if (!flag_lto_preserve_object_names)
+    lto_free_function_in_decl_state_for_node (this);
   timevar_pop (TV_IPA_LTO_CTORS_IN);
   return DECL_INITIAL (decl);
 }
