@@ -1212,6 +1212,109 @@
   [(set_attr "type" "shift")
    (set_attr "mode" "SI")])
 
+
+;; "ins" instruction optimisation
+
+;; Recognise compound shift+ands+or pattern as a zero-extract
+;; destination. Combine should recognise this itself, but it needs a
+;; helping hand due to the number of instructions present in the
+;; generated RTL exceeding combine's limit.
+
+(define_insn_and_split "*mips_shift_ins"
+  [(set (match_operand:SI 0 "register_operand")
+        (ior:SI (and:SI (match_operand:SI 1 "register_operand")
+                        (match_operand:SI 2 "const_int_operand"))
+                (and:SI (ashift:SI (match_operand:SI 3 "register_operand")
+                                   (match_operand:SI 4 "const_int_operand") )
+                        (match_operand:SI 5 "const_int_operand") ))) ]
+  "TARGET_NANOMIPS && TARGET_OPT_INS_LOGIC
+   && can_create_pseudo_p() && !lra_in_progress
+   && nanomips_masks_ok_for_ins_p (UINTVAL (operands[2]), UINTVAL (operands[5]),
+                                   UINTVAL (operands[4]))"
+  "#"
+  "&& true"
+  [(set (match_dup 7) (match_dup 3)) ; copy %3 in case %0 is same reg as %3
+   (set (match_dup 0) (match_dup 1))
+   (set (zero_extract:GPR (match_dup 0)
+                          (match_dup 6)    ; size
+                          (match_dup 4))   ; pos
+        (match_dup 7)) ]
+{
+  gcc_assert (!reload_completed);
+  operands[6] = GEN_INT(exact_log2 (1 + (UINTVAL (operands[5])
+                                         >> UINTVAL (operands[4]))));
+  operands[7] = gen_reg_rtx(SImode);
+}
+[(set_attr "type" "arith")
+ (set_attr "mode" "SI")])
+
+;; !!! duplicate of the above for commutation of IOR. Recog doesn't
+;; attempt to match commutations. It would be much nicer to be
+;; able to use define_subst for this, but it doesn't currently
+;; support splits.
+(define_insn_and_split "*mips_shift_ins"
+  [(set (match_operand:SI 0 "register_operand")
+        (ior:SI (and:SI (ashift:SI (match_operand:SI 3 "register_operand")
+                                   (match_operand:SI 4 "const_int_operand") )
+                        (match_operand:SI 5 "const_int_operand") )
+                (and:SI (match_operand:SI 1 "register_operand" "0")
+                        (match_operand:SI 2 "const_int_operand")) )) ]
+  "TARGET_NANOMIPS && TARGET_OPT_INS_LOGIC
+   && can_create_pseudo_p() && !lra_in_progress
+   && nanomips_masks_ok_for_ins_p(UINTVAL (operands[2]), UINTVAL (operands[5]),
+                                  UINTVAL (operands[4]))"
+  "#"
+  "&& true"
+  [(set (match_dup 7) (match_dup 3)) ; copy %3 in case %0 is same reg as %3
+   (set (match_dup 0) (match_dup 1))
+   (set (zero_extract:GPR (match_dup 0)
+                          (match_dup 6)    ; size
+                          (match_dup 4))   ; pos
+        (match_dup 7)) ]
+{
+  gcc_assert (!reload_completed);
+  operands[6] = GEN_INT(exact_log2 (1 + (UINTVAL (operands[5])
+                                         >> UINTVAL (operands[4]))));
+  operands[7] = gen_reg_rtx(SImode);
+}
+[(set_attr "type" "arith")
+ (set_attr "mode" "SI")])
+
+
+;; Map a partial bitfield construction to 'ins'.
+(define_insn_and_split "*mips_ins_mask"
+  [(set (match_operand:SI 0 "register_operand" "=r")
+        (and:SI (ashift:SI (match_operand:SI 1 "register_operand" "r")
+                           (match_operand:SI 2 "const_int_operand"))
+                (match_operand:SI 3 "const_int_operand")))
+]
+  "TARGET_NANOMIPS  && TARGET_OPT_INS_LOGIC
+   && can_create_pseudo_p() && !lra_in_progress
+   && nanomips_use_ins_for_shift_mask_p (UINTVAL (operands[2]),
+                                         UINTVAL (operands[3]))"
+  "#"
+  "&& true"
+  [(set (match_dup 4) (match_dup 1))
+   (set (match_dup 0) (const_int 0))
+   (set (zero_extract:GPR (match_dup 0)
+                          (match_dup 5)  ; size
+                          (match_dup 2)) ; pos
+        (match_dup 4))
+   ]
+{
+  gcc_assert (!reload_completed);
+  /* Calculate length from mask and shift */
+  unsigned HOST_WIDE_INT shift_val = UINTVAL (operands[2]);
+  unsigned HOST_WIDE_INT mask_val = UINTVAL (operands[3]);
+  int length = exact_log2 (1 + (mask_val >> shift_val));
+  operands[5] = GEN_INT (length);
+  /* Temporary register */
+  operands[4] = gen_reg_rtx (SImode);
+}
+  [(set_attr "type" "arith")
+   (set_attr "mode" "SI")
+   (set_attr "insn_count" "2")])
+
 (define_c_enum "unspec" [
   UNSPEC_ADDRESS_FIRST
 ])
