@@ -27800,6 +27800,59 @@ nanomips_move_balc_p (rtx *operands)
     return false;
   return true;
 }
+
+/* Check operands of and/shift/or pattern for constants suitable for
+   implementation with 'ins'.
+   - source mask must be {0*}{1+}{.*}
+   - dest mask must be corresponding inverted mask
+*/
+bool nanomips_masks_ok_for_ins_p (unsigned HOST_WIDE_INT mask_dest,
+				  unsigned HOST_WIDE_INT mask_src,
+				  unsigned HOST_WIDE_INT shift)
+{
+  /* Discard bottom bits of source mask, since their values aren't
+     propagated (src is shifted so has 0 in bottom bits) */
+  unsigned src_shifted = mask_src >> shift;
+  int length = exact_log2 (src_shifted + 1);
+  if (length == -1)
+    return false;
+  unsigned expected_dest_mask = ((~0 << (length + shift))
+				 | ~( ~0 << shift ));
+  if (expected_dest_mask == mask_dest)
+    return true;
+  return false;
+}
+
+/* Determine whether to use an 'ins' (plus a move zero) to implement
+   (x<<shift)&mask.
+
+   Since this transformation can sometimes need extra moves, we also
+   use heuristics to conservatively avoid transforming except in cases
+   where we can be sure worse code would be generated without
+   'ins'.  */
+bool nanomips_use_ins_for_shift_mask_p (unsigned HOST_WIDE_INT shift,
+					unsigned HOST_WIDE_INT  mask)
+{
+  /* Validity check: this can only be done if the mask value is suitable */
+  unsigned mask_shifted = mask >> shift;
+  int length = exact_log2 (mask_shifted + 1);
+  if (length == -1)
+    return false;
+
+  /* The mask wouldn't fit in a single 'and' instruction. It's always
+     better to use 'ins' as the 'and' will need an extra instruction
+     for mask setup. */
+  if (!SMALL_OPERAND (mask))
+    return true;
+  /* The and+shift sequence can be better when paired with a store or
+     an add since the shift can be combined into a swxs or lsa
+     instruction. This only happens for shift values of 3 or
+     smaller */
+  if (shift > 3)
+    return true;
+  return false;
+}
+
 
 #ifdef NANOMIPS_SUPPORT
 /* Implement TARGET_TRAMPOLINE_INIT.  */

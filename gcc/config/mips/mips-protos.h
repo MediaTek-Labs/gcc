@@ -415,6 +415,11 @@ extern int umips_load_store_pair_p (bool, rtx *);
 extern void umips_output_load_store_pair (bool, rtx *);
 extern bool nanomips_move_balc_p (rtx *);
 extern bool nanomips_llsc_address_p (rtx, machine_mode);
+extern bool nanomips_masks_ok_for_ins_p (unsigned HOST_WIDE_INT,
+					 unsigned HOST_WIDE_INT,
+					 unsigned HOST_WIDE_INT);
+extern bool nanomips_use_ins_for_shift_mask_p (unsigned HOST_WIDE_INT,
+					       unsigned HOST_WIDE_INT);
 extern bool mips_movep_target_p (rtx, rtx);
 extern bool mips_movep_no_overlap_p (rtx, rtx, rtx, rtx);
 extern bool umips_12bit_offset_address_p (rtx, machine_mode);
