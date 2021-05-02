@@ -12,7 +12,7 @@ main ()
   try
     {
       throw A();		// { dg-error "rvalue" "" { target c++14_down } } can't copy
-      // { dg-message "13:thrown expression" "expr" { target c++14_down } .-1 }
+      // { dg-message "thrown expression" "expr" { target c++14_down } .-1 }
     }
   catch (...) { }
 }
