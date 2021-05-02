@@ -12,7 +12,7 @@ main ()
   try
     {
       throw A();		// { dg-error "rvalue" "" } can't copy
-// { dg-error "thrown expression" "expr" { target *-*-* } 13 }
+// { dg-error "thrown expression" "expr" { target *-*-* } 14 }
     }
   catch (...) { }
 }
