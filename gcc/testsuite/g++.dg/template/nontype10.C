@@ -1,5 +1,7 @@
 // { dg-do compile }
 // Contributed by: Giovanni Bajo <giovannibajo at gcc dot gnu dot org>
+// { dg-xfail-if "not for upstream" { *-*-musl* } }
+
 #include <cstddef>
 
 template <int  T> struct A {};

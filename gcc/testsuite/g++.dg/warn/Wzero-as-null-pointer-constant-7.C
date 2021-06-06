@@ -1,5 +1,6 @@
 // { dg-options "-Wzero-as-null-pointer-constant" }
 // { dg-do compile { target c++11 } }
+// { dg-skip-if "not for upstream" { *-*-musl* } }
 
 #include <cstddef>
 

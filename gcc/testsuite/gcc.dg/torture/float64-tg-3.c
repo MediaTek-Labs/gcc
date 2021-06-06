@@ -5,6 +5,7 @@
 /* { dg-add-options ieee } */
 /* { dg-require-effective-target float64_runtime } */
 /* { dg-skip-if "No subnormal support" { csky-*-* } { "-mhard-float" } } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #define WIDTH 64
 #define EXT 0

@@ -2,6 +2,7 @@
 /* Origin: Joseph Myers <jsm28@cam.ac.uk> */
 /* { dg-do preprocess } */
 /* { dg-options "-std=iso9899:1999 -pedantic-errors" } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 /* This test checks that the C99 macros (but not the C11 ones) are defined;
    it does not check the correctness of their values.  */

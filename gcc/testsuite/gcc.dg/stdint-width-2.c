@@ -2,6 +2,7 @@
 /* { dg-do compile } */
 /* { dg-options "-std=c2x -ffreestanding" } */
 /* { dg-additional-options "-DSIGNAL_SUPPRESS" { target { ! signal } } } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #include <stddef.h>
 #include <stdint.h>

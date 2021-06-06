@@ -1,6 +1,7 @@
 /* Test *_NORM_MAX macros.  */
 /* { dg-do run } */
 /* { dg-options "-std=c2x -pedantic-errors" } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #include <float.h>
 

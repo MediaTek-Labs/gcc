@@ -1,5 +1,6 @@
 // PR c++/71302
 // { dg-options "-Wzero-as-null-pointer-constant -fdiagnostics-show-caret" }
+// { dg-skip-if "not for upstream" { *-*-musl* } }
 
 #include <cstddef>
 

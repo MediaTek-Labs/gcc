@@ -1,6 +1,7 @@
 /* Test C2X width macros in <limits.h>.  */
 /* { dg-do compile } */
 /* { dg-options "-std=c2x" } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #include <limits.h>
 

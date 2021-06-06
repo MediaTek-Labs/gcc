@@ -1,5 +1,6 @@
 // { dg-do compile  }
 // { dg-options "-Wconversion-null -fdiagnostics-show-caret" }
+// { dg-skip-if "not for upstream" { *-*-musl* } }
 
 #include <stddef.h>
 

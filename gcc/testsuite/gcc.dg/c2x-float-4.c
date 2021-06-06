@@ -2,6 +2,7 @@
 /* { dg-do run } */
 /* { dg-options "-std=c2x -pedantic-errors" } */
 /* { dg-add-options ieee } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #include <float.h>
 

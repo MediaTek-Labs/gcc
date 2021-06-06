@@ -1,5 +1,6 @@
 // { dg-do link  }
 // { dg-options "" }
+// { dg-skip-if "not for upstream" { *-*-musl* } }
 
 #include <cstddef>
 

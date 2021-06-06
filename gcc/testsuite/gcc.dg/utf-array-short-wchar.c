@@ -3,6 +3,7 @@
 /* { dg-do compile } */
 /* { dg-require-effective-target wchar } */
 /* { dg-options "-std=gnu99 -fshort-wchar" } */
+/* { dg-skip-if "not for upstream" { *-*-musl* } } */
 
 #include <wchar.h>
 

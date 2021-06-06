@@ -4,6 +4,7 @@
 /* { dg-add-options float32 } */
 /* { dg-add-options ieee } */
 /* { dg-require-effective-target float32_runtime } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #define WIDTH 32
 #define EXT 0

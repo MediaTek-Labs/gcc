@@ -1,6 +1,7 @@
 /* Test C2x CR_DECIMAL_DIG: defined for __STDC_WANT_IEC_60559_EXT__.  */
 /* { dg-do compile } */
 /* { dg-options "-std=c2x" } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #define __STDC_WANT_IEC_60559_EXT__
 #include <float.h>

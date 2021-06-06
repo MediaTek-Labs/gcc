@@ -1,6 +1,7 @@
 /* Test *_IS_IEC_60559 macros.  */
 /* { dg-do compile } */
 /* { dg-options "-std=c2x -pedantic-errors" } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #include <float.h>
 

@@ -4,6 +4,7 @@
 
 /* { dg-do run } */
 /* { dg-options "-fsingle-precision-constant" } */
+/* { dg-skip-if "not for upstream" { *-*-musl* } } */
 
 #include <math.h>
 #include <float.h>

@@ -1,6 +1,7 @@
 /* Test TS 18661-1 CR_DECIMAL_DIG.  */
 /* { dg-do compile } */
 /* { dg-options "-std=c11" } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #define __STDC_WANT_IEC_60559_BFP_EXT__
 #include <float.h>

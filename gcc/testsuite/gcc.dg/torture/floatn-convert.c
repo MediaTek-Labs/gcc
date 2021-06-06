@@ -10,6 +10,7 @@
 /* { dg-add-options float128x } */
 /* { dg-require-effective-target float32 } */
 /* { dg-require-effective-target floatn_nx_runtime } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #define __STDC_WANT_IEC_60559_TYPES_EXT__
 #include <float.h>

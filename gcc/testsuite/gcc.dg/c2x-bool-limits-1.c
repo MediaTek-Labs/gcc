@@ -1,6 +1,7 @@
 /* Test limits for _Bool in <limits.h> in C2x.  */
 /* { dg-do compile } */
 /* { dg-options "-std=c2x" } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #include <limits.h>
 

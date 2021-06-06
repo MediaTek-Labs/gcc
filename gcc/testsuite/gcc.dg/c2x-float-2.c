@@ -3,6 +3,7 @@
 /* { dg-do run } */
 /* { dg-options "-std=c2x -w" } */
 /* { dg-add-options ieee } */
+/* { dg-xfail-if "not for upstream" { *-*-musl* } } */
 
 #include <float.h>
 

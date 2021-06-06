@@ -7,6 +7,7 @@
 /* { dg-do compile } */
 /* { dg-require-effective-target int32plus } */
 /* { dg-options "-std=c99 -pedantic-errors -fshort-enums -fshort-wchar" } */
+/* { dg-skip-if "not for upstream" { *-*-musl* } } */
 
 #include <limits.h>
 #include <stddef.h>

@@ -1,6 +1,7 @@
 // PR c++/24745 : warnings for NULL constant.
 // { dg-do compile  }
 // { dg-options "-Wpointer-arith -Wconversion " }
+// { dg-skip-if "not for upstream" { *-*-musl* } }
 
 #include <cstddef>
 
