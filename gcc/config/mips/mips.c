@@ -15658,6 +15658,9 @@ mips_emit_probe_stack_range (HOST_WIDE_INT first, HOST_WIDE_INT size)
   if (TARGET_MIPS16)
     sorry ("%<-fstack-check=specific%> not implemented for MIPS16");
 
+  if (TARGET_NANOMIPS)
+    sorry ("%<-fstack-check=specific%> not implemented");
+
   /* See if we have a constant small number of probes to generate.  If so,
      that's the easy case.  */
   if (first + size <= 32768)

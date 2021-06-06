@@ -1170,6 +1170,9 @@ proc check_effective_target_fstack_protector {} {
 
 # Return 1 if the target supports -fstack-check or -fstack-check=$stack_kind
 proc check_stack_check_available { stack_kind } {
+    if { [istarget nanomips*-*-*] } {
+	return 0
+    }
     if [string match "" $stack_kind] then {
 	set stack_opt "-fstack-check"
     } else { set stack_opt "-fstack-check=$stack_kind" }
