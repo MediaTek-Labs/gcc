@@ -1,7 +1,8 @@
 // { dg-additional-options "-fmodules-ts -fopenmp" }
+// { dg-xfail-if "" { ! fopenmp } }
 
 export module foo;
-// { dg-module-cmi foo }
+// { dg-module-cmi foo { xfail { ! fopenmp } } }
 
 export inline void frob (unsigned (&ary)[64])
 {

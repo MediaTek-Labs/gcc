@@ -9403,7 +9403,8 @@ proc check_effective_target_gld { } {
 	set gcc_ld [lindex [${tool}_target_compile "" "" "none" $options] 0]
 	set status [remote_exec host "$gcc_ld" "--version"]
 	set ld_output [lindex $status 1]
-	if { [ string first "GNU" $ld_output ] >= 0 } {
+	if { [ string first "GNU" $ld_output ] >= 0 
+	     && [ string first "gold" $ld_output ] < 0 } {
 	    set use_gld_saved 1
 	} else {
 	    set use_gld_saved 0

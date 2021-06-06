@@ -1,6 +1,6 @@
 /* PR gcov-profile/94029 */
 /* { dg-options "-ftest-coverage" } */
-/* { dg-do compile } */
+/* { dg-do compile { target native } } */
 
 #define impl_test(name) void test_##name() { }
 impl_test(t1

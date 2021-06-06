@@ -1,5 +1,6 @@
-#include <stdio.h>
 #include "analyzer-decls.h"
+
+extern int getchar (void);
 
 int test_1 (void)
 {

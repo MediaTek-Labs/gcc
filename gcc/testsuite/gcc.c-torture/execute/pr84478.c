@@ -1,4 +1,5 @@
 /* PR tree-optimization/84478 */
+/* { dg-skip-if "" { nanomips*-*-elf } { "-flto" } { "" } } */
 
 long poolptr;
 unsigned char *strpool;

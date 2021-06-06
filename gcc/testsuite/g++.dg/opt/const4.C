@@ -2,6 +2,7 @@
 // Test whether A is put into .rodata section on platforms
 // that have it.
 // { dg-do compile }
+/* { dg-additional-options "-mno-pid" { target nanomips*-*-* } } */
 
 // { dg-final { scan-assembler-symbol-section {constant_variable} {^\.(const|rodata)|\[RO\]} } }
 const int constant_variable[] __attribute__ ((__used__)) = { 0, 1, 2, 3 };

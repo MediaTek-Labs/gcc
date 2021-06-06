@@ -1,4 +1,5 @@
 // { dg-additional-options "-fmodules-ts" }
+// { dg-xfail-if "" { ! fopenmp } }
 
 import foo;
 

@@ -1,7 +1,8 @@
 // { dg-additional-options "-fmodules-ts -fopenmp" }
+// { dg-xfail-if "" { ! fopenmp } }
 
 export module foo;
-// { dg-module-cmi foo }
+// { dg-module-cmi foo { xfail { ! fopenmp } } }
 
 // The OpenMPness doesn't escape to the interface.
 export void frob (unsigned (&ary)[64])

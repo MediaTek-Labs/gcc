@@ -6,6 +6,7 @@
 /* { dg-final { scan-assembler-symbol-section {^_?ar} {^\.(const|rodata)|\[RO\]} } } */
 /* { dg-require-effective-target label_values } */
 /* { dg-require-effective-target indirect_jumps } */
+/* { dg-additional-options "-mno-gpopt" { target nanomips*-*-* } } */
 
 int foo (int a)
 {
