@@ -28710,6 +28710,9 @@ if test $gcc_cv_as_mips_explicit_relocs = yes; then
        fi
 fi
 
+
+$as_echo "#define TARGET_LIBC_GNUSTACK 1" >>confdefs.h
+
     ;;
     s390*-*-*)
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking assembler for .gnu_attribute support" >&5

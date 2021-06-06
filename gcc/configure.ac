@@ -5306,6 +5306,8 @@ configured with --enable-newlib-nano-formatted-io.])
        then target_cpu_default=MASK_EXPLICIT_RELOCS
        else target_cpu_default="($target_cpu_default)|MASK_EXPLICIT_RELOCS"
        fi])
+    AC_DEFINE(TARGET_LIBC_GNUSTACK, 1,
+	      [Define if your target C Library properly handles PT_GNU_STACK])
     ;;
     s390*-*-*)
     gcc_GAS_CHECK_FEATURE([.gnu_attribute support],

@@ -20,6 +20,9 @@
    see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
    <http://www.gnu.org/licenses/>.  */
 
+/* An executable stack is *not* required for these functions.  */
+#include "gnustack.h"
+
 #define STARTFN(NAME) .globl NAME; .ent NAME; .type NAME, @function; NAME:
 #define ENDFN(NAME) .end NAME; .size NAME, . - NAME
 

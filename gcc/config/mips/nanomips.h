@@ -336,3 +336,6 @@ FP_ASM_SPEC "\
   { "$r30",	30 + GP_REG_FIRST },					\
   { "$r31",	31 + GP_REG_FIRST },					\
 }
+
+#undef NEED_INDICATE_EXEC_STACK
+#define NEED_INDICATE_EXEC_STACK 1
