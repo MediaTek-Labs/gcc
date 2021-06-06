@@ -12079,8 +12079,10 @@ mips_section_type_flags (tree decl, const char *name, int reloc)
       || strncmp (name, ".ssbss.", 6) == 0
       || (mips_sdata_section_num > -1
       && strncmp (name, ".sbss_", 6) == 0))
+   {
+    flags &= ~SECTION_NOTYPE;
     flags |= SECTION_BSS;
-
+   }
   return flags;
 }
 
