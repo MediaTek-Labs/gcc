@@ -1949,7 +1949,7 @@ Common Var(flag_bit_tests) Init(1) Optimization
 Use bit tests for sufficiently large switch statements.
 
 fjump-table-clusters
-Common Var(flag_jump_table_clusters) Init(0) Optimization
+Common Var(flag_jump_table_clusters) Init(1) Optimization
 Use combination of jump tables for sufficiently large switch statements.
 
 fkeep-inline-functions

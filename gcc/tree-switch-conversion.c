@@ -1296,11 +1296,17 @@ jump_table_cluster::can_be_handled (const vec<cluster *> &clusters,
    is profitable transformation.  */
 
 bool
-jump_table_cluster::is_beneficial (const vec<cluster *> &,
+jump_table_cluster::is_beneficial (const vec<cluster *> &clusters,
 				   unsigned start, unsigned end)
 {
   /* Single case bail out.  */
   if (start == end)
+    return false;
+
+  /* Bail out if clustering is disabled and we
+     are not covering all clusters.  */
+  if (!flag_jump_table_clusters
+      && (start != 0 || clusters.length () != (end + 1)))
     return false;
 
   return end - start + 1 >= case_values_threshold ();
