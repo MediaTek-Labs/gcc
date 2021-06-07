@@ -1,4 +1,5 @@
 // { dg-do compile }
+// { dg-require-effective-target rtti_enabled }
 // Contributed by: <leif dot lonnblad at thep dot lu dot se>
 // PR c++/15064: typeid does not form an integral constant expression
 

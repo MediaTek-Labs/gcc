@@ -1,5 +1,6 @@
 // { dg-do run }
 // { dg-additional-sources "local1-a.cc" }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 

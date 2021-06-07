@@ -1,6 +1,7 @@
 // Test that typeid sees through references even when optimizing.
 // { dg-do run }
 // { dg-options "-O2" }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 

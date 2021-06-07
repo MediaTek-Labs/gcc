@@ -1,4 +1,5 @@
 /* { dg-options "-std=gnu++0x -Wno-return-type" } */
+/* { dg-require-effective-target rtti_enabled } */
 
 typedef __SIZE_TYPE__ size_t;
 namespace std __attribute__ ((__visibility__ ("default"))) {

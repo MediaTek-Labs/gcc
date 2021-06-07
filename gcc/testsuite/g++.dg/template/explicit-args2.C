@@ -1,5 +1,6 @@
 // PR c++/37177
 // { dg-do compile { target c++11 } }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 

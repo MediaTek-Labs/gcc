@@ -1,5 +1,6 @@
 /* { dg-lto-do run } */
 /* { dg-lto-options { { -O3 -flto -fno-early-inlining } } } */
+/* { dg-require-effective-target rtti_enabled } */
 
 struct a
 {

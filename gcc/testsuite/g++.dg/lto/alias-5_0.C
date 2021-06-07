@@ -1,5 +1,6 @@
 /* { dg-lto-do run } */
 /* { dg-lto-options { { -O3 -flto } } } */
+/* { dg-require-effective-target rtti_enabled } */
 /* This testcase tests that anonymous namespaces in different TUs are treated
    as different types by LTO TBAA and that they never alias with structurally
    same C types.  */

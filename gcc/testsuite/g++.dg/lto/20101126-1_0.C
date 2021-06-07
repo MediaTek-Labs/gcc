@@ -1,3 +1,4 @@
+// { dg-require-effective-target rtti_enabled }
 typedef struct { int i; } T1;
 typedef T1 T2;
 extern T1 a;

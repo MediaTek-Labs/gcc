@@ -1,5 +1,6 @@
 // Positive test for auto
 // { dg-do run { target c++11 } }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 extern "C" void abort();

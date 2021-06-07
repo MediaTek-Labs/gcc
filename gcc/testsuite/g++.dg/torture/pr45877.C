@@ -1,5 +1,6 @@
 // { dg-do compile }
 // { dg-additional-options "-Wno-return-type" }
+// { dg-require-effective-target rtti_enabled }
 
 namespace std __attribute__ ((__visibility__ ("default")))
 {

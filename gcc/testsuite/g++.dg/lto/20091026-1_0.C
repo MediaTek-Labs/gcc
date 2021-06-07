@@ -1,5 +1,6 @@
 // { dg-lto-do link }
 // { dg-extra-ld-options "-r -nostdlib -flinker-output=nolto-rel" }
+// { dg-require-effective-target exceptions_enabled }
 
 #include "20091026-1_a.h"
 cObject *cHead::find(const char *objname) const

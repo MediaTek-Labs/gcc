@@ -1,4 +1,5 @@
 // { dg-additional-options -fmodules-ts }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 import "tname-spec-1_a.H";

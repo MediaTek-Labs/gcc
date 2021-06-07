@@ -4,6 +4,7 @@
 // statements.
 // { dg-do compile }
 // { dg-options "-O2 -Wstringop-truncation -g" }
+// { dg-require-effective-target exceptions_enabled }
 
 extern "C" char* strncpy (char*, const char*, __SIZE_TYPE__);
 

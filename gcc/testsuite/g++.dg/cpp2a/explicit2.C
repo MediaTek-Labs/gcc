@@ -1,6 +1,7 @@
 // P0892R2
 // { dg-do compile }
 // { dg-options "-std=c++2a" }
+// { dg-require-effective-target exceptions_enabled }
 
 int foo() { return 42; }
 int g;

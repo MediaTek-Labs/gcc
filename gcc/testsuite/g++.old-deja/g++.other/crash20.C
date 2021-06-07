@@ -1,4 +1,5 @@
 // { dg-do assemble  }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 

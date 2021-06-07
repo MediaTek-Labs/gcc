@@ -1,5 +1,6 @@
 // { dg-do compile }
 // { dg-options "-O2" }
+// { dg-require-effective-target rtti_enabled }
 
 namespace std {
   struct type_info

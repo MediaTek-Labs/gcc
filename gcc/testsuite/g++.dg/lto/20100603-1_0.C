@@ -1,5 +1,6 @@
 /* { dg-lto-do link } */
 /* { dg-extra-ld-options "-Wno-lto-type-mismatch" } */
+/* { dg-require-effective-target rtti_enabled } */
 
 extern "C" {
     typedef struct {} CvImage;

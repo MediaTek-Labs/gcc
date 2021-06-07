@@ -19,7 +19,7 @@ struct j
     throw()
 #endif
   {
-    return calloc (b, sizeof (int)); // { dg-bogus "leak" "" { xfail c++98_only } }
+    return calloc (b, sizeof (int)); // { dg-bogus "leak" "" { xfail { c++98_only && exceptions_enabled } } }
   }
   j (B *, int)
   {

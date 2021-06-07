@@ -1,3 +1,4 @@
+// { dg-require-effective-target rtti_enabled }
 #include <typeinfo>
 
 struct A {

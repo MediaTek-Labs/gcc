@@ -1,5 +1,6 @@
 /* { dg-do compile } */
 /* { dg-options "-O3 -fno-pic -fno-ipa-sra -fdump-ipa-inline -fdump-ipa-cp"  } */
+/* { dg-require-effective-target exceptions_enabled } */
 void pad(void);
 class A {};
 class B {

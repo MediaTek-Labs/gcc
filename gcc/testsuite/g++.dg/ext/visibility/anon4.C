@@ -3,6 +3,7 @@
 
 // { dg-do compile }
 // { dg-final { scan-assembler-not "globl.*_ZTIN*3fooE" } }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 namespace 

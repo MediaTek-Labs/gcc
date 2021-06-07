@@ -1,5 +1,6 @@
 /* { dg-do run }  */
 /* { dg-require-alias "" } */
+/* { dg-require-effective-target rtti_enabled } */
 
 #include <typeinfo>
 

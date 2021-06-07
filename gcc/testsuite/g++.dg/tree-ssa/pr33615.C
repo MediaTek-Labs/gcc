@@ -1,5 +1,6 @@
 /* { dg-do compile } */
 /* { dg-options "-O -fnon-call-exceptions -fdump-tree-lim2-details -w" } */
+/* { dg-require-effective-target exceptions_enabled } */
 
 extern volatile int y;
 

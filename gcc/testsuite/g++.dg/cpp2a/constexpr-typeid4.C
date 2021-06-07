@@ -1,5 +1,6 @@
 // PR c++/88337 - Implement P1327R1: Allow dynamic_cast/typeid in constexpr.
 // { dg-do compile { target c++17 } }
+// { dg-require-effective-target rtti_enabled }
 // Test typeid in a template.
 
 #include <typeinfo>

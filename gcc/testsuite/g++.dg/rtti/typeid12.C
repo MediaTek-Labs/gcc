@@ -1,5 +1,6 @@
 // PR c++/87547
 // { dg-do run }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 

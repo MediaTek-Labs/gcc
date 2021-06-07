@@ -1,7 +1,8 @@
 // { dg-module-do run }
 // { dg-additional-options -fmodules-ts }
+// { dg-require-effective-target rtti_enabled }
 export module foo;
-// { dg-module-cmi foo }
+// { dg-module-cmi foo { xfail { ! rtti_enabled } } }
 
 export struct Visitor
 {

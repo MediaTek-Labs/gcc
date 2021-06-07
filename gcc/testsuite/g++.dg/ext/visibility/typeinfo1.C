@@ -4,6 +4,7 @@
 
 // { dg-require-visibility "" }
 // { dg-options "-fvisibility-inlines-hidden" }
+// { dg-require-effective-target rtti_enabled }
 // { dg-final { scan-not-hidden "_ZTIPPi" } }
 // { dg-final { scan-not-hidden "_ZTSPPi" } }
 // { dg-final { scan-hidden "_ZTIP1A" } }

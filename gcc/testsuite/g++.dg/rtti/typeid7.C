@@ -1,6 +1,7 @@
 // PR c++/32260
 // { dg-do compile }
 // { dg-options "-O2 -W -Wall" }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 

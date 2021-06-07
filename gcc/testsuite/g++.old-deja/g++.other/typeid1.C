@@ -1,5 +1,6 @@
 // { dg-do assemble  }
 // { dg-options "" }
+// { dg-require-effective-target rtti_enabled }
 // Origin: sk@gluit.de
 
 #include <typeinfo>

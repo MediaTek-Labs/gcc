@@ -1,5 +1,6 @@
 // Testcase for deduction of std::initializer_list for auto.
 // { dg-do run { target c++11 } }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 #include <initializer_list>

@@ -2,6 +2,7 @@
 // { dg-do compile { target c++11 } }
 // { dg-additional-options "-O2 -fdump-tree-optimized" }
 // { dg-final { scan-tree-dump-not "tail call" "optimized" } }
+// { dg-require-effective-target exceptions_enabled }
 
 int g(int) ;
 

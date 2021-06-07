@@ -1,4 +1,5 @@
 // { dg-lto-do run }
+// { dg-require-effective-target rtti_enabled }
 
 void *operator new(__SIZE_TYPE__, void *p2) { return p2; }
 struct B { B(int i_) : i(i_) {} int i; };

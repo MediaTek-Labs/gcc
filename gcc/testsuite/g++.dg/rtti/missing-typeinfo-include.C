@@ -2,6 +2,7 @@
    directives).  */
 
 /* { dg-options "-fdiagnostics-generate-patch" } */
+/* { dg-require-effective-target rtti_enabled } */
 
 void test()
 {

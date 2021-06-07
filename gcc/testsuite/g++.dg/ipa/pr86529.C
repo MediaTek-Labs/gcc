@@ -1,5 +1,6 @@
 // { dg-do compile }
 // { dg-options "-fipa-pure-const -std=c++11" }
+// { dg-require-effective-target rtti_enabled }
 
 namespace std {
 class type_info {

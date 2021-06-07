@@ -1,5 +1,6 @@
 // { dg-additional-options {-fmodule-header -fno-module-lazy} }
-// { dg-module-cmi {} }
+// { dg-require-effective-target exceptions_enabled }
+// { dg-module-cmi {} { xfail { ! exceptions_enabled } } }
 import  "pr99239_a.H";
        
 inline void

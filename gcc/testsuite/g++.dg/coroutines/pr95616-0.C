@@ -1,4 +1,5 @@
 //  { dg-additional-options "-fsyntax-only" }
+// { dg-require-effective-target exceptions_enabled }
 
 #if __has_include(<coroutine>)
 #include <coroutine>

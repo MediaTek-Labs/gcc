@@ -1,4 +1,5 @@
 // { dg-do compile }
+// { dg-require-effective-target exceptions_enabled }
 
 void start (void);
 void

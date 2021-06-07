@@ -1,5 +1,6 @@
 // Test that the typeid name for a local class is properly null-terminated.
 // { dg-do run }
+// { dg-require-effective-target rtti_enabled }
 
 #include <string.h>
 #include <typeinfo>

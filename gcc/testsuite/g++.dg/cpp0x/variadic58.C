@@ -1,4 +1,5 @@
 // { dg-do compile { target c++11 } }
+// { dg-require-effective-target rtti_enabled }
 #include <typeinfo>
 
 template<typename... Args>

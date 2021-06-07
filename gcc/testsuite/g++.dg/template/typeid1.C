@@ -1,3 +1,4 @@
+// { dg-require-effective-target rtti_enabled }
 // PR c++/55878
 
 #include <typeinfo>

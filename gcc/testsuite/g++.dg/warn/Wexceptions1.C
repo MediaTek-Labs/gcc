@@ -1,3 +1,4 @@
+// { dg-require-effective-target exceptions_enabled }
 // PR c++/97675
 
 struct Base { };

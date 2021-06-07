@@ -1,4 +1,5 @@
 //  { dg-additional-options "-fsyntax-only" }
+//  { dg-skip-if "" { ! exceptions_enabled } }
 
 #if __has_include(<coroutine>)
 #include <coroutine>

@@ -70,4 +70,4 @@ test_unused() {
 }
 
 /* { dg-final { scan-tree-dump-times "Deleting : operator delete" 6 "cddce1"} } */
-/* { dg-final { scan-tree-dump-times "Deleting : _\\d+ = operator new" 8 "cddce1"} } */
+/* { dg-final { scan-tree-dump-times "Deleting : x?_\\d+ = operator new" 8 "cddce1"} } */

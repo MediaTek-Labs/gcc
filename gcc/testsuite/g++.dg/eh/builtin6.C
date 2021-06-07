@@ -1,5 +1,6 @@
 // PR c++/88482
 // { dg-do compile }
+// { dg-require-effective-target exceptions_enabled }
 
 float __cxa_throw;		// { dg-message "previous declaration" }
 extern "C" void *__cxa_get_exception_ptr (void *);

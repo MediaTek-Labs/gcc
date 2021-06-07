@@ -1,4 +1,5 @@
 // { dg-options "-Wcatch-value=2" }
+// { dg-require-effective-target exceptions_enabled }
 
 struct A { virtual ~A() {} };
 struct B : A {};

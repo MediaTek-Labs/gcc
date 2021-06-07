@@ -1,6 +1,7 @@
 // PR c++/36628
 // { dg-do run { target c++11 } }
 // { dg-additional-options "-Wno-return-type" }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 #include <string.h>

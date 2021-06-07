@@ -1,5 +1,6 @@
 // pr c++/79393
 // { dg-do compile { target c++14 } }
+// { dg-require-effective-target exceptions_enabled }
 
 struct A 
 {

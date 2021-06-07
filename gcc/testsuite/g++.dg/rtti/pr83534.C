@@ -1,5 +1,6 @@
 // { dg-options "-std=c++17" }
 // { dg-do run }
+// { dg-require-effective-target rtti_enabled }
 
 #include <typeinfo>
 

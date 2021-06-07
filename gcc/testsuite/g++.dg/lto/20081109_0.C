@@ -1,3 +1,4 @@
+// { dg-require-effective-target exceptions_enabled }
 extern "C" { void abort (void);}
 int foo (int);
 

@@ -1,4 +1,5 @@
 // { dg-do run  }
+// { dg-require-effective-target rtti_enabled }
 // 980617 bkoz
 // typeid for local types
 // typeid bool vs int and enum vs int

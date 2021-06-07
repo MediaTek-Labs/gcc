@@ -1,6 +1,7 @@
 // PR ipa/83054
 // { dg-options "-O3 -Wsuggest-final-types" }
 // { dg-do compile }
+// { dg-skip-if "" { ! exceptions_enabled } }
 
 extern "C" int printf (const char *, ...);
 struct foo // { dg-warning "final would enable devirtualization of 5 calls" }

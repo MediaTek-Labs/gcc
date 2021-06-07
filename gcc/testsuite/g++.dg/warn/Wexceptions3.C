@@ -1,3 +1,4 @@
+// { dg-require-effective-target exceptions_enabled }
 // PR c++/81660
 
 void bar (int);

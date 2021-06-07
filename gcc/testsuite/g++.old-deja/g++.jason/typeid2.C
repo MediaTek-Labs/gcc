@@ -1,4 +1,5 @@
 // { dg-do run  }
+// { dg-require-effective-target rtti_enabled }
 // PRMS Id: 11596
 
 #include <typeinfo>

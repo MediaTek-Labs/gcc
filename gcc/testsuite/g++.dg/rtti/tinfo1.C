@@ -1,5 +1,6 @@
 // Test if a local definition is in a linkonce/comdat section.
 // { dg-do compile }
+// { dg-require-effective-target rtti_enabled }
 // { dg-final { scan-assembler "_ZTIP9CTemplateIhE\[: \t\n\]" } }
 // { dg-final { scan-assembler-not "(.globl|.global)\[ 	\]+_ZTIP9CTemplateIhE" } }
 // { dg-final { scan-assembler-not ".section\[^\n\r\]*_ZTIP9CTemplateIhE\[^\n\r\]*" } }

@@ -1,5 +1,6 @@
 // PR c++/89785
 // { dg-do compile { target c++14 } }
+// { dg-require-effective-target exceptions_enabled }
 
 constexpr int
 foo (int x)

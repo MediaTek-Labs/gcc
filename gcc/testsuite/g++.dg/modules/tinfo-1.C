@@ -1,6 +1,7 @@
 // { dg-additional-options "-fmodules-ts -fdump-lang-module-uid" }
+// { dg-require-effective-target exceptions_enabled }
 export module Foo;
-// { dg-module-cmi Foo }
+// { dg-module-cmi Foo { xfail { ! exceptions_enabled } } }
 
 struct B 
 {

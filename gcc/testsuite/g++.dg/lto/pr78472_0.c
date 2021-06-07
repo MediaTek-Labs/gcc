@@ -1,4 +1,5 @@
 // { dg-lto-do link }
+// { dg-require-effective-target rtti_enabled }
 
 extern struct S
 {

@@ -1,5 +1,6 @@
 // PR c++/93414 - poor diagnostic for dynamic_cast in constexpr context.
 // { dg-do compile { target c++20 } }
+// { dg-require-effective-target rtti_enabled }
 // Here 'b' doesn't point/refer to a public base of Derived.
 
 struct Base {

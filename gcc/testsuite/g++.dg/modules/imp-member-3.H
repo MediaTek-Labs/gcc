@@ -1,5 +1,6 @@
 // { dg-additional-options -fmodule-header }
-// { dg-module-cmi {} }
+// { dg-require-effective-target exceptions_enabled }
+// { dg-module-cmi {} { xfail { ! exceptions_enabled } } }
 
 class bad_optional_access
 {

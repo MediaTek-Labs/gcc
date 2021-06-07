@@ -1,4 +1,5 @@
 // { dg-do run { target c++11 } }
+// { dg-require-effective-target rtti_enabled }
 
 // Test typeid
 

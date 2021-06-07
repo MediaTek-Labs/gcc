@@ -1,5 +1,6 @@
 // PR c++/13536
 // { dg-require-effective-target ilp32 } */
+// { dg-require-effective-target rtti_enabled }
 // { dg-options "-w" }
 
 #include <typeinfo>
