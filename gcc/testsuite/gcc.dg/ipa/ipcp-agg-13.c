@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O3 -fno-ipa-sra -fdump-ipa-cp --param ipa-cp-eval-threshold=1" } */
+/* { dg-options "-O3 -fno-pic -fno-ipa-sra -fdump-ipa-cp --param ipa-cp-eval-threshold=1" } */
 
 int data;
 int fn();

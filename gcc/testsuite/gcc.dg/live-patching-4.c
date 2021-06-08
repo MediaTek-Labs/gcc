@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O2 -flive-patching=inline-only-static -fdump-tree-einline-optimized" } */
+/* { dg-options "-O2 -fno-pic -flive-patching=inline-only-static -fdump-tree-einline-optimized" } */
 
 extern int sum, n, m;
 

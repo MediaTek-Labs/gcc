@@ -2,7 +2,7 @@
    Verify that freeing unallocated objects referenced indirectly through
    pointers obtained from function calls is diagnosed.
    { dg-do compile }
-   { dg-options "-O2 -Wall -Wfree-nonheap-object" }  */
+   { dg-options "-O2 -fno-pic -Wall -Wfree-nonheap-object" }  */
 
 typedef __SIZE_TYPE__ size_t;
 

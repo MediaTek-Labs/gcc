@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O3 -fdump-tree-lsplit-details" } */
+/* { dg-options "-O3 -fno-pic -fdump-tree-lsplit-details" } */
 
 extern const int step;
 

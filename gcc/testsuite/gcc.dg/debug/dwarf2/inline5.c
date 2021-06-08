@@ -1,7 +1,7 @@
 /* Verify that the concrete instance DW_TAG_lexical_block has an abstract
    origin.  Verify that the inline instance has the abstract instance as
    abstract origin rather than the concrete one.  */
-/* { dg-options "-O -gdwarf -dA" } */
+/* { dg-options "-O -fno-pic -gdwarf -dA" } */
 /* { dg-do compile } */
 /* { dg-final { scan-assembler-times "DW_TAG_inlined_subroutine" 2 } } */
 /* { dg-final { scan-assembler-times "DW_TAG_lexical_block\\)\[^#/!@;\\|\]*\[#/!@;\\|\]+ +DW_AT_abstract_origin" 2 } } */

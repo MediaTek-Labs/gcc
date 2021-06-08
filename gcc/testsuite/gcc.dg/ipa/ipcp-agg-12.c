@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O3 -fno-ipa-sra -fdump-ipa-cp-details --param=ipa-cp-eval-threshold=2"  } */
+/* { dg-options "-O3 -fno-pic -fno-ipa-sra -fdump-ipa-cp-details --param=ipa-cp-eval-threshold=2"  } */
 
 struct S
 {

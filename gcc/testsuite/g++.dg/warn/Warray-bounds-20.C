@@ -1,7 +1,7 @@
 /* PR middle-end/98266 - bogus array subscript is partly outside array
    bounds on virtual inheritance
    { dg-do compile }
-   { dg-options "-O2 -Wall" } */
+   { dg-options "-O2 -fno-pic -Wall" } */
 
 void* operator new (__SIZE_TYPE__, void *p) { return p; }
 void* operator new[] (__SIZE_TYPE__, void *p) { return p; }

@@ -1,7 +1,7 @@
 /* PR middle-end/98664 - inconsistent --Wfree-nonheap-object for inlined
    calls to system headers
    { dg-do compile }
-   { dg-options "-O2 -Wall" } */
+   { dg-options "-O2 -fno-pic -Wall" } */
 
 # 7 "Wfree-nonheap-object-4.h" 1 3
 

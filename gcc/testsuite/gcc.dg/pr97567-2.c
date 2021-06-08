@@ -1,5 +1,5 @@
 /* { dg-do compile} */
-/* { dg-options "-O2 -fdump-tree-evrp" } */
+/* { dg-options "-O2 -fno-pic -fdump-tree-evrp" } */
 
 char a[2];
 

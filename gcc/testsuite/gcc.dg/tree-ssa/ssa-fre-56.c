@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O -fdump-tree-fre1" } */
+/* { dg-options "-O -fno-pic -fdump-tree-fre1" } */
 
 int x = 1;
 int __attribute__((noinline,noclone)) fn ()

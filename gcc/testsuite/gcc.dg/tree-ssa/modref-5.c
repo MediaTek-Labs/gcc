@@ -1,4 +1,4 @@
-/* { dg-options "-O2 -fdump-tree-modref1"  } */
+/* { dg-options "-O2 -fno-pic -fdump-tree-modref1"  } */
 /* { dg-do run } */
 __attribute__ ((noinline))
 void

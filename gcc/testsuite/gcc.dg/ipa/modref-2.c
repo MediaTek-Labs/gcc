@@ -1,4 +1,4 @@
-/* { dg-options "-O2 -fdump-ipa-modref"  } */
+/* { dg-options "-O2 -fno-pic -fdump-ipa-modref"  } */
 /* { dg-do compile } */
 void
 test (int *a, int size)

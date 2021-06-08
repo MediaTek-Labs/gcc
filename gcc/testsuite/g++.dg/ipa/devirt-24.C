@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O3 -fno-ipa-sra -fdump-ipa-inline -fdump-ipa-cp"  } */
+/* { dg-options "-O3 -fno-pic -fno-ipa-sra -fdump-ipa-inline -fdump-ipa-cp"  } */
 void pad(void);
 class A {};
 class B {

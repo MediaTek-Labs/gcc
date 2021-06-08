@@ -1,5 +1,5 @@
 /* { dg-do compile { target init_priority } } */
-/* { dg-options "-O2 -fdump-ipa-icf-details -fno-inline"  } */
+/* { dg-options "-O2 -fno-pic -fdump-ipa-icf-details -fno-inline"  } */
 
 __attribute__ ((noinline, constructor(200)))
 int foo()

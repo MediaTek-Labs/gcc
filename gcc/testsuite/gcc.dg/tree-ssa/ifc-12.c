@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-Ofast -fdump-tree-ifcvt-stats-blocks-details" } */
+/* { dg-options "-Ofast -fno-pic -fdump-tree-ifcvt-stats-blocks-details" } */
 /* { dg-require-visibility "" } */
 
 struct st

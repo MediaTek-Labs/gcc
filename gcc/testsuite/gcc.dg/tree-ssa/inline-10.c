@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-Os -fdump-tree-optimized -fno-partial-inlining" } */
+/* { dg-options "-Os -fno-pic -fdump-tree-optimized -fno-partial-inlining" } */
 void do_something1(void);
 void do_something2(void);
 void do_something3(void);

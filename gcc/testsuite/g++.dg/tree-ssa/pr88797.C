@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O3 -fdump-tree-split-paths-details" } */
+/* { dg-options "-O3 -fno-pic -fdump-tree-split-paths-details" } */
 
 
 void use(unsigned);

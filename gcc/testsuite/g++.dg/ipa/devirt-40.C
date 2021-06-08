@@ -1,4 +1,4 @@
-/* { dg-options "-O2 -fdump-tree-fre3-details"  } */
+/* { dg-options "-O2 -fno-pic -fdump-tree-fre3-details"  } */
 typedef enum
 {
 } UErrorCode;

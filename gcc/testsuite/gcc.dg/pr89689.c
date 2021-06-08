@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O2 -Warray-bounds" } */
+/* { dg-options "-O2 -fno-pic -Warray-bounds" } */
 
 #include <string.h>
 #include <assert.h>

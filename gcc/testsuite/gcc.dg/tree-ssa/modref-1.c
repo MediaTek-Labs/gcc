@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O2 -fdump-tree-optimized"  } */
+/* { dg-options "-O2 -fno-pic -fdump-tree-optimized"  } */
 int p,q,r,s,*ptr=&q, *ptr2=&p;
 __attribute__ ((noinline))
 int

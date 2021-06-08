@@ -1,6 +1,6 @@
 /* PR tree-optimization/88775 */
 /* { dg-do compile } */
-/* { dg-options "-O2 -fdump-tree-optimized" } */
+/* { dg-options "-O2 -fno-pic -fdump-tree-optimized" } */
 /* { dg-final { scan-tree-dump-times "return 1;" 10 "optimized" } } */
 
 int a[64] = {};

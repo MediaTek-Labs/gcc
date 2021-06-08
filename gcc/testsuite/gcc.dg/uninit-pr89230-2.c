@@ -1,6 +1,6 @@
 /* PR middle-end/89230 - Bogus uninited usage warning with printf
    { dg-do compile }
-   { dg-options "-O2 -Wall" } */
+   { dg-options "-O2 -fno-pic -Wall" } */
 
 typedef __SIZE_TYPE__ size_t;
 

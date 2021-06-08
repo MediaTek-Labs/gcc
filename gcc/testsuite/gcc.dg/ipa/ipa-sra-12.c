@@ -1,5 +1,5 @@
 /* { dg-do run } */
-/* { dg-options "-O2 -fipa-sra -fdump-ipa-sra"  } */
+/* { dg-options "-O2 -fno-pic -fipa-sra -fdump-ipa-sra"  } */
 
 /* Check of a simple and transitive structure split. */
 

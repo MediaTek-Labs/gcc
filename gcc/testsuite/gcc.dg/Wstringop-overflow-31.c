@@ -1,7 +1,7 @@
 /* PR middle-end/93646 - confusing -Wstringop-truncation on strncat where
    -Wstringop-overflow is expected
    { dg-do compile }
-   { dg-options "-O2 -Wall" } */
+   { dg-options "-O2 -fno-pic -Wall" } */
 
 extern __SIZE_TYPE__ strlen (const char*);
 extern char* strncat (char*, const char*, __SIZE_TYPE__);

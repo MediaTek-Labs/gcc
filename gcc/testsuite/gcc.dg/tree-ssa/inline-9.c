@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-Os -fdump-tree-optimized -fno-partial-inlining" } */
+/* { dg-options "-Os -fno-pic -fdump-tree-optimized -fno-partial-inlining" } */
 
 /* When optimizing for size, t should be inlined when it expands to one call only.  */
 extern int q(int);

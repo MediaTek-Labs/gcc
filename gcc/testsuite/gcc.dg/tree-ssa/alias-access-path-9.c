@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O2 -fdump-tree-fre1" } */
+/* { dg-options "-O2 -fno-pic -fdump-tree-fre1" } */
 
 /* This testcase tests nonoverlapping_component_refs_since_match_p in presence
    of non-trivial mem-refs.  */

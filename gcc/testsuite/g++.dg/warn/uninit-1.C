@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O2 -Wmaybe-uninitialized" } */
+/* { dg-options "-O2 -fno-pic -Wmaybe-uninitialized" } */
 struct a {int a;};
 __attribute__ ((noinline))
 void

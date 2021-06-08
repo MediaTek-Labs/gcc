@@ -1,6 +1,6 @@
 /* PR c++/94314.  */
 /* { dg-do run { target c++14 } } */
-/* { dg-options "-O2 -fdump-tree-cddce-details -fdelete-null-pointer-checks" } */
+/* { dg-options "-O2 -fno-pic -fdump-tree-cddce-details -fdelete-null-pointer-checks" } */
 
 int count = 0;
 

@@ -3,7 +3,7 @@
 // non-type template arguments are interprested as null regardless
 // of the form of their initialization.
 // { dg-do compile { target c++20 } }
-// { dg-options "-O2 -Wall -fdump-tree-optimized" }
+// { dg-options "-O2 -fno-pic -Wall -fdump-tree-optimized" }
 
 struct A { int i; };
 

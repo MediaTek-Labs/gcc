@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O2 -fdump-tree-optimized" } */
+/* { dg-options "-O2 -fno-pic -fdump-tree-optimized" } */
 void unlikely () __attribute__ ((cold));
 void unlikely2 () __attribute__ ((cold));
 

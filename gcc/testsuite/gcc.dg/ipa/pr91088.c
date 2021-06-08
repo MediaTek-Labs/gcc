@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O3 -fdump-ipa-cp-details -fno-inline" } */
+/* { dg-options "-O3 -fno-pic -fdump-ipa-cp-details -fno-inline" } */
 
 int foo();
 

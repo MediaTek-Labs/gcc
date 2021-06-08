@@ -1,6 +1,6 @@
 /* PR middle-end/50476 - Warn of pointer set to object whose lifetime is limited
    { dg-do compile }
-   { dg-options "-O1 -Wall" } */
+   { dg-options "-O1 -fno-pic -Wall" } */
 
 int *x = 0;
 

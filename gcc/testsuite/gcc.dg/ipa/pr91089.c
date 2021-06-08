@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O3 -fdump-ipa-cp-details -fdump-ipa-fnsummary-details --param ipa-max-switch-predicate-bounds=10 -fno-inline" } */
+/* { dg-options "-O3 -fno-pic -fdump-ipa-cp-details -fdump-ipa-fnsummary-details --param ipa-max-switch-predicate-bounds=10 -fno-inline" } */
 
 int fn ();
 
