@@ -2,8 +2,8 @@
 /* { dg-options "-m32 -mpid -msoft-float" } */
 /* { dg-additional-options "-mssdata" } */
 
-/* { dg-final { scan-assembler-not "\\.section\t\\.ssdata,\"aw\",@progbits" } } */
-/* { dg-final { scan-assembler "\\.section\t\\.sdata,\"aw\",@progbits" } } */
+/* { dg-final { scan-assembler-not "\\.section\t\\.ssdata,\"aw\"" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.sdata,\"aw\"" } } */
 
 float f32() { return 1.0f; }
 double f64() { return 1.0; }

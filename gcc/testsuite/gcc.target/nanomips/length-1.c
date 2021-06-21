@@ -1,6 +1,6 @@
 /* { dg-options "-dp" } */
-/* { dg-final { scan-assembler "\[^\n\]*movsi_nanomips/6\[^\n\]*length = 6" } } */
-/* { dg-final { scan-assembler "\[^\n\]*movsi_nanomips/6\[^\n\]*length = 4" } } */
+/* { dg-final { scan-assembler "\[^\n\]*l=6\[^\n\]*movsi_nanomips/5" } } */
+/* { dg-final { scan-assembler "\[^\n\]*l=4\[^\n\]*movsi_nanomips/5" } } */
 
 int f1 ()
 {

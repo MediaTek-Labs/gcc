@@ -1,7 +1,7 @@
 int
 jumptab (int a)
 {
-  int b;
+  volatile int b;
   switch (a)
     {
     case 0:

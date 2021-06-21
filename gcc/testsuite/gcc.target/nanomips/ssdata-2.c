@@ -45,12 +45,12 @@ long long __attribute__ ((vector_size (16))) var_i64_v;
 float __attribute__ ((vector_size (16))) var_f32_v;
 double __attribute__ ((vector_size (16))) var_f64_v;
 
-/* { dg-final { scan-assembler "\\.section\t\\.ssdata\\.cc_i8,\"aw\",@progbits" } } */
-/* { dg-final { scan-assembler "\\.section\t\\.ssdata\\.cc_i16,\"aw\",@progbits" } } */
-/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.cc_i32,\"aw\",@progbits" } } */
-/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.cc_i64,\"aw\",@progbits" } } */
-/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.cc_f32,\"aw\",@progbits" } } */
-/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.cc_f64,\"aw\",@progbits" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.ssdata\\.cc_i8,\"aw\"" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.ssdata\\.cc_i16,\"aw\"" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.cc_i32,\"aw\"" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.cc_i64,\"aw\"" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.cc_f32,\"aw\"" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.cc_f64,\"aw\"" } } */
 
 _Complex char  cc_i8 = 1;
 _Complex short  cc_i16 = 1;
@@ -65,17 +65,17 @@ _Complex double  cc_f64 = 1;
 void* var_ptr_void;
 char* var_ptr_char;
 
-/* { dg-final { scan-assembler "\\.section\t\\.ssdata\\.var_i8_i,\"aw\",@progbits" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.ssdata\\.var_i8_i,\"aw\"" } } */
 
 char var_i8_i = 1;
 
 /* Note, this case is historically potentially broken. It happens to work if the
    unaligned object end up at an aligned address.  */
-/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.var_s_misaligned,\"aw\",@progbits" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.var_s_misaligned,\"aw\"" } } */
 
 struct { int val; } var_s_misaligned __attribute__((aligned(1))) = {1};
 
-/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.var_s_not_misaligned,\"aw\",@progbits" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.sdata\\.var_s_not_misaligned,\"aw\"" } } */
 
 struct { int val; } __attribute__((aligned(1))) var_s_not_misaligned = {1};
 

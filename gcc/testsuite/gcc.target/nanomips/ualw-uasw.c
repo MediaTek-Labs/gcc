@@ -4,7 +4,7 @@
 
 #include <string.h>
 
-char c[20];
+char c[20] __attribute__((aligned(1)));
 
 void
 foo (char *a)

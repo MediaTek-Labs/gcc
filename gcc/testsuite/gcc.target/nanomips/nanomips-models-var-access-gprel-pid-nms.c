@@ -1,5 +1,6 @@
 /* { dg-do compile } */
 /* { dg-options "-m32 -march=32r6s -mgpopt -mpid" } */
+/* { dg-additional-options "-ftoplevel-reorder" } */
 /* { dg-skip-if "" { *-*-* } { "-O1" "-O2" "-O3" "-Os" } { "" } } */
 
 /* { dg-final { scan-assembler "lw\t\\\$\[ast0-9\]+,%gprel\\(a_sta_4Kaligned\\)\\(\\\$gp\\)" } } */
@@ -19,7 +20,7 @@
 /* { dg-final { scan-assembler "lui\t\\\$\[ast0-9\]+,%gprel_hi\\(l_sta_4Kaligned\\)" } } */
 /* { dg-final { scan-assembler "lw\t\\\$\[ast0-9\]+,%gprel_lo\\(l_sta_4Kaligned\\)\\(\\\$\[ast0-9\]+\\)" } } */
 /* { dg-final { scan-assembler "lui\t\\\$\[ast0-9\]+,%gprel_hi\\(l_sta_2aligned\\)" } } */
-/* { dg-final { scan-assembler "addu\t\\\$\[ast0-9\]+,\\\$\[ast0-9\]+,\\\$gp\n\tlw\t\\\$\[ast0-9\]+,%gprel_lo\\(l_sta_2aligned\\)\\(\\\$\[ast0-9\]+\\) # unaligned" } } */
+/* { dg-final { scan-assembler "addu\t\\\$\[ast0-9\]+,\\\$\[ast0-9\]+,\\\$gp\n\tlw\t\\\$\[ast0-9\]+,%gprel_lo\\(l_sta_2aligned\\)\\(\\\$\[ast0-9\]+\\)" } } */
 /* { dg-final { scan-assembler "lui\t\\\$\[ast0-9\]+,%gprel_hi\\(l_sta_char\\)" } } */
 /* { dg-final { scan-assembler "lbu\t\\\$\[ast0-9\]+,%gprel_lo\\(l_sta_char\\)\\(\\\$\[ast0-9\]+\\)" } } */
 /* { dg-final { scan-assembler "lui\t\\\$\[ast0-9\]+,%gprel_hi\\(l_sta_short\\)" } } */

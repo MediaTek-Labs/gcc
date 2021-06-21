@@ -14,8 +14,8 @@ typedef union
   bits_t b;
 } bitfields_t;
 
-void *
-strcpy (void *__restrict__ dst, const void *__restrict__ _a)
+char *
+strcpy (char *__restrict__ dst, const char *__restrict__ _a)
 {
   unsigned x = *(unsigned *) _a;
   bitfields_t bx;

@@ -1,4 +1,5 @@
 /* { dg-options "-m32 isa_rev>=6" } */
+/* { dg-skip-if "" { *-*-* } { "-O1" "-O2" "-O3" "-Os" } { "" } } */
 
 extern void abort (void);
 extern void exit (int);

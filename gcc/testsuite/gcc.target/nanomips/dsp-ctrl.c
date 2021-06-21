@@ -14,14 +14,14 @@ void __attribute__ ((noinline))
 test2 ()
 {
   long long a = 0;
-  __builtin_mips_extpdp (a, 3);
+  volatile int tmp = __builtin_mips_extpdp (a, 3);
 }
 
 void __attribute__ ((noinline))
 test3 (int i)
 {
   long long a = 0;
-  __builtin_mips_extpdp (a, i);
+  volatile int tmp = __builtin_mips_extpdp (a, i);
 }
 
 void __attribute__ ((noinline))
@@ -29,7 +29,7 @@ test4 ()
 {
   long long a = 0;
   int i = 0;
-  __builtin_mips_mthlip (a, i);
+  volatile long long tmp = __builtin_mips_mthlip (a, i);
 }
 
 int

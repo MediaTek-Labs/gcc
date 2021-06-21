@@ -5,7 +5,7 @@
 
 /* { dg-final { scan-assembler "lw\t\\\$\[ast0-9\]+,%gprel\\(var_data\\)" } } */
 /* { dg-final { scan-assembler "lw\t\\\$\[ast0-9\]+,%gprel\\(var_bss\\)" } } */
-/* { dg-final { scan-assembler "\\.section\t\\.ssdata,\"aw\",@progbits" } } */
+/* { dg-final { scan-assembler "\\.section\t\\.ssdata,\"aw\"" } } */
 /* { dg-final { scan-assembler "\\.section\t\\.ssbss,\"aw\",@nobits" } } */
 
 

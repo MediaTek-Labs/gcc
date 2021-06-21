@@ -1,4 +1,5 @@
 /* { dg-do compile } */
+/* { dg-options "-g0" } */
 
 void
 unreachable (int i)
