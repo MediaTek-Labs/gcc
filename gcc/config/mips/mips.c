@@ -6105,11 +6105,19 @@ mips_rtx_costs (rtx x, machine_mode mode, int outer_code,
 	  && GET_CODE (XEXP (x, 0)) == MULT)
 	{
 	  rtx op2 = XEXP (XEXP (x, 0), 1);
-	  if (const_immlsa_operand (op2, mode))
+	  HOST_WIDE_INT op2_shift;
+
+	  if (CONST_INT_P (op2)
+	      && (op2_shift = exact_log2 (INTVAL (op2))) >= 0
+	      && IN_RANGE ((op2_shift - (TARGET_NANOMIPS ? 0 : 1)), 0, 3))
 	    {
+	      /* Icrease the cost slightly over the plain addition to allow
+		 creation of more indexed scaled addresess in fwprop */
 	      *total = (COSTS_N_INSNS (1)
+			+ ((TARGET_NANOMIPS == NANOMIPS_NMF) ? 1 : 0)
 			+ set_src_cost (XEXP (XEXP (x, 0), 0), mode, speed)
 			+ set_src_cost (XEXP (x, 1), mode, speed));
+
 	      return true;
 	    }
 	}

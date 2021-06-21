@@ -9,6 +9,6 @@
 TEST (1, char)
 /* { dg-final { scan-assembler-times "\tsbx\t" 2 } } */
 TEST (2, short)
-/* { dg-final { scan-assembler-times "\tshx\t" 2 } } */
+/* { dg-final { scan-assembler-times "\tshxs\t" 2 } } */
 TEST (3, int)
 /* { dg-final { scan-assembler-times "\tswxs\t" 2 } } */

@@ -11,10 +11,9 @@
 TEST (1, char, char)
 TEST (2, char, short)
 /* { dg-final { scan-assembler-times "\tsbx\t" 4 } } */
-/* { dg-final { scan-assembler-times "\tshxs\t" 4 } } */
 TEST (3, short, short)
+/* { dg-final { scan-assembler-times "\tshxs\t" 8 } } */
 TEST (4, short, int)
-/* { dg-final { scan-assembler-times "\tshx\t" 4 } } */
 /* { dg-final { scan-assembler-times "\tswxs\t" 4 } } */
 TEST (5, int, long long)
 /* { dg-final { scan-assembler-times "\tsw\t" 4 } } */
