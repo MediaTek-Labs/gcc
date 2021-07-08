@@ -36,6 +36,8 @@
 
 (include "mips.md")
 
+(include "generic.md")
+
 ; The MIPS DSP Instructions.
 
 (include "mips-dsp.md")

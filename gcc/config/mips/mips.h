@@ -321,6 +321,13 @@ struct mips_cpu_info {
 #define NANOMIPS_NMS		    1
 #define NANOMIPS_NMF		    2
 
+#ifndef NANOMIPS_SUPPORT
+#define TARGET_PID		    0
+#define TARGET_PCREL		    0
+#define TARGET_LINKRELAX	    0
+#define nanomips_tls_dialect	    TLS_TRADITIONAL
+#endif
+
 /* Scheduling target defines.  */
 #define TUNE_20KC		    (mips_tune == PROCESSOR_20KC)
 #define TUNE_24K		    (mips_tune == PROCESSOR_24KC	\
@@ -354,7 +361,7 @@ struct mips_cpu_info {
 #define TUNE_P5600                  (mips_tune == PROCESSOR_P5600)
 #define TUNE_I6400                  (mips_tune == PROCESSOR_I6400)
 #define TUNE_P6600                  (mips_tune == PROCESSOR_P6600)
-#define TUNE_NANOMIPS64R6	    0
+#define TUNE_I7200		    0
 
 /* True if the pre-reload scheduler should try to create chains of
    multiply-add or multiply-subtract instructions.  For example,
@@ -2259,13 +2266,13 @@ enum reg_class
   M16_STORE_REGS,		/* microMIPS store registers  */
   N16_STORE_REGS,		/* nanoMIPS store registers  */
   M16_REGS,			/* mips16 directly accessible registers */
+  PIC_FN_ADDR_REG,		/* SVR4 PIC function address register */
   N16_TAIL_REGS,		/* nanoMIPS sibling call registers */
   N16_REGS,			/* nanoMIPS directly accessible registers */
   N16_4X4_REGS,			/* nanoMIPS registers $4-$11,$16-$23 */
   M16_SP_REGS,			/* mips16 + $sp */
   T_REG,			/* mips16 T register ($24) */
   M16_T_REGS,			/* mips16 registers plus T register */
-  PIC_FN_ADDR_REG,		/* SVR4 PIC function address register */
   V1_REG,			/* Register $v1 ($3) used for TLS access.  */
   SPILL_REGS,			/* All but $sp and call preserved regs are in here */
   LEA_REGS,			/* Every GPR except $25 */
@@ -2303,13 +2310,13 @@ enum reg_class
   "M16_STORE_REGS",							\
   "N16_STORE_REGS",							\
   "M16_REGS",								\
+  "PIC_FN_ADDR_REG",							\
   "N16_TAIL_REGS",							\
   "N16_REGS",								\
   "N16_4X4_REGS",							\
   "M16_SP_REGS",							\
   "T_REG",								\
   "M16_T_REGS",								\
-  "PIC_FN_ADDR_REG",							\
   "V1_REG",								\
   "SPILL_REGS",								\
   "LEA_REGS",								\
@@ -2350,13 +2357,13 @@ enum reg_class
   { 0x000200fc, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* M16_STORE_REGS */	\
   { 0x000e00f1, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* N16_STORE_REGS */	\
   { 0x000300fc, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* M16_REGS */		\
+  { 0x02000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* PIC_FN_ADDR_REG */	\
   { 0x0700fffc, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* N16_TAIL_REGS */	\
   { 0x000f00f0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* N16_REGS */	\
   { 0x00ff0ff0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* N16_4X4_REGS */	\
   { 0x200300fc, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* M16_SP_REGS */	\
   { 0x01000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* T_REG */		\
   { 0x010300fc, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* M16_T_REGS */	\
-  { 0x02000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* PIC_FN_ADDR_REG */	\
   { 0x00000008, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* V1_REG */		\
   { 0x0303fffc, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* SPILL_REGS */      	\
   { 0xfdffffff, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000 },	/* LEA_REGS */		\

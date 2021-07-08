@@ -3546,7 +3546,8 @@ mips_symbol_insns_1 (enum mips_symbol_type type, machine_mode mode)
 
     case SYMBOL_GP_RELATIVE:
         if (mode == MAX_MACHINE_MODE
-            || GET_MODE_SIZE (mode) == 1)
+	    || ((GET_MODE_SIZE (mode) == 1)
+		|| !TARGET_NANOMIPS))
           return 1;
 
       return 0;
@@ -4255,7 +4256,7 @@ lwm_swm_address_p (rtx x, machine_mode mode)
 	    && CONST_INT_P (addr.offset)
 	    && MIPS_9BIT_OFFSET_P (INTVAL (addr.offset)));
   else
-    return memory_operand (x, mode);
+    return mips_classify_address (&addr, x, mode, false);
 }
 
 /* Return true if X is a legitimate address that conforms to the requirements
@@ -5273,8 +5274,7 @@ mips_legitimize_address (rtx x, rtx oldx ATTRIBUTE_UNUSED,
         return mips_force_address (x, mode);
 
       mips_split_plus (XEXP (XEXP (x, 1), 0), &symbol, &offset);
-
-      base = gen_rtx_LO_SUM (Pmode, XEXP (base, 0), symbol);
+      base = gen_rtx_LO_SUM (Pmode, XEXP (base, 0), gen_rtx_CONST (Pmode, symbol));
       addr = mips_add_offset (NULL, base, offset);
       return mips_force_address (addr, mode);
     }
@@ -10397,6 +10397,7 @@ mips_block_move_straight (rtx dest, rtx src, HOST_WIDE_INT length,
       if (mips_use_multi_memcpy
 	  && MIN (MEM_ALIGN (src), MEM_ALIGN (dest)) >= BITS_PER_WORD)
 	{
+#ifdef NANOMIPS_SUPPORT
 	  if (TARGET_NANOMIPS == NANOMIPS_NMF && IN_RANGE (num_units, 2, 8))
 	    {
 	      rtx part_src = adjust_address (src, BLKmode, offset);
@@ -10407,6 +10408,7 @@ mips_block_move_straight (rtx dest, rtx src, HOST_WIDE_INT length,
 						GEN_INT (num_units)));
 	    }
 	  else
+#endif
 	    {
 	      rtx part = adjust_address (src, BLKmode, offset);
 	      set_mem_size (part, num_units * delta);
@@ -10418,6 +10420,7 @@ mips_block_move_straight (rtx dest, rtx src, HOST_WIDE_INT length,
 	    }
 	  for (; offset + delta <= this_length; offset += delta, i++);
 	}
+#ifdef NANOMIPS_SUPPORT
       else if (mips_use_multi_memcpy && TARGET_NANOMIPS == NANOMIPS_NMF
 	       && IN_RANGE (num_units, 2, 8))
 	{
@@ -10430,6 +10433,7 @@ mips_block_move_straight (rtx dest, rtx src, HOST_WIDE_INT length,
 					      GEN_INT (num_units)));
 	  for (; offset + delta <= this_length; offset += delta, i++);
 	}
+#endif
       else
 	{
 	  /* Load as many BITS-sized chunks as possible.  Use a normal load if
@@ -16286,6 +16290,7 @@ mips_expand_prologue_pabi (void)
 	RTX_FRAME_RELATED_P (emit_insn (gen_add3_insn (stack_pointer_rtx,
 						       stack_pointer_rtx,
 						       GEN_INT (-size)))) = 1;
+#ifdef NANOMIPS_SUPPORT
       else if (ISA_HAS_ADDIU48)
 	{
 	  /* WORK NEEDED: It should not be necessary to split this from above.  */
@@ -16294,6 +16299,7 @@ mips_expand_prologue_pabi (void)
 					 GEN_INT (-size));
 	  RTX_FRAME_RELATED_P (emit_insn (insn)) = 1;
 	}
+#endif
       else
 	{
 	  mips_emit_move (MIPS_PROLOGUE_TEMP (Pmode), GEN_INT (size));
@@ -16433,6 +16439,7 @@ mips_deallocate_stack (rtx base, rtx offset, HOST_WIDE_INT new_frame_size)
       mips_epilogue_set_cfa (base, new_frame_size);
       emit_move_insn (stack_pointer_rtx, base);
     }
+#ifdef NANOMIPS_SUPPORT
   else if (ISA_HAS_ADDIU48 && CONST_INT_P (offset)
 	   && !IN_RANGE (INTVAL (offset), -0xfff, 0xffff))
     {
@@ -16441,6 +16448,7 @@ mips_deallocate_stack (rtx base, rtx offset, HOST_WIDE_INT new_frame_size)
       emit_insn (gen_mips_addsi3_48 (stack_pointer_rtx, base, offset));
       mips_epilogue_set_cfa (stack_pointer_rtx, new_frame_size);
     }
+#endif
   else
     {
       emit_insn (gen_add3_insn (stack_pointer_rtx, base, offset));
@@ -17967,7 +17975,9 @@ mips_output_jump (rtx *operands, int target_opno, int size_opno, bool link_p,
 	       && reg_p
 	       && mips_get_pic_call_symbol (operands, size_opno))
 	{
-	  s += sprintf (s, "%%*.reloc\t1f,R_MIPS_JALR,%%%d\n1:\t", size_opno);
+	  s += sprintf (s, "%%*.reloc\t1f,%s,%%%d\n1:\t",
+			TARGET_MICROMIPS ? "R_MICROMIPS_JALR" : "R_MIPS_JALR",
+			size_opno);
 	  /* Not sure why this shouldn't permit a short delay but it did not
 	     allow it before so we still don't allow it.  */
 	  short_delay = "";
@@ -18609,7 +18619,7 @@ mips_process_sync_loop1 (rtx_insn *insn, rtx *operands, attr_sync_insn1 insn1)
     }
   else if (!(required_oldval && cmp)
 	   && !mips_branch_likely
-	   && !TARGET_CB_MAYBE)
+	   && !TARGET_NANOMIPS)
     mips_multi_add_insn ("nop", NULL);
 
   /* CMP = 1 -- either standalone or in a delay slot.  */
@@ -22903,8 +22913,8 @@ mips_annotate_pic_calls (void)
 
       symbol = mips_find_pic_call_symbol (insn, reg, true);
       if (symbol
-	  && mips_classify_symbol (symbol, SYMBOL_CONTEXT_CALL) ==
-	    SYMBOL_GOT_CALL)
+	  && ((mips_classify_symbol (symbol, SYMBOL_CONTEXT_CALL) ==
+	    SYMBOL_GOT_CALL) || !TARGET_NANOMIPS))
 	{
 	  mips_annotate_pic_call_expr (call, symbol);
 	  if (second_call)
@@ -26935,11 +26945,13 @@ mips_option_override (void)
 
   register_pass (&shrink_mips_offsets_info);
 
+#ifdef NANOMIPS_SUPPORT
   mips_use_frame_pointer = false;
   if (global_options.x_flag_omit_frame_pointer == 0) {
     global_options.x_flag_omit_frame_pointer = 1;
     mips_use_frame_pointer = true;
   }
+#endif
 }
 
 /* Implement TARGET_OVERRIDE_OPTIONS_AFTER_CHANGE.  */
@@ -27065,6 +27077,7 @@ mips_conditional_register_usage (void)
 	call_used_regs[regno] = 1;
     }
   /* $f8-$f15 are callee-saved registers. */
+#ifdef NANOMIPS_SUPPORT
   if (mips_abi == ABI_P32)
     {
       int regno;
@@ -27075,6 +27088,7 @@ mips_conditional_register_usage (void)
       for (regno = FP_REG_FIRST + 8; regno <= FP_REG_FIRST + 15; regno+=1)
 	call_used_regs[regno] = 0;
     }
+#endif
   /* Make sure that double-register accumulator values are correctly
      ordered for the current endianness.  */
   if (TARGET_LITTLE_ENDIAN)
@@ -27085,12 +27099,13 @@ mips_conditional_register_usage (void)
       for (regno = DSP_ACC_REG_FIRST; regno <= DSP_ACC_REG_LAST; regno += 2)
 	mips_swap_registers (regno);
     }
-
+#ifdef NANOMIPS_SUPPORT
     if (mips_use_frame_pointer) {
       gcc_assert(mips_abi == ABI_P32);
       const int fp_regno = HARD_FRAME_POINTER_REGNUM;
       call_used_regs[fp_regno] = fixed_regs[fp_regno] = 1;
     }
+#endif
 }
 
 /* Implement EH_USES.  */

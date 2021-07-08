@@ -35,10 +35,11 @@
   74kf2_1
   74kf1_1
   74kf3_2
-  interaptiv_mr2
   loongson_2e
   loongson_2f
-  loongson_3a
+  gs464
+  gs464e
+  gs264e
   m4k
   octeon
   octeon2
@@ -70,7 +71,6 @@
   p5600
   m5100
   i6400
-  m6200
   p6600
 ])
 
@@ -79,7 +79,6 @@
 (include "i6400.md")
 (include "p5600.md")
 (include "m5100.md")
-(include "m6200.md")
 (include "p6600.md")
 (include "4k.md")
 (include "5k.md")
@@ -100,12 +99,15 @@
 (include "9000.md")
 (include "10000.md")
 (include "loongson2ef.md")
-(include "loongson3a.md")
+(include "gs464.md")
+(include "gs464e.md")
+(include "gs264e.md")
 (include "octeon.md")
 (include "sb1.md")
 (include "sr71k.md")
 (include "xlr.md")
 (include "xlp.md")
+(include "generic.md")
 
 ;; Synchronization instructions.
 
@@ -129,27 +131,8 @@
 ; microMIPS patterns.
 (include "micromips.md")
 
-;; Synchronization instructions.
-
-(include "sync.md")
-
-; The MIPS Paired-Single Floating Point and MIPS-3D Instructions.
-
-(include "mips-ps-3d.md")
-
-; The MIPS DSP Instructions.
-
-(include "mips-dsp.md")
-
-; The MIPS DSP REV 2 Instructions.
-
-(include "mips-dspr2.md")
-
-; MIPS fixed-point instructions.
-(include "mips-fixed.md")
-
-; ST-Microelectronics Loongson-2E/2F-specific patterns.
-(include "loongson.md")
+; Loongson MultiMedia extensions Instructions (MMI) patterns.
+(include "loongson-mmi.md")
 
 ; The MIPS MSA Instructions.
 (include "mips-msa.md")

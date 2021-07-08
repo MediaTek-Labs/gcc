@@ -123,6 +123,7 @@ along with GCC; see the file COPYING3.  If not see
 #define TUNE_I6400		    0
 #undef TUNE_P6600
 #define TUNE_P6600		    0
+#undef TUNE_I7200
 #define TUNE_I7200                  (mips_tune == PROCESSOR_I7200)
 
 /* Currently, querying of DFA is only needed for Loongson.  */

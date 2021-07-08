@@ -1201,7 +1201,6 @@
   (eq_attr "type" "ghost")
   "nothing")
 
-(include "generic.md")
 
 ;;
 ;;  ....................
@@ -3728,7 +3727,7 @@
     case 0:
     case 1: return "andi\t%0,%1,<SHORT:mask>";
     case 2:
-      if (<SHORT:MODE>mode == HImode)
+      if (<SHORT:MODE>mode == HImode && TARGET_NANOMIPS)
 	return "ext\t%0,%1,0,16";
       else
 	return "andi\t%0,%1,<SHORT:mask>";
@@ -3745,10 +3744,11 @@
    (set_attr "has_16bit_ver" "rr,rr,rr,rri_load")
    (set_attr "subset_16bit" "std,std,std,sub_load")
    (set (attr "enabled")
-	(cond [(and (eq_attr "alternative" "0,1")
+	(cond [(and (eq_attr "alternative" "1")
 		    (not (match_test "TARGET_NANOMIPS")))
 		  (const_string "no")
 	       (and (eq_attr "alternative" "2")
+		    (match_test "TARGET_NANOMIPS")
 		    (not (match_test "TARGET_NANOMIPS == NANOMIPS_NMF")))
 		  (const_string "no")]
 	      (const_string "*")))])
@@ -4560,7 +4560,7 @@
 (define_insn "mov_<load>l"
   [(set (match_operand:GPR 0 "register_operand" "=d")
 	(unspec:GPR [(match_operand:BLK 1 "memory_operand" "m")
-		     (match_operand:QI 2 "memory_operand" "ZF")]
+		     (match_operand:QI 2 "memory_operand" "ZC")]
 		    UNSPEC_LOAD_LEFT))]
   "!TARGET_MIPS16 && mips_mem_fits_mode_p (<MODE>mode, operands[1])"
   "<load>l\t%0,%2"
@@ -4570,7 +4570,7 @@
 (define_insn "mov_<load>r"
   [(set (match_operand:GPR 0 "register_operand" "=d")
 	(unspec:GPR [(match_operand:BLK 1 "memory_operand" "m")
-		     (match_operand:QI 2 "memory_operand" "ZF")
+		     (match_operand:QI 2 "memory_operand" "ZC")
 		     (match_operand:GPR 3 "register_operand" "0")]
 		    UNSPEC_LOAD_RIGHT))]
   "!TARGET_MIPS16 && mips_mem_fits_mode_p (<MODE>mode, operands[1])"
@@ -4590,7 +4590,7 @@
 (define_insn "mov_<store>l"
   [(set (match_operand:BLK 0 "memory_operand" "=m")
 	(unspec:BLK [(match_operand:GPR 1 "reg_or_0_operand" "dJ")
-		     (match_operand:QI 2 "memory_operand" "ZF")]
+		     (match_operand:QI 2 "memory_operand" "ZC")]
 		    UNSPEC_STORE_LEFT))]
   "!TARGET_MIPS16 && mips_mem_fits_mode_p (<MODE>mode, operands[0])"
   "<store>l\t%z1,%2"
@@ -4600,7 +4600,7 @@
 (define_insn "mov_<store>r"
   [(set (match_operand:BLK 0 "memory_operand" "+m")
 	(unspec:BLK [(match_operand:GPR 1 "reg_or_0_operand" "dJ")
-		     (match_operand:QI 2 "memory_operand" "ZF")
+		     (match_operand:QI 2 "memory_operand" "ZC")
 		     (match_dup 0)]
 		    UNSPEC_STORE_RIGHT))]
   "!TARGET_MIPS16 && mips_mem_fits_mode_p (<MODE>mode, operands[0])"
@@ -4790,7 +4790,7 @@
 		  (match_operand:P 2 "got_page_ofst_operand" "")))]
   "TARGET_NANOMIPS"
   "#"
-  ""
+  "&& 1"
   [(set (match_dup 0)
 	(unspec:P [(reg:SI GLOBAL_POINTER_REGNUM) (match_dup 3)] UNSPEC_LOAD_GOT))]
   { operands[3] = mips_unspec_address (operands[2], SYMBOL_GOTOFF_DISP); }
