@@ -24275,8 +24275,8 @@ get_reg_copies (rtx rcopies[], rtx reg, vec<rtx> &ret)
 static rtx_insn *
 get_movep_insn_location (rtx_insn *move1, rtx_insn *move2,
 			 vec<rtx*> rcopies_mtx, rtx &rsrc1, rtx &rsrc2,
-			 unsigned move1_pos, unsigned move2_pos,
-			 unsigned &move_curr_pos, vec<rtx_insn*> &move_insns)
+			 int move1_pos, int move2_pos,
+			 int &move_curr_pos, vec<rtx_insn*> &move_insns)
 {
   rtx dest1, dest2, src1, src2;
   int ix, iy;
@@ -24340,7 +24340,7 @@ get_movep_insn_location (rtx_insn *move1, rtx_insn *move2,
 
   /* Move through program points, starting from move2_pos to find correct one
      for movep instruction.  */
-  while (move_curr_pos < rcopies_mtx.length ())
+  while (move_curr_pos < (int)rcopies_mtx.length ())
     {
       /* Check if it is call or move instruction already merged into movep.  */
       if (!rcopies_mtx[move_curr_pos])
@@ -24393,7 +24393,7 @@ get_movep_insn_location (rtx_insn *move1, rtx_insn *move2,
 
   if (tmp_src1 && tmp_src2)
     {
-      gcc_assert (move_curr_pos < rcopies_mtx.length ());
+      gcc_assert (move_curr_pos < (int)rcopies_mtx.length ());
       rtx_insn *move_insn = move_insns[move_curr_pos];
 
       rtx_insn *check_insn = NEXT_INSN (move_insn);
@@ -24621,7 +24621,7 @@ mips_free_move_src_copies (vec<rtx*> &src_copies)
 }
 
 static void
-update_copy_info (vec<rtx*> &src_copies, rtx_insn *move, unsigned move_pos,
+update_copy_info (vec<rtx*> &src_copies, rtx_insn *move, int move_pos,
 		  int movep_pos)
 {
   int curr_pos = movep_pos;
@@ -24675,7 +24675,7 @@ mips_check_for_movep (rtx_insn **move, rtx_insn **rmoveinsns, int move_pos[],
 	rtx_insn *loc_insn = NULL;
 	rtx lsrc1, lsrc2;
 	int i1 = i, i2 = i-1;
-	unsigned movep_pos;
+	int movep_pos;
 
 	if (move_pos[i] > move_pos[i-1])
 	  {
@@ -24791,7 +24791,7 @@ mips_check_for_movep (rtx_insn **move, rtx_insn **rmoveinsns, int move_pos[],
 		  rtx_insn *loc_insn = NULL;
 		  rtx lsrc1, lsrc2;
 		  int i1 = i, i2 = i-1;
-		  unsigned rmovep_pos;
+		  int rmovep_pos;
 		  if (rmove_pos[i] > rmove_pos[i-1])
 		    {
 		      i1 = i-1;
@@ -27846,8 +27846,8 @@ bool nanomips_masks_ok_for_ins_p (unsigned HOST_WIDE_INT mask_dest,
   int length = exact_log2 (src_shifted + 1);
   if (length == -1)
     return false;
-  unsigned expected_dest_mask = ((~0 << (length + shift))
-				 | ~( ~0 << shift ));
+  unsigned expected_dest_mask = ((~0U << (length + shift))
+				 | ~( ~0U << shift ));
   if (expected_dest_mask == mask_dest)
     return true;
   return false;
