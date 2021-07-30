@@ -3232,10 +3232,6 @@ fi
 # Select default multilib build variants
 if test x${with_multi_buildlist} = x ; then
   case "$target" in
-    mips*-img-linux*) multi_buildlist=${srcdir}/gcc/config/mips/ml-img-linux ;;
-    mips*-mti-linux*) multi_buildlist=${srcdir}/gcc/config/mips/ml-mti-linux ;;
-    mips*-img-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-img-elf ;;
-    mips*-mti-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-mti-elf ;;
     nanomips*-*-elf*) multi_buildlist=${srcdir}/gcc/config/mips/ml-nano-elf ;;
     nanomips*-*-linux*) multi_buildlist=${srcdir}/gcc/config/mips/ml-nano-linux ;;
   esac

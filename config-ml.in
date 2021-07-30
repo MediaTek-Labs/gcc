@@ -347,7 +347,7 @@ m68*-*-*)
 	  done
 	fi
 	;;
-mips*-*-* | nanomips*-*-*)
+mips*-*-*)
 	if [ x$enable_single_float = xno ]
 	then
 	  old_multidirs="${multidirs}"
@@ -382,6 +382,8 @@ mips*-*-* | nanomips*-*-*)
 	    esac
 	  done
 	fi
+	;;
+nanomips*-*-*)
 	if [ x$with_multi_buildlist != x ]
 	then
 	  old_multidirs="${multidirs}"
