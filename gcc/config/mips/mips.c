@@ -24,6 +24,8 @@ along with GCC; see the file COPYING3.  If not see
 #define IN_TARGET_CODE 1
 
 #include "config.h"
+#define INCLUDE_VECTOR
+#define INCLUDE_ALGORITHM
 #include "system.h"
 #include "coretypes.h"
 #include "backend.h"
@@ -30551,9 +30553,6 @@ mips_update_recolor_data (ira_allocno_t &allocno, bool &s_regs_used)
 	recolor_allocnos_data[i].updated = false;
       }
 }
-
-#include <vector>
-#include <algorithm>
 
 ira_allocno_t
 get_first_allocno_from_thread (ira_allocno_t a);
