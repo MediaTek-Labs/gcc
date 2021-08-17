@@ -14997,6 +14997,8 @@ mips_compute_frame_info_pabi (void)
 
   mips_cfun_set_interrupt_properties ();
   cfun->machine->global_pointer = mips_global_pointer ();
+  cfun->machine->use_hazard_barrier_return_p =
+		 mips_use_hazard_barrier_return_p (current_function_decl);
 
   frame = &cfun->machine->frame;
   memset (frame, 0, sizeof (*frame));
@@ -17512,6 +17514,11 @@ mips_expand_epilogue_pabi (bool sibcall_p)
 	  else
 	    emit_jump_insn (gen_mips_eret ());
 	}
+      else if (cfun->machine->use_hazard_barrier_return_p)
+	{
+	  rtx reg = gen_rtx_REG (Pmode, RETURN_ADDR_REGNUM);
+	  emit_jump_insn (gen_nanomips_hb_return_internal (reg));
+	}
       else
 	{
 	  rtx reg = gen_rtx_REG (Pmode, RETURN_ADDR_REGNUM);
@@ -17593,6 +17600,7 @@ nanomips_can_use_return_insn (void)
 	 && (cfun->machine->frame.num_gp == 0
 	     || BITSET_P (cfun->machine->frame.mask, RETURN_ADDR_REGNUM))
 	 && !cfun->machine->interrupt_handler_p
+	 && !cfun->machine->use_hazard_barrier_return_p
 	 && !frame_pointer_needed
 	 && nanomips_valid_save_restore_p (cfun->machine->frame.mask, true,
 					   NULL);

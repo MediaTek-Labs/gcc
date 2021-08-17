@@ -7699,11 +7699,20 @@
   [(return)
    (unspec_volatile [(match_operand 0 "pmode_register_operand" "")]
 		    UNSPEC_JRHB)]
-  ""
+  "!TARGET_NANOMIPS"
   {
     return "%(jr.hb\t$31%/%)";
   }
   [(set_attr "insn_count" "2")])
+
+(define_insn "nanomips_hb_return_internal"
+  [(return)
+   (unspec_volatile [(match_operand 0 "pmode_register_operand" "")]
+		    UNSPEC_JRHB)]
+  "TARGET_NANOMIPS"
+  {
+    return "jrc.hb\t%0";
+  })
 
 ;; Normal return.
 
