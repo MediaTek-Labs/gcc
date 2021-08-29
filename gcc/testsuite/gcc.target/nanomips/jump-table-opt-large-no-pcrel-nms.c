@@ -5,5 +5,5 @@
 /* { dg-final { scan-assembler "\tbgeiuc\t" } } */
 /* { dg-final { scan-assembler "\tlui\t.*%hi" } } */
 /* { dg-final { scan-assembler "\tori\t.*%lo" } } */
-/* { dg-final { scan-assembler "\tlbx\t" } } */
+/* { dg-final { scan-assembler "\tlbux\t" } } */
 /* { dg-final { scan-assembler "\tbrsc\t" } } */

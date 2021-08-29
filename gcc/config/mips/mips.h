@@ -2940,14 +2940,14 @@ typedef struct mips_args {
   (TARGET_MIPS16_SHORT_JUMP_TABLES					    \
    ? (((MIN) >= -32768 && (MAX) < 32768) ? HImode : SImode)		    \
    : TARGET_NANOMIPS_JUMPTABLE_OPT					    \
-    ? (((MIN) >= -256 && (MAX) < 256)					    \
-      ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 0, QImode)	    \
-      : ((MIN) >= 0 && (MAX) < 512)					    \
-	? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 1, QImode)	    \
-	: ((MIN) >= -65536 && (MAX) < 65536)				    \
-	  ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 0, HImode)	    \
-	  : ((MIN) >= 0 && (MAX) < 131072)				    \
-	    ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 1, HImode)	    \
+    ? (((MIN) >= 0 && (MAX) < 512)					    \
+      ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 1, QImode)	    \
+      : ((MIN) >= -256 && (MAX) < 256)					    \
+	? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 0, QImode)	    \
+	: ((MIN) >= 0 && (MAX) < 131072)				    \
+	  ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 1, HImode)	    \
+	  : ((MIN) >= -65536 && (MAX) < 65536)				    \
+	    ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 0, HImode)	    \
 	    : SImode)							    \
     : ptr_mode)
 
