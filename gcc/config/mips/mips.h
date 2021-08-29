@@ -2944,9 +2944,9 @@ typedef struct mips_args {
       ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 0, QImode)	    \
       : ((MIN) >= 0 && (MAX) < 512)					    \
 	? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 1, QImode)	    \
-	: ((MIN) >= -32768 && (MAX) < 32768)				    \
+	: ((MIN) >= -65536 && (MAX) < 65536)				    \
 	  ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 0, HImode)	    \
-	  : ((MIN) >= 0 && (MAX) < 65536)				    \
+	  : ((MIN) >= 0 && (MAX) < 131072)				    \
 	    ? (ADDR_DIFF_VEC_FLAGS (BODY).offset_unsigned = 1, HImode)	    \
 	    : SImode)							    \
     : ptr_mode)
