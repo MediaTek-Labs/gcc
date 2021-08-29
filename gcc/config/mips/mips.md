@@ -3316,7 +3316,7 @@
 	(not:GPR (match_operand:GPR 1 "register_operand" "!u,d")))]
   ""
 {
-  if (TARGET_MIPS16)
+  if (TARGET_MIPS16 || TARGET_NANOMIPS)
     return "not\t%0,%1";
   else
     return "nor\t%0,%.,%1";
