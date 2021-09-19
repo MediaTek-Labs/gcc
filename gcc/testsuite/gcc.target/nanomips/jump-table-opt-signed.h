@@ -26,15 +26,27 @@ int
 main (void)
 {
   int i;
-  for (i = 0; i <= 5; i++)
+  for (i = 0; i <= 6; i++)
     {
       int ret;
+      int flag = 0;
+stop:
+     /* Prevent optimizer from duplicating this block */
+      __asm__ __volatile__("nop\nnop\nnop\nnop\n"
+			   "nop\nnop\nnop\nnop\n"
+			   "nop\nnop\nnop\nnop\n"
+			   "nop\nnop\nnop\nnop\n"
+			   :"+r"(flag));
+      if (flag++)
+        return 0;
+
       switch (i) {
 	TESTS
+	case 6: goto stop;
 	default: ret = 0; break;
 	  }
       if (ret != i)
 	return 1;
     }
-  return 0;
+  return 1;
 }

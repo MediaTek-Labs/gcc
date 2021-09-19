@@ -5,4 +5,4 @@
 #include "jump-table-opt-signed.h"
 
 /* { dg-final {scan-assembler "\t\.reloc\t1f,R_NANOMIPS_JUMPTABLE_LOAD,.L\[0-9\]+\n" } } */
-/* { dg-final {scan-assembler "\t.jumptable \[124\],\[56\],0\n" } } */
+/* { dg-final {scan-assembler "\t.jumptable \[124\],\[67\],0\n" } } */
