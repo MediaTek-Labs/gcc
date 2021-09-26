@@ -387,6 +387,17 @@ stamp-nortti:
 	      -e 's/^enable_shared = yes/enable_shared = no/' \
 	      -e 's/^enable_static = no/enable_static = yes/' \
 	  < ../Makefile > Makefile ; \
+	  mkdir -p  ${norttidir}/libsupc++ ; \
+	  sed -e 's/top_builddir = \.\./top_builddir = ..\/..\/../' \
+	      -e 's/top_build_prefix = \.\./top_build_prefix = ..\/..\/../' \
+	      -e 's/srcdir = \.\./srcdir = ..\/..\/../' \
+	      -e 's/VPATH = \.\./VPATH = ..\/..\/../' \
+	      -e 's/glibcxx_basedir = \.\./glibcxx_basedir = ..\/..\/../' \
+	      -e 's/MKDIR_P = \.\./MKDIR_P = ..\/..\/../' \
+	      -e 's/-I\.\. /-I..\/..\/.. /' \
+	      -e 's/^enable_shared = yes/enable_shared = no/' \
+	      -e 's/^enable_static = no/enable_static = yes/' \
+	  < ../../libsupc++/Makefile > libsupc++/Makefile ; \
 	  for d in . $(SUBDIRS); do \
 	  sed -e 's/top_builddir = \.\./top_builddir = ..\/../' \
 	      -e 's/top_build_prefix = \.\./top_build_prefix = ..\/../' \
@@ -407,6 +418,8 @@ build-nortti: stamp-nortti
 	  sed -e 's,all-local: all-once,all-local:,' \
 	      -e 's,install-data-local: install-data-once,install-data-local:,' \
 	      -e '/vpath/!s,src/c,src/nortti/c,' \
+	      -e 's,\(.*)\)/\(libsupc++/lib\),\1/src/nortti/\2,' \
+	      -e 's/\(SUBDIRS =\) \(c.*\)/\1 libsupc++ \2/' \
 	  < Makefile.tmp > Makefile ; \
 	  rm -f Makefile.tmp ; \
 	  $(MAKE) CXXFLAGS='$(CXXFLAGS) -fno-rtti -fno-exceptions' \
