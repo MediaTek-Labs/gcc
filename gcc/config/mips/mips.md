@@ -3208,7 +3208,7 @@
 ;;
 ;;  ...................
 ;;
-;;  Count leading zeroes.
+;;  Count leading zeroes and ones.
 ;;
 ;;  ...................
 ;;
@@ -3218,6 +3218,14 @@
 	(clz:GPR (match_operand:GPR 1 "register_operand" "d")))]
   "ISA_HAS_CLZ_CLO"
   "<d>clz\t%0,%1"
+  [(set_attr "type" "clz")
+   (set_attr "mode" "<MODE>")])
+
+(define_insn "*clo<mode>2"
+  [(set (match_operand:GPR 0 "register_operand" "=d")
+	(clz:GPR (not:GPR (match_operand:GPR 1 "register_operand" "d"))))]
+  "ISA_HAS_CLZ_CLO"
+  "<d>clo\t%0,%1"
   [(set_attr "type" "clz")
    (set_attr "mode" "<MODE>")])
 
