@@ -1140,7 +1140,7 @@ debug_objcopy (const char *infile, bool rename)
   const char *errmsg;
   int err;
 
-  const char *p;
+  const char *p, *e;
   const char *orig_infile = infile;
   off_t inoff = 0;
   long loffset;
@@ -1155,6 +1155,18 @@ debug_objcopy (const char *infile, bool rename)
       infile = fname;
       inoff = (off_t) loffset;
     }
+
+  if ((p = strchr (infile, 'p'))
+      && p != infile
+      && (e = strchr (p, ')'))
+      && e[1] == '\0')
+    {
+      char *fname = (char*)infile;
+      fname[p - infile] = '\0';
+      gcc_assert (inoff);
+      gcc_assert (infile != orig_infile);
+    }
+
   int infd = open (infile, O_RDONLY | O_BINARY);
   if (infd == -1)
     return NULL;
