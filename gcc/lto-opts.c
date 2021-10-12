@@ -176,6 +176,7 @@ lto_write_options (void)
 	case OPT_SPECIAL_ignore:
 	case OPT_SPECIAL_program_name:
 	case OPT_SPECIAL_input_file:
+	case OPT_fdebug_prefix_map_:
 	  continue;
 
 	default:
