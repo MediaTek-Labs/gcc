@@ -132,6 +132,38 @@ atomicity_file = ${glibcxx_srcdir}/$(ATOMICITY_SRCDIR)/atomicity.h
 atomicity.cc: ${atomicity_file}
 	$(LN_S) ${atomicity_file} ./atomicity.cc || true
 
+
+eh_ptr.lo: eh_ptr.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_ptr.o: eh_ptr.cc
+	$(CXXCOMPILE) -fexceptions -c $<
+
+eh_terminate.lo: eh_terminate.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_terminate.o: eh_terminate.cc
+	$(CXXCOMPILE) -fexceptions -c $<
+
+eh_throw.lo: eh_throw.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_throw.o: eh_throw.cc
+	$(CXXCOMPILE) -fexceptions -c $<
+
+eh_call.lo: eh_call.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_call.o: eh_call.cc
+	$(CXXCOMPILE) -fexceptions -c $<
+
+eh_personality.lo: eh_personality.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_personality.o: eh_personality.cc
+	$(CXXCOMPILE) -fexceptions -c $<
+
+eh_catch.lo: eh_catch.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_catch.o: eh_catch.cc
+	$(CXXCOMPILE) -fexceptions -c $<
+
+
 # AM_CXXFLAGS needs to be in each subdirectory so that it can be
 # modified in a per-library or per-sub-library way.  Need to manually
 # set this option because CONFIG_CXXFLAGS has to be after
@@ -190,7 +222,7 @@ LTCXXCOMPILE = \
 	$(LIBTOOL) --tag CXX --tag disable-shared \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=compile $(CXX) $(TOPLEVEL_INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) $(EXTRA_CXX_FLAGS)
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) $(EXTRA_CXX_FLAGS) -frtti
 
 LTLDFLAGS = $(shell $(SHELL) $(top_srcdir)/../libtool-ldflags $(LDFLAGS))
 

@@ -1,4 +1,4 @@
-// { dg-do run { target nanomips*-*-* } }
+// { dg-do run { target nanomips*-*-elf* } }
 // { dg-require-effective-target exceptions_enabled }
 
 /* We expect for std::logic_error vtable  to pull in its type_info

@@ -1,4 +1,4 @@
-// { dg-do link { target nanomips*-*-* } }
+// { dg-do link { target nanomips*-*-elf* } }
 // { dg-options "-nortti-libstdc++" }
 
 /* Using a throwing new with -nortti-libstdc++ should not

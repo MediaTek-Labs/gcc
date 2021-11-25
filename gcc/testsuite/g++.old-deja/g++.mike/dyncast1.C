@@ -1,5 +1,6 @@
 // { dg-do run { xfail sparc64-*-elf arm-*-pe } }
 // { dg-options "-fexceptions -w" }
+// { dg-require-effective-target exceptions_enabled }
 
 #include <typeinfo>
 
