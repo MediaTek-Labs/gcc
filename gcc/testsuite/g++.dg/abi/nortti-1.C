@@ -1,4 +1,4 @@
-// { dg-do run { target nanomips*-*-* } }
+// { dg-do run { target nanomips*-*-elf* } }
 // { dg-options "-nortti-libstdc++" }
 
 /* We expect for std::logic_error vtable not to pull in its type_info

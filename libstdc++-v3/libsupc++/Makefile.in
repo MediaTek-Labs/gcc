@@ -522,7 +522,7 @@ LTCXXCOMPILE = \
 	$(LIBTOOL) --tag CXX --tag disable-shared \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=compile $(CXX) $(TOPLEVEL_INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) $(EXTRA_CXX_FLAGS)
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) $(EXTRA_CXX_FLAGS) -frtti
 
 LTLDFLAGS = $(shell $(SHELL) $(top_srcdir)/../libtool-ldflags $(LDFLAGS))
 
@@ -862,19 +862,34 @@ eh_aux_runtime.o: eh_aux_runtime.cc
 	$(CXXCOMPILE) -std=gnu++11 -c $<
 
 eh_ptr.lo: eh_ptr.cc
-	$(LTCXXCOMPILE) -std=gnu++11 -c $<
+	$(LTCXXCOMPILE) -std=gnu++11 -fexceptions -c $<
 eh_ptr.o: eh_ptr.cc
-	$(CXXCOMPILE) -std=gnu++11 -c $<
+	$(CXXCOMPILE) -std=gnu++11 -fexceptions -c $<
 
 eh_terminate.lo: eh_terminate.cc
-	$(LTCXXCOMPILE) -std=gnu++11 -c $<
+	$(LTCXXCOMPILE) -std=gnu++11 -fexceptions -c $<
 eh_terminate.o: eh_terminate.cc
-	$(CXXCOMPILE) -std=gnu++11 -c $<
+	$(CXXCOMPILE) -std=gnu++11 -fexceptions -c $<
 
 eh_throw.lo: eh_throw.cc
-	$(LTCXXCOMPILE) -std=gnu++11 -c $<
+	$(LTCXXCOMPILE) -std=gnu++11 -fexceptions -c $<
 eh_throw.o: eh_throw.cc
-	$(CXXCOMPILE) -std=gnu++11 -c $<
+	$(CXXCOMPILE) -std=gnu++11 -fexceptions -c $<
+
+eh_call.lo: eh_call.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_call.o: eh_call.cc
+	$(CXXCOMPILE) -fexceptions -c $<
+
+eh_personality.lo: eh_personality.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_personality.o: eh_personality.cc
+	$(CXXCOMPILE) -fexceptions -c $<
+
+eh_catch.lo: eh_catch.cc
+	$(LTCXXCOMPILE) -fexceptions -c $<
+eh_catch.o: eh_catch.cc
+	$(CXXCOMPILE) -fexceptions -c $<
 
 guard.lo: guard.cc
 	$(LTCXXCOMPILE) -std=gnu++11 -c $<
