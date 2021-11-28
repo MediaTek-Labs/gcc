@@ -274,7 +274,7 @@ init_local_tick (void)
 HOST_WIDE_INT
 get_random_seed (bool noinit)
 {
-  if (!random_seed && !noinit)
+  if (!random_seed && !flag_random_seed && !noinit)
     {
       int fd = open ("/dev/urandom", O_RDONLY);
       if (fd >= 0)
