@@ -7010,7 +7010,7 @@ attr_checksum (dw_attr_node *at, struct md5_ctx *ctx, int *mark)
 
     case dw_val_class_file:
     case dw_val_class_file_implicit:
-      CHECKSUM_STRING (AT_file (at)->filename);
+      CHECKSUM_STRING (remap_debug_filename (AT_file (at)->filename));
       break;
 
     case dw_val_class_data8:
@@ -7308,7 +7308,7 @@ attr_checksum_ordered (enum dwarf_tag tag, dw_attr_node *at,
     case dw_val_class_file:
     case dw_val_class_file_implicit:
       CHECKSUM_ULEB128 (DW_FORM_string);
-      CHECKSUM_STRING (AT_file (at)->filename);
+      CHECKSUM_STRING (remap_debug_filename (AT_file (at)->filename));
       break;
 
     case dw_val_class_data8:
@@ -28080,6 +28080,13 @@ dwarf2out_register_main_translation_unit (tree unit)
 {
   gcc_assert (TREE_CODE (unit) == TRANSLATION_UNIT_DECL
 	      && main_translation_unit == NULL_TREE);
+
+  if (flag_generate_lto && DECL_NAME (unit))
+    {
+       tree name = get_identifier (remap_debug_filename (
+				    IDENTIFIER_POINTER (DECL_NAME (unit))));
+       DECL_NAME (unit) = name;
+    }
   main_translation_unit = unit;
   /* If dwarf2out_init has not been called yet, it will perform the association
      itself looking at main_translation_unit.  */

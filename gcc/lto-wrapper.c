@@ -1,3 +1,5 @@
+
+
 /* Wrapper to call lto.  Used by collect2 and the linker plugin.
    Copyright (C) 2009-2021 Free Software Foundation, Inc.
 
@@ -1156,7 +1158,7 @@ debug_objcopy (const char *infile, bool rename)
       inoff = (off_t) loffset;
     }
 
-  if ((p = strchr (infile, 'p'))
+  if ((p = strchr (infile, '('))
       && p != infile
       && (e = strchr (p, ')'))
       && e[1] == '\0')
