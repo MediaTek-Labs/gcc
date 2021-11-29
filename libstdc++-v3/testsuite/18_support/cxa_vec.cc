@@ -5,6 +5,8 @@
 // Copyright (C) 2000-2021 Free Software Foundation, Inc.
 // Contributed by Nathan Sidwell 7 Apr 2000 <nathan@nathan@codesourcery.com>
 
+// { dg-xfail-run-if "" { *-*-* } { "-nortti-libstdc++" } { "" }
+
 #include <cxxabi.h>
 #include <stdio.h>
 #include <new>
