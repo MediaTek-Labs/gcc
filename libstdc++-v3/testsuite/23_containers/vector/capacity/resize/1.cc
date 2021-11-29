@@ -24,6 +24,8 @@
 // NULL even if an allocation fails (filed as Radar 3884894).
 // { dg-do run { xfail *-*-darwin8.[0-4].* *-*-dragonfly* } }
 
+// { dg-xfail-run-if "" { *-*-* } { "-nortti-libstdc++" } { "" } }
+
 #include <vector>
 #include <stdexcept>
 #include <testsuite_hooks.h>
