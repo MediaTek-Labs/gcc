@@ -27,7 +27,7 @@ along with GCC; see the file COPYING3.  If not see
 
 #undef SYSROOT_SUFFIX_SPEC
 #define SYSROOT_SUFFIX_SPEC						\
-    "/nanomips%{meb|EB:eb}-"MIPS_SYSVERSION_SPEC			\
+    "/nanomips%{meb|EB:eb}-" MIPS_SYSVERSION_SPEC			\
     "%{msoft-float:-soft;:-hard}"					\
     "%{muclibc:-uclibc}"						\
     "%{mmusl:-musl}"
