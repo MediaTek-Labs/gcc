@@ -26753,7 +26753,13 @@ mips_option_override (void)
   if (TARGET_DSPR2)
     TARGET_DSP = true;
 
-  if (TARGET_DSP && mips_isa_rev >= 6)
+  if (TARGET_DSPR3)
+    {
+      TARGET_DSP = true;
+      TARGET_DSPR2 = true;
+    }
+
+  if (TARGET_DSP && mips_isa_rev >= 6 && !TARGET_DSPR3)
     {
       error ("the %qs architecture does not support DSP instructions",
 	     mips_arch_info->name);
@@ -26777,12 +26783,6 @@ mips_option_override (void)
 	  && (target_flags_explicit & MASK_LOONGSON_EXT) != 0)
 	error ("%<-mloongson-ext2%> must be used with %<-mloongson-ext%>");
       target_flags |= MASK_LOONGSON_EXT;
-    }
-
-  if (TARGET_DSPR3)
-    {
-      TARGET_DSP = true;
-      TARGET_DSPR2 = true;
     }
 
   /* .eh_frame addresses should be the same width as a C pointer.
