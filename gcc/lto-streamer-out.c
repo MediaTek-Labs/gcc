@@ -228,7 +228,7 @@ lto_output_location_1 (struct output_block *ob, struct bitpack_d *bp,
 	    }
 	  bp_pack_value (bp, stream_pwd, 1);
 	  if (stream_pwd)
-	    bp_pack_string (ob, bp, get_src_pwd (), true);
+	    bp_pack_string (ob, bp, remap_debug_filename (get_src_pwd ()), true);
 	  bp_pack_string (ob, bp, remapped, true);
 	  bp_pack_value (bp, xloc.sysp, 1);
 	}
