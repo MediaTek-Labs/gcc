@@ -55,3 +55,7 @@ Enum(tls_type) String(desc) Value(TLS_DESCRIPTORS)
 mtls-dialect=
 Target RejectNegative Joined Enum(tls_type) Var(nanomips_tls_dialect) Init(TLS_TRADITIONAL) Save
 Specify TLS dialect.
+
+muse-64bit-time_t
+Target Var(nanomips_64bit_time_t) Init(0)
+Enable/disable 64-bit time_t ABI
