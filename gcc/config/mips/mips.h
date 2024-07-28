@@ -463,8 +463,11 @@ struct mips_cpu_info {
 #define TARGET_CPU_CPP_BUILTINS()					\
   do									\
     {									\
-      if (TARGET_NANOMIPS)						\
+      if (TARGET_NANOMIPS) {						\
 	builtin_define ("__nanomips__");				\
+	if (nanomips_64bit_time_t)					\
+	  builtin_define ("__nanomips_64bit_time_t__");			\
+      }                                                                 \
       else								\
 	{								\
 	  builtin_assert ("machine=mips");                        	\

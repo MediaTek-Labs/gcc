@@ -205,7 +205,8 @@ along with GCC; see the file COPYING3.  If not see
 %{mtune=*}" \
 FP_ASM_SPEC "\
 %{mbalc-stubs} %{mno-balc-stubs} %{!mno-balc-stubs: %{Os: -mbalc-stubs}} \
-%(subtarget_asm_spec)"
+%{muse-64bit-time_t} %{mno-use-64bit-time_t} \
+%(subtarget_asm_spec)" \
 
 #undef LINK_SPEC
 #define LINK_SPEC "\
