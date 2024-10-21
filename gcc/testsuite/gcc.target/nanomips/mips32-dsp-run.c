@@ -995,13 +995,13 @@ void test_MIPS_DSP ()
   if (i32_r != i32_s)
     abort ();
 
-/*  i32_a = 0x00000220; // pos is 32, size is 4
+  i32_a = 0x00000220; // pos is 32, size is 4
   __builtin_mips_wrdsp (i32_a, 63);
   i32_s = 1;
   i32_r = __builtin_mips_bposge32 ();
   if (i32_r != i32_s)
     abort ();
-*/
+
 #ifndef __mips64
   a64_a = 0x12345678;
   i32_b = 0x80000000;
